@@ -39,6 +39,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4BDCB7DE24C1874B00C6A6B6 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		F4D5CED724C1471600C6B104 = {
 			isa = PBXGroup;
 			children = (
@@ -58,6 +65,7 @@
 		F4D5CEE224C1471600C6B104 /* MC3-SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				4BDCB7DE24C1874B00C6A6B6 /* CoreData */,
 				F4D5CEE324C1471600C6B104 /* AppDelegate.swift */,
 				F4D5CEE524C1471600C6B104 /* SceneDelegate.swift */,
 				F4D5CEEA24C1471600C6B104 /* ProgresifView.swift */,
@@ -290,7 +298,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"MC3-SwiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = 7LUWAU8N83;
+				DEVELOPMENT_TEAM = 9G44XW2W74;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "MC3-SwiftUI/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -310,7 +318,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"MC3-SwiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = 7LUWAU8N83;
+				DEVELOPMENT_TEAM = 9G44XW2W74;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "MC3-SwiftUI/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
