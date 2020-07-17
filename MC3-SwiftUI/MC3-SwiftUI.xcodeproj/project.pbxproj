@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4BDCB7E024C1B9B900C6A6B6 /* Sekolah.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7DF24C1B9B900C6A6B6 /* Sekolah.swift */; };
+		4BDCB7E224C1F50F00C6A6B6 /* pageDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7E124C1F50F00C6A6B6 /* pageDetail.swift */; };
+		4BDCB7E424C21D1800C6A6B6 /* contentRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7E324C21D1800C6A6B6 /* contentRoot.swift */; };
+		4BDCB7E624C21F0500C6A6B6 /* FonikView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7E524C21F0500C6A6B6 /* FonikView.swift */; };
+		4BDCB7E824C2209800C6A6B6 /* SusunKataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7E724C2209800C6A6B6 /* SusunKataView.swift */; };
 		F4D5CEE424C1471600C6B104 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5CEE324C1471600C6B104 /* AppDelegate.swift */; };
 		F4D5CEE624C1471600C6B104 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5CEE524C1471600C6B104 /* SceneDelegate.swift */; };
 		F4D5CEE924C1471600C6B104 /* MC3_SwiftUI.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F4D5CEE724C1471600C6B104 /* MC3_SwiftUI.xcdatamodeld */; };
@@ -17,6 +22,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4BDCB7DF24C1B9B900C6A6B6 /* Sekolah.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sekolah.swift; sourceTree = "<group>"; };
+		4BDCB7E124C1F50F00C6A6B6 /* pageDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pageDetail.swift; sourceTree = "<group>"; };
+		4BDCB7E324C21D1800C6A6B6 /* contentRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = contentRoot.swift; sourceTree = "<group>"; };
+		4BDCB7E524C21F0500C6A6B6 /* FonikView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FonikView.swift; sourceTree = "<group>"; };
+		4BDCB7E724C2209800C6A6B6 /* SusunKataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SusunKataView.swift; sourceTree = "<group>"; };
 		F4D5CEE024C1471600C6B104 /* MC3-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MC3-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4D5CEE324C1471600C6B104 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4D5CEE524C1471600C6B104 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,8 +52,33 @@
 		4BDCB7DE24C1874B00C6A6B6 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				4BDCB7DF24C1B9B900C6A6B6 /* Sekolah.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		4BDCB7E924C220F400C6A6B6 /* SusunKata */ = {
+			isa = PBXGroup;
+			children = (
+				4BDCB7E724C2209800C6A6B6 /* SusunKataView.swift */,
+			);
+			path = SusunKata;
+			sourceTree = "<group>";
+		};
+		4BDCB7EA24C2210B00C6A6B6 /* Fonik */ = {
+			isa = PBXGroup;
+			children = (
+				4BDCB7E524C21F0500C6A6B6 /* FonikView.swift */,
+			);
+			path = Fonik;
+			sourceTree = "<group>";
+		};
+		4BDCB7EB24C2211A00C6A6B6 /* Progresif */ = {
+			isa = PBXGroup;
+			children = (
+				F4D5CEEA24C1471600C6B104 /* ProgresifView.swift */,
+			);
+			path = Progresif;
 			sourceTree = "<group>";
 		};
 		F4D5CED724C1471600C6B104 = {
@@ -68,7 +103,11 @@
 				4BDCB7DE24C1874B00C6A6B6 /* CoreData */,
 				F4D5CEE324C1471600C6B104 /* AppDelegate.swift */,
 				F4D5CEE524C1471600C6B104 /* SceneDelegate.swift */,
-				F4D5CEEA24C1471600C6B104 /* ProgresifView.swift */,
+				4BDCB7E324C21D1800C6A6B6 /* contentRoot.swift */,
+				4BDCB7E924C220F400C6A6B6 /* SusunKata */,
+				4BDCB7EA24C2210B00C6A6B6 /* Fonik */,
+				4BDCB7EB24C2211A00C6A6B6 /* Progresif */,
+				4BDCB7E124C1F50F00C6A6B6 /* pageDetail.swift */,
 				F4D5CEEC24C1471900C6B104 /* Assets.xcassets */,
 				F4D5CEF124C1471900C6B104 /* LaunchScreen.storyboard */,
 				F4D5CEF424C1471900C6B104 /* Info.plist */,
@@ -158,9 +197,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4D5CEE424C1471600C6B104 /* AppDelegate.swift in Sources */,
+				4BDCB7E224C1F50F00C6A6B6 /* pageDetail.swift in Sources */,
+				4BDCB7E824C2209800C6A6B6 /* SusunKataView.swift in Sources */,
+				4BDCB7E624C21F0500C6A6B6 /* FonikView.swift in Sources */,
 				F4D5CEE624C1471600C6B104 /* SceneDelegate.swift in Sources */,
 				F4D5CEEB24C1471600C6B104 /* ProgresifView.swift in Sources */,
+				4BDCB7E024C1B9B900C6A6B6 /* Sekolah.swift in Sources */,
 				F4D5CEE924C1471600C6B104 /* MC3_SwiftUI.xcdatamodeld in Sources */,
+				4BDCB7E424C21D1800C6A6B6 /* contentRoot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

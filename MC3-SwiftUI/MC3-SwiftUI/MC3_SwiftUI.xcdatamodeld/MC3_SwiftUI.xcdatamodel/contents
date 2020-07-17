@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Kelas" representedClassName="Kelas" syncable="YES" codeGenerationType="class">
-        <attribute name="idKelas" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    <entity name="Kelas" representedClassName=".Kelas" syncable="YES">
         <attribute name="namaKelas" optional="YES" attributeType="String"/>
+        <attribute name="namaSekolah" optional="YES" attributeType="String"/>
         <relationship name="diDalemSekolah" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Sekolah" inverseName="punyaKelas" inverseEntity="Sekolah"/>
         <relationship name="punyaMurid" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Murid" inverseName="diDalemKelas" inverseEntity="Murid"/>
     </entity>
-    <entity name="Murid" representedClassName="Murid" syncable="YES" codeGenerationType="class">
+    <entity name="Murid" representedClassName=".Murid" syncable="YES">
         <attribute name="idMurid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="namaMurid" optional="YES" attributeType="String"/>
         <relationship name="diDalemKelas" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kelas" inverseName="punyaMurid" inverseEntity="Kelas"/>
     </entity>
-    <entity name="Sekolah" representedClassName="Sekolah" syncable="YES" codeGenerationType="class">
-        <attribute name="idSekolah" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    <entity name="Sekolah" representedClassName=".Sekolah" syncable="YES">
         <attribute name="namaSekolah" optional="YES" attributeType="String"/>
         <relationship name="punyaKelas" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Kelas" inverseName="diDalemSekolah" inverseEntity="Kelas"/>
     </entity>
     <elements>
-        <element name="Sekolah" positionX="-45" positionY="0" width="128" height="88"/>
-        <element name="Murid" positionX="-18" positionY="27" width="128" height="88"/>
-        <element name="Kelas" positionX="9" positionY="54" width="128" height="103"/>
+        <element name="Sekolah" positionX="-45" positionY="0" width="128" height="73"/>
+        <element name="Murid" positionX="-13.6796875" positionY="139.56640625" width="128" height="88"/>
+        <element name="Kelas" positionX="316.56640625" positionY="0.4375" width="128" height="103"/>
     </elements>
 </model>
