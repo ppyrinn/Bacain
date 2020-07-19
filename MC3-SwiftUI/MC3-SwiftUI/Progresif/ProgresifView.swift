@@ -23,6 +23,8 @@ struct ProgresifView: View {
                             Button(action: {
                                 let sekolah = Sekolah(context: self.moc)
                                 sekolah.namaSekolah = self.newSekolah
+                                let uuid = UUID()
+                                sekolah.idSekolah = uuid
                                 
                                 do{
                                     try self.moc.save()
@@ -40,7 +42,7 @@ struct ProgresifView: View {
                         .font(.headline)
                     }
                     Section(header: Text("Daftar Sekolah")) {
-                        ForEach(self.listOfSekolah, id: \.namaSekolah){ item in
+                        ForEach(self.listOfSekolah, id: \.idSekolah){ item in
                             NavigationLink(destination: pageDetail(sekolah: item)) {
                                     Text("\(item.namaSekolah)")
 

@@ -10,6 +10,7 @@ import CoreData
 
 class Sekolah: NSManagedObject, Identifiable{
     @NSManaged public var namaSekolah: String
+    @NSManaged public var idSekolah:  UUID
 }
 
 extension Sekolah{
@@ -19,6 +20,7 @@ extension Sekolah{
         let sort = NSSortDescriptor(key: "namaSekolah", ascending: true)
         
         request.sortDescriptors = [sort]
+        
         
         return request
         

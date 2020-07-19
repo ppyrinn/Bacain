@@ -10,8 +10,30 @@ import SwiftUI
 
 struct pageDetail: View {
     var sekolah: Sekolah
+
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(fetchRequest: Kelas.getAllKelas()) var listOfKelas: FetchedResults<Kelas>
+
     var body: some View {
-        Text("\(sekolah.namaSekolah)")
+        HStack{
+            VStack{
+                
+                Text("\(self.sekolah.idSekolah)")
+
+                Text("\(sekolah.namaSekolah)")
+                
+
+            }
+            List{
+                ForEach(self.listOfKelas, id: \.idKelas){ item in
+                        Text("\(item.namaKelas)")
+                }
+            }
+        }
+    }
+    
+    func getKelas(){
+        
     }
 }
 
