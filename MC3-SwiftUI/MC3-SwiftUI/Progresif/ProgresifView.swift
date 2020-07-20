@@ -21,28 +21,28 @@ struct ProgresifView: View {
 //                contentRoot()
                 
                 List{
-                    Section(header: Text("Tambah Sekolah Baru")) {
-                        HStack{
-                            TextField("Sekolah Baru", text: self.$newSekolah)
-                            Button(action: {
-                                let sekolah = Sekolah(context: self.moc)
-                                sekolah.namaSekolah = self.newSekolah
-
-                                do{
-                                    try self.moc.save()
-                                }catch{
-                                    print(error)
-                                }
-
-                                self.newSekolah = ""
-                            }) {
-                                Image(systemName: "plus.circle.fill")
-                                    .foregroundColor(.green)
-                                    .imageScale(.large)
-                            }
-                        }
-                        .font(.headline)
-                    }
+//                    Section(header: Text("Tambah Sekolah Baru")) {
+//                        HStack{
+//                            TextField("Sekolah Baru", text: self.$newSekolah)
+//                            Button(action: {
+//                                let sekolah = Sekolah(context: self.moc)
+//                                sekolah.namaSekolah = self.newSekolah
+//
+//                                do{
+//                                    try self.moc.save()
+//                                }catch{
+//                                    print(error)
+//                                }
+//
+//                                self.newSekolah = ""
+//                            }) {
+//                                Image(systemName: "plus.circle.fill")
+//                                    .foregroundColor(.green)
+//                                    .imageScale(.large)
+//                            }
+//                        }
+//                        .font(.headline)
+//                    }
                     
                     Section(header: Text("Daftar Sekolah")) {
                         ForEach(self.listOfSekolah, id: \.namaSekolah){ item in
@@ -72,7 +72,6 @@ struct ProgresifView: View {
                     .imageScale(.large)
                 }.sheet(isPresented: $showingDetail) {
                     addSchool()
-                    .environment(\.managedObjectContext, self.moc)
                 }
                 
             )
@@ -102,16 +101,6 @@ struct addSchool: View {
     var body: some View {
         ZStack{
             VStack{
-                
-                HStack{
-                    Text("Kelas")
-                        .foregroundColor(.orange)
-                        .bold()
-                    TextField("Sekolah Baru", text: self.$newSekolah)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                }
-                .padding(30)
-                
                 HStack {
                     
                     Button(action: {
@@ -123,15 +112,12 @@ struct addSchool: View {
                     }
                     
                     
-                    
                     Spacer()
                     
                     Button(action: {
                         // show new task view
                         let sekolah = Sekolah(context: self.moc)
                         sekolah.namaSekolah = self.newSekolah
-                        
-                        print("textnya adalah", self.newSekolah)
                         
                         do{
                             try self.moc.save()
@@ -163,7 +149,14 @@ struct addSchool: View {
                         
                 }
                 
-                
+                HStack{
+                    Text("Kelas")
+                        .foregroundColor(.orange)
+                        .bold()
+                    TextField("Sekolah Baru", text: self.$newSekolah)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                }
+                .padding(30)
                 Spacer()
                 
                     
