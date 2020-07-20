@@ -12,7 +12,6 @@
 		4BDCB7E424C21D1800C6A6B6 /* contentRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7E324C21D1800C6A6B6 /* contentRoot.swift */; };
 		4BDCB7E624C21F0500C6A6B6 /* FonikView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7E524C21F0500C6A6B6 /* FonikView.swift */; };
 		4BDCB7E824C2209800C6A6B6 /* SusunKataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7E724C2209800C6A6B6 /* SusunKataView.swift */; };
-		4BDCB7ED24C3502300C6A6B6 /* AlfabetContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7EC24C3502300C6A6B6 /* AlfabetContainerView.swift */; };
 		4BDCB7EF24C3517E00C6A6B6 /* AlfabetScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7EE24C3517E00C6A6B6 /* AlfabetScrollView.swift */; };
 		4BDCB7F124C42CB100C6A6B6 /* Kelas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7F024C42CB100C6A6B6 /* Kelas.swift */; };
 		4BDCB7F324C44AFA00C6A6B6 /* Fonik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7F224C44AFA00C6A6B6 /* Fonik.swift */; };
@@ -33,7 +32,6 @@
 		4BDCB7E324C21D1800C6A6B6 /* contentRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = contentRoot.swift; sourceTree = "<group>"; };
 		4BDCB7E524C21F0500C6A6B6 /* FonikView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FonikView.swift; sourceTree = "<group>"; };
 		4BDCB7E724C2209800C6A6B6 /* SusunKataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SusunKataView.swift; sourceTree = "<group>"; };
-		4BDCB7EC24C3502300C6A6B6 /* AlfabetContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlfabetContainerView.swift; sourceTree = "<group>"; };
 		4BDCB7EE24C3517E00C6A6B6 /* AlfabetScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlfabetScrollView.swift; sourceTree = "<group>"; };
 		4BDCB7F024C42CB100C6A6B6 /* Kelas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kelas.swift; sourceTree = "<group>"; };
 		4BDCB7F224C44AFA00C6A6B6 /* Fonik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonik.swift; sourceTree = "<group>"; };
@@ -85,7 +83,6 @@
 			isa = PBXGroup;
 			children = (
 				4BDCB7E524C21F0500C6A6B6 /* FonikView.swift */,
-				4BDCB7EC24C3502300C6A6B6 /* AlfabetContainerView.swift */,
 				4BDCB7EE24C3517E00C6A6B6 /* AlfabetScrollView.swift */,
 			);
 			path = Fonik;
@@ -215,7 +212,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BDCB7EF24C3517E00C6A6B6 /* AlfabetScrollView.swift in Sources */,
-				4BDCB7ED24C3502300C6A6B6 /* AlfabetContainerView.swift in Sources */,
 				F4D5CEE424C1471600C6B104 /* AppDelegate.swift in Sources */,
 				4BDCB7E224C1F50F00C6A6B6 /* pageDetail.swift in Sources */,
 				4BDCB7E824C2209800C6A6B6 /* SusunKataView.swift in Sources */,
