@@ -11,11 +11,33 @@ import SwiftUI
 struct SusunKataView: View {
     
     @State private var textField = ""
+    let screenWidth = UIScreen.main.bounds.width
+    let screenHeight = UIScreen.main.bounds.height
+
+    
+    fileprivate func titleBar() -> some View {
+        return VStack{
+            ZStack{
+                Rectangle()
+                    .foregroundColor(.white)
+                .frame(width: screenWidth, height: screenHeight*15/100, alignment: .top)
+                VStack{
+                    HStack{
+                        Text("Susun Kata")
+                            .font(.system(size: 50, weight: .bold, design: .default))
+                        Spacer()
+                    }.padding(.top)
+                }.padding(.top)
+            }
+            Spacer()
+        }
+    }
 
     var body: some View {
         ZStack{
             Rectangle()
                 .foregroundColor(Color(red: 1, green: 0.81, blue: 0.42))
+            titleBar()
             VStack{
                 HStack{
                     ForEach(0..<5) {  index in
