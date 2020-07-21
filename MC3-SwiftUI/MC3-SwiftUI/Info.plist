@@ -54,5 +54,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Ucapan anda akan direkam saat mengaktifkan tombol &apos;record&apos;</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Ucapan anda akan direkam untuk menilai kecakapan saat membaca soal</string>
 </dict>
 </plist>
