@@ -15,6 +15,7 @@ struct Fonik{
     public var title: String
     public var subTitle: String
     public var sound: String
+//    public var selected: Bool
 
 }
 

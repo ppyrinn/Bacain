@@ -18,24 +18,41 @@ struct FonikView: View {
     @State private var title = "Aa"
     @State private var subTitle = "a..a..a.."
     @State private var sound = "Sound"
+    
+    @State private var pressed = false
+
+    
+
 
 
 
     fileprivate func scrollViewItem() -> some View {
         return ForEach(listOfFonik, id: \.alfabet){ fonik in
             Button(action: {
-                self.buttonStyle.isSelected = !self.buttonStyle.isSelected
+                self.pressed.toggle()
+                
+                //self.buttonStyle.isSelected = !self.buttonStyle.isSelected
                 self.gambarDesc = "\(fonik.gambarDesc)"
                 self.gambar = "\(fonik.gambar)"
                 self.title = "\(fonik.title)"
                 self.subTitle = "\(fonik.subTitle)"
                 self.sound = "\(fonik.sound)"
                 
+                print()
+                
             }) {
+                ZStack{
+                    Rectangle()
+                        .foregroundColor(self.pressed ? .red : .blue)
+                    .frame(width: 50, height: 50, alignment: .center)
+                        .cornerRadius(10)
                 Text("\(fonik.alfabet)")
                     .font(.system(size: 30, weight: .bold, design: .default))
+                    .foregroundColor(.primary)
+                    
+                }
                 
-            }
+                }
             .buttonStyle(self.buttonStyle)
             .padding(.top, 5)
             .padding(.bottom, 3)
@@ -112,10 +129,10 @@ struct SelectableButtonStyle: ButtonStyle {
         configuration.label
             .padding()
             //.foregroundColor(configuration.isPressed ? Color.red : Color.white)
-            .frame(width: 55, height: 55, alignment: .center)
-            .background(configuration.isPressed ?  color2 : color)
+            //.frame(width: 70, height: 70, alignment: .center)
+            .background(configuration.isPressed ?  color2 : Color.white)
             //.clipShape(RoundedRectangle(cornerRadius: isSelected ? 16.0 : 0.0))
-            //.overlay(RoundedRectangle(cornerRadius: isSelected ? 16.0 : 0.0).stroke(lineWidth: isSelected ? 2.0 : 0.0).foregroundColor(Color.pink))
+            .overlay(RoundedRectangle(cornerRadius: isSelected ? 16.0 : 0.0).stroke(lineWidth: isSelected ? 2.0 : 0.0).foregroundColor(Color.pink))
             .animation(.linear(duration: 0.1))
             .cornerRadius(10)
     }
