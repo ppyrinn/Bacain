@@ -70,6 +70,88 @@ struct ProgresifView: View {
     }
 }
 
+struct addSchool: View {
+    
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(fetchRequest: Sekolah.getAllSekolah()) var listOfSekolah: FetchedResults<Sekolah>
+    @State private var newSekolah = ""
+    @State var showDetail = true
+    
+    var body: some View {
+        ZStack{
+            VStack{
+                
+                HStack{
+                    Text("Kelas")
+                        .foregroundColor(.orange)
+                        .bold()
+                    TextField("Sekolah Baru", text: self.$newSekolah)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                }
+                .padding(30)
+                
+                HStack {
+                    
+                    Button(action: {
+                        self.showDetail.toggle()
+                        
+                    }) {
+                        Text("Batal")
+                            .foregroundColor(.orange)
+                    }
+                    
+                    
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        // show new task view
+                        let sekolah = Sekolah(context: self.moc)
+                        sekolah.namaSekolah = self.newSekolah
+                        let id = UUID()
+                        sekolah.idSekolah = id
+                        
+                        print("textnya adalah", self.newSekolah)
+                        
+                        do{
+                            try self.moc.save()
+                        }catch{
+                            print(error)
+                        }
+                        
+                        self.newSekolah = ""
+                        
+                    }) {
+                        Text("Tambah Kelas")
+                            .foregroundColor(.orange)
+                    }
+                    
+                    
+                    }
+                .padding(30)
+                
+                Spacer()
+                
+                HStack{
+                    Text("Tambah Kelas")
+                        .font(.largeTitle)
+                        .foregroundColor(.orange)
+                }
+                
+                HStack{
+                    Text("Tambah Kelas yang ingin kamu simpan perkembangan murdinya")
+                        
+                }
+                
+                
+                Spacer()
+                
+                    
+                }
+            }
+        }
+    }
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ProgresifView()
