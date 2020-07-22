@@ -19,6 +19,8 @@ struct FonikView: View {
     @State private var subTitle = "a..a..a.."
     @State private var sound = "Sound"
     
+    let screenWidth = UIScreen.main.bounds.width
+    let screenHeight = UIScreen.main.bounds.height
     @State private var pressed = false
 
     
@@ -37,8 +39,6 @@ struct FonikView: View {
                 self.title = "\(fonik.title)"
                 self.subTitle = "\(fonik.subTitle)"
                 self.sound = "\(fonik.sound)"
-                
-                print()
                 
             }) {
                 ZStack{
@@ -62,16 +62,32 @@ struct FonikView: View {
 
     }
     
+    fileprivate func titleBar() -> some View {
+        return VStack{
+            ZStack{
+                Rectangle()
+                    .foregroundColor(.white)
+                .frame(width: screenWidth, height: screenHeight*15/100, alignment: .top)
+                VStack{
+                    HStack{
+                        Text("Fonik")
+                            .font(.system(size: 50, weight: .bold, design: .default))
+                        Spacer()
+                    }.padding(.top)
+                }.padding(.top)
+            }
+            Spacer()
+        }
+    }
+    
     var body: some View {
         ZStack{
             Rectangle()
                 .foregroundColor(Color(red: 1, green: 0.81, blue: 0.42))
-            VStack{
-                Text("Fonik")
+            ZStack{
+                titleBar()
                 HStack{
-                    VStack{
-                        Text("Fonik")
-                        ScrollView(.vertical) {
+                        ScrollView() {
                             scrollViewItem()
                         }
                             .frame(width: 80, height: 400, alignment: .center)
@@ -79,15 +95,17 @@ struct FonikView: View {
                         .background(Color.white)
                             .frame(width: 80, height: 400, alignment: .center)
                             .cornerRadius(10)
-                            
-                    }
+                        .padding(.leading, screenWidth*5/100)
 
-                    Spacer()
+                        Spacer()
                     ZStack{
-                        Rectangle()
-                        .frame(width: 380, height: 610, alignment: .center)
-                        .cornerRadius(50)
-                        .foregroundColor(Color.white)
+                        VStack{
+                            Rectangle()
+                                .frame(width: screenWidth*4/9, height: screenHeight*8/10, alignment: .center)
+                            .cornerRadius(50)
+                            .foregroundColor(Color.white)
+                            Spacer()
+                        }
                         VStack{
                             Text("\(gambar)")
                             Text("\(gambarDesc)")
@@ -103,9 +121,8 @@ struct FonikView: View {
                         .font(.system(size: 25, weight: .medium, design: .default))
                         Text("\(sound)")
                         
-                    }
-                }.padding(.trailing, 80)
-                .padding(.leading, 70)
+                    }.padding(.trailing, screenWidth*15/100)
+                }
             }
         }
     
