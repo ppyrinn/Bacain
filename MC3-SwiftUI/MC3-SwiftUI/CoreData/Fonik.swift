@@ -29,5 +29,15 @@ let susunKataTop = [
     "Ba", "ma", "ri", "Ju", "ga", "bo", "la", "bu", "lu", "pa", "ha", "du", "ri", "gi", "ku", "to", "pi", "ta", "mu", "ni", "gu", "he", "yo", "zo", "na", "ze", "ro"
 ]
 
+func generateKata() -> [String]{
+    var randomWord: [String] = []
+    for _ in 0..<8{
+        let random = susunKataTop.randomElement()!.capitalized
+        randomWord.append(random)
+    }
+    return randomWord
+}
+
+
 
 

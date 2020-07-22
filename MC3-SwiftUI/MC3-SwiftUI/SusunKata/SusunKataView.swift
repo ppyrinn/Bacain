@@ -11,8 +11,14 @@ import SwiftUI
 struct SusunKataView: View {
     
     @State private var textField = ""
+    
+    @State private var topRow = susunKataTop.shuffled()
+    @State private var bottomRow = susunKataTop.shuffled()
+
+    
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
+    
 
     
     fileprivate func titleBar() -> some View {
@@ -40,11 +46,16 @@ struct SusunKataView: View {
             titleBar()
             VStack{
                 HStack{
-                    ForEach(0..<5) {  index in
+                    ForEach(0..<8) {  index in
                         Button(action: {
-                            print("\(index)")
+                            if self.textField == ""{
+                                self.textField += "\(self.topRow[index].capitalized)"
+
+                            }else{
+                                self.textField += " - \(self.topRow[index].capitalized)"
+                            }
                         }) {
-                            Text("A")
+                            Text(self.topRow[index].capitalized)
                                 .font(.system(size: 28, weight: .bold, design: .default))
                         }
                         .buttonStyle(SelectableButtonStyle())
@@ -54,16 +65,16 @@ struct SusunKataView: View {
                 }
                 .padding()
                 HStack{
-                    ForEach(0..<5) {  index in
+                    ForEach(0..<7) {  index in
                         Button(action: {
                             if self.textField == ""{
-                                self.textField += "\(index)"
+                                self.textField += "\(self.bottomRow[index].capitalized)"
 
                             }else{
-                                self.textField += " - \(index)"
+                                self.textField += " - \(self.bottomRow[index].capitalized)"
                             }
                         }) {
-                            Text("B")
+                            Text(self.bottomRow[index].capitalized)
                             .font(.system(size: 28, weight: .bold, design: .default))
                         }
                     .buttonStyle(SelectableButtonStyle())
