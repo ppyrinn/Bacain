@@ -53,7 +53,6 @@ struct KuisView: View {
                             .fontWeight(.bold)
                             .font(.system(size: 17))
                             .font(.custom("SF Compact Text", size: 17))
-                            .foregroundColor(.black)
                         Spacer()
                         Button(action: {
                             //
@@ -72,59 +71,38 @@ struct KuisView: View {
                     
                     Spacer()
                     
-                    Image("lari").padding(.top, -90)
+                    Image("lari")
                     
                     Text(soal)
                         .fontWeight(.bold)
                         .font(.system(size: 57))
                         .font(.custom("SF Compact Text", size: 57))
-                        .foregroundColor(.black)
                     
                     if(self.showEjaan == true){
                         HStack{
                             ForEach(ejaan, id :\.self){ eja in
                                 Text("\(eja) •")
-                                    .font(.system(size: 28))
-                                    .font(.custom("SF Compact Text", size: 28))
-                                    .foregroundColor(.black)
-                            }
-                            Image("ceklis").resizable()
-                            .frame(width: 28, height: 28, alignment: .center)
-                            .opacity(0)
-                            if(self.resultString.uppercased() == self.soal.uppercased()){
-                                Image("ceklis").resizable()
-                                .frame(width: 28, height: 28, alignment: .center)
-                                .opacity(1)
-                            }
-                        }
-                        .padding(.top, -20)
-                    }else{
-                        HStack{
-                            
-                            Text(" ")
                                 .font(.system(size: 28))
                                 .font(.custom("SF Compact Text", size: 28))
-                                .foregroundColor(.black)
-                            
-                            Image("ceklis").resizable()
-                                .frame(width: 28, height: 28, alignment: .center)
-                                .opacity(0)
+                            }
+                            if(self.resultString.uppercased() == self.soal.uppercased()){
+                                Image("ceklis")
+                            }
                         }
-                        .padding(.top, -20)
                     }
                     
                     
                     if(self.isRecording == true){
                         Button(action: {
-                            self.resultString =  self.soundClassification.stopRecording()
+                            self.resultString = self.soundClassification.stopRecording()
                             self.isRecording = false
                             self.showEjaan = true
                         }){
                             Image("stop-button")
                         }
+                        Text("Sedang mendengarkan...")
                     }else{
                         Button(action: {
-                            
                             self.soundClassification.recordAndRecognizeSpeech()
                             self.isRecording = true
                         }){
@@ -151,10 +129,3 @@ struct KuisView_Previews: PreviewProvider {
     }
 }
 
-extension KuisView: SoundClassifierDelegate {
-    func displayPredictionResult(identifier: String, confidence: Double) {
-        DispatchQueue.main.async {
-            print("Recognition: \(identifier)\nConfidence \(confidence)")
-        }
-    }
-}
