@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Fonik" representedClassName=".Fonik" syncable="YES">
-        <attribute name="alfabet" optional="YES" attributeType="String"/>
-        <attribute name="gambar" optional="YES" attributeType="String"/>
-        <attribute name="gambarDesc" optional="YES" attributeType="String"/>
-        <attribute name="sound" optional="YES" attributeType="String"/>
-        <attribute name="subTitle" optional="YES" attributeType="String"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
-    </entity>
     <entity name="Kelas" representedClassName=".Kelas" syncable="YES">
         <attribute name="idKelas" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="idSekolah" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -15,9 +7,15 @@
         <relationship name="diDalemSekolah" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Sekolah" inverseName="punyaKelas" inverseEntity="Sekolah"/>
         <relationship name="punyaMurid" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Murid" inverseName="diDalemKelas" inverseEntity="Murid"/>
     </entity>
+    <entity name="Kuis" representedClassName="Kuis" syncable="YES" codeGenerationType="class">
+        <attribute name="idKelas" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="idKuis" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    </entity>
     <entity name="Murid" representedClassName=".Murid" syncable="YES">
+        <attribute name="idKelas" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="idMurid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="namaMurid" optional="YES" attributeType="String"/>
+        <attribute name="progress" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="diDalemKelas" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kelas" inverseName="punyaMurid" inverseEntity="Kelas"/>
     </entity>
     <entity name="Sekolah" representedClassName=".Sekolah" syncable="YES">
@@ -37,11 +35,11 @@
         <attribute name="sound" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Fonik" positionX="180" positionY="144" width="128" height="133"/>
         <element name="Kelas" positionX="316.56640625" positionY="0.4375" width="128" height="118"/>
-        <element name="Murid" positionX="-13.6796875" positionY="139.56640625" width="128" height="88"/>
+        <element name="Murid" positionX="-13.6796875" positionY="139.56640625" width="128" height="118"/>
         <element name="Sekolah" positionX="-45" positionY="0" width="128" height="88"/>
         <element name="Soal" positionX="135" positionY="99" width="128" height="103"/>
         <element name="SusunKata" positionX="189" positionY="153" width="128" height="88"/>
+        <element name="Kuis" positionX="144" positionY="126" width="128" height="73"/>
     </elements>
 </model>

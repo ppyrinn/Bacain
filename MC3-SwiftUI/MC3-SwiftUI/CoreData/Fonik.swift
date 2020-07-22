@@ -22,7 +22,11 @@ let listOfFonik: [Fonik] = [
     Fonik(alfabet: "A", gambar: "Gambar Anggur", gambarDesc: "Anggur", title: "Aa", subTitle: "a..a..a..", sound: "suara anggur"),
     Fonik(alfabet: "B", gambar: "Gambar Budi", gambarDesc: "Budi", title: "Bb", subTitle: "b..b..b..", sound: "suara Budi"),
     Fonik(alfabet: "C", gambar: "Gambar Cabai", gambarDesc: "Cabai", title: "Cc", subTitle: "c..c..c..", sound: "suara cabai"),
-
 ]
+
+let susunKataTop = [
+    "Ba", "ma", "ri", "Ju", "ga", "bo", "la", "bu", "lu", "pa", "ha", "du", "ri", "gi", "ku", "to", "pi", "ta", "mu", "ni", "gu", "he", "yo", "zo", "na", "ze", "ro"
+]
+
 
 
