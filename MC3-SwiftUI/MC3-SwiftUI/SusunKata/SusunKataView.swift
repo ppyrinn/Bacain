@@ -13,7 +13,7 @@ struct SusunKataView: View {
     @State private var textField = ""
     
     @State private var topRow = susunKataTop.shuffled()
-    @State private var bottomRow = susunKataTop.shuffled()
+    @State private var bottomRow = susunKataBot.shuffled()
 
     
     let screenWidth = UIScreen.main.bounds.width

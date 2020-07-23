@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4B68056C24C8A63B000261E6 /* Murid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B68056B24C8A63B000261E6 /* Murid.swift */; };
+		4BB7EDD624C93EC6007087CE /* Kuis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB7EDD524C93EC6007087CE /* Kuis.swift */; };
 		4BDCB7E024C1B9B900C6A6B6 /* Sekolah.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7DF24C1B9B900C6A6B6 /* Sekolah.swift */; };
 		4BDCB7E224C1F50F00C6A6B6 /* pageDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7E124C1F50F00C6A6B6 /* pageDetail.swift */; };
 		4BDCB7E424C21D1800C6A6B6 /* contentRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7E324C21D1800C6A6B6 /* contentRoot.swift */; };
@@ -16,7 +17,6 @@
 		4BDCB7EF24C3517E00C6A6B6 /* AlfabetScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7EE24C3517E00C6A6B6 /* AlfabetScrollView.swift */; };
 		4BDCB7F124C42CB100C6A6B6 /* Kelas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7F024C42CB100C6A6B6 /* Kelas.swift */; };
 		4BDCB7F324C44AFA00C6A6B6 /* Fonik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7F224C44AFA00C6A6B6 /* Fonik.swift */; };
-		4BDCB7F524C44BBE00C6A6B6 /* SusunKata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7F424C44BBE00C6A6B6 /* SusunKata.swift */; };
 		4BDCB7F724C44C6D00C6A6B6 /* Soal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7F624C44C6D00C6A6B6 /* Soal.swift */; };
 		F4D5CEE424C1471600C6B104 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5CEE324C1471600C6B104 /* AppDelegate.swift */; };
 		F4D5CEE624C1471600C6B104 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5CEE524C1471600C6B104 /* SceneDelegate.swift */; };
@@ -29,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		4B68056B24C8A63B000261E6 /* Murid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Murid.swift; sourceTree = "<group>"; };
+		4BB7EDD524C93EC6007087CE /* Kuis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kuis.swift; sourceTree = "<group>"; };
 		4BDCB7DF24C1B9B900C6A6B6 /* Sekolah.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sekolah.swift; sourceTree = "<group>"; };
 		4BDCB7E124C1F50F00C6A6B6 /* pageDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pageDetail.swift; sourceTree = "<group>"; };
 		4BDCB7E324C21D1800C6A6B6 /* contentRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = contentRoot.swift; sourceTree = "<group>"; };
@@ -37,7 +38,6 @@
 		4BDCB7EE24C3517E00C6A6B6 /* AlfabetScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlfabetScrollView.swift; sourceTree = "<group>"; };
 		4BDCB7F024C42CB100C6A6B6 /* Kelas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kelas.swift; sourceTree = "<group>"; };
 		4BDCB7F224C44AFA00C6A6B6 /* Fonik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonik.swift; sourceTree = "<group>"; };
-		4BDCB7F424C44BBE00C6A6B6 /* SusunKata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SusunKata.swift; sourceTree = "<group>"; };
 		4BDCB7F624C44C6D00C6A6B6 /* Soal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Soal.swift; sourceTree = "<group>"; };
 		F4D5CEE024C1471600C6B104 /* MC3-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MC3-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4D5CEE324C1471600C6B104 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,7 +68,7 @@
 				4BDCB7F224C44AFA00C6A6B6 /* Fonik.swift */,
 				4B68056B24C8A63B000261E6 /* Murid.swift */,
 				4BDCB7F624C44C6D00C6A6B6 /* Soal.swift */,
-				4BDCB7F424C44BBE00C6A6B6 /* SusunKata.swift */,
+				4BB7EDD524C93EC6007087CE /* Kuis.swift */,
 				4BDCB7F024C42CB100C6A6B6 /* Kelas.swift */,
 			);
 			path = CoreData;
@@ -215,10 +215,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BDCB7EF24C3517E00C6A6B6 /* AlfabetScrollView.swift in Sources */,
+				4BB7EDD624C93EC6007087CE /* Kuis.swift in Sources */,
 				F4D5CEE424C1471600C6B104 /* AppDelegate.swift in Sources */,
 				4BDCB7E224C1F50F00C6A6B6 /* pageDetail.swift in Sources */,
 				4BDCB7E824C2209800C6A6B6 /* SusunKataView.swift in Sources */,
-				4BDCB7F524C44BBE00C6A6B6 /* SusunKata.swift in Sources */,
 				4BDCB7E624C21F0500C6A6B6 /* FonikView.swift in Sources */,
 				4BDCB7F124C42CB100C6A6B6 /* Kelas.swift in Sources */,
 				F4D5CEE624C1471600C6B104 /* SceneDelegate.swift in Sources */,
