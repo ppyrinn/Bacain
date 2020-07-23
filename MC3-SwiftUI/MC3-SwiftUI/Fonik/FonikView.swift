@@ -13,7 +13,7 @@ struct FonikView: View {
     @State var buttonStyle = SelectableButtonStyle()
 
  
-    @State private var gambar = "Gambar Anggur"
+    @State private var gambar = "anggur"
     @State private var gambarDesc = "Anggur"
     @State private var title = "Aa"
     @State private var subTitle = "a..a..a.."
@@ -31,14 +31,14 @@ struct FonikView: View {
     fileprivate func scrollViewItem() -> some View {
         return ForEach(listOfFonik, id: \.alfabet){ fonik in
             Button(action: {
-                self.pressed.toggle()
-                
-                //self.buttonStyle.isSelected = !self.buttonStyle.isSelected
+                self.buttonStyle.isSelected = !self.buttonStyle.isSelected
                 self.gambarDesc = "\(fonik.gambarDesc)"
                 self.gambar = "\(fonik.gambar)"
-                self.title = "\(fonik.title)"
-                self.subTitle = "\(fonik.subTitle)"
-                self.sound = "\(fonik.sound)"
+                self.title = "\(fonik.alfabet + fonik.alfabet.lowercased())"
+                self.subTitle = "\(fonik.alfabet.lowercased())..\(fonik.alfabet.lowercased())..\(fonik.alfabet.lowercased()).."
+                self.sound = "\(fonik.alfabet)"
+                playFonik(title: self.sound)
+
                 
             }) {
                 ZStack{
@@ -47,17 +47,15 @@ struct FonikView: View {
                     .frame(width: 50, height: 50, alignment: .center)
                         .cornerRadius(10)
                 Text("\(fonik.alfabet)")
-                    .font(.system(size: 30, weight: .bold, design: .default))
-                    .foregroundColor(.primary)
-                    
-                }
+                    .font(.system(size: 28, weight: .medium, design: .default))
                 
-                }
+            }
+                
             .buttonStyle(self.buttonStyle)
             .padding(.top, 5)
             .padding(.bottom, 3)
             .padding(.leading, 5)
-            .padding(.trailing,5)
+            .padding(.trailing, 5)
         }
 
     }
@@ -93,7 +91,7 @@ struct FonikView: View {
                             .frame(width: 80, height: 400, alignment: .center)
 
                         .background(Color.white)
-                            .frame(width: 80, height: 400, alignment: .center)
+                            .frame(width: 70, height: screenHeight/2, alignment: .center)
                             .cornerRadius(10)
                         .padding(.leading, screenWidth*5/100)
 
@@ -107,7 +105,9 @@ struct FonikView: View {
                             Spacer()
                         }
                         VStack{
-                            Text("\(gambar)")
+                            Image(gambar)
+                                .resizable()
+                                .frame(width: screenWidth/4, height: screenWidth/4, alignment: .center)
                             Text("\(gambarDesc)")
                             .font(.system(size: 34, weight: .bold, design: .default))
                         }
@@ -119,7 +119,13 @@ struct FonikView: View {
                         .font(.system(size: 90, weight: .bold, design: .default))
                         Text("\(subTitle)")
                         .font(.system(size: 25, weight: .medium, design: .default))
-                        Text("\(sound)")
+                        Button(action: {
+                            playFonik(title: self.sound)
+                        }) {
+                            Image("sound-button")
+                                .renderingMode(.original)
+                        }
+                    
                         
                     }.padding(.trailing, screenWidth*15/100)
                 }
@@ -144,6 +150,7 @@ struct SelectableButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
         
         configuration.label
+            .frame(width: 25, height: 25, alignment: .center)
             .padding()
             //.foregroundColor(configuration.isPressed ? Color.red : Color.white)
             //.frame(width: 70, height: 70, alignment: .center)
