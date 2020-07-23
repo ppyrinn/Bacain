@@ -31,7 +31,7 @@ struct FonikView: View {
     fileprivate func scrollViewItem() -> some View {
         return ForEach(listOfFonik, id: \.alfabet){ fonik in
             Button(action: {
-                self.buttonStyle.isSelected.toggle()
+                self.buttonStyle.isSelected = !self.buttonStyle.isSelected
                 self.gambarDesc = "\(fonik.gambarDesc)"
                 self.gambar = "\(fonik.gambar)"
                 self.title = "\(fonik.alfabet + fonik.alfabet.lowercased())"
@@ -41,20 +41,22 @@ struct FonikView: View {
 
                 
             }) {
-               
+                ZStack{
+                    Rectangle()
+                        .foregroundColor(self.pressed ? .red : .blue)
+                    .frame(width: 50, height: 50, alignment: .center)
+                        .cornerRadius(10)
                 Text("\(fonik.alfabet)")
                     .font(.system(size: 28, weight: .medium, design: .default))
-                    
                 
             }
-            .frame(width: 60, height: 60, alignment: .center)
+                
             .buttonStyle(self.buttonStyle)
-//            .padding(.top, 5)
-//            .padding(.bottom, 3)
-//            .padding(.leading, 5)
-//            .padding(.trailing, 5)
+            .padding(.top, 5)
+            .padding(.bottom, 3)
+            .padding(.leading, 5)
+            .padding(.trailing, 5)
         }
-        
 
     }
     
@@ -62,19 +64,15 @@ struct FonikView: View {
         return VStack{
             ZStack{
                 Rectangle()
-                .foregroundColor(.white)
-                .frame(width: screenWidth, height: screenHeight*10/100, alignment: .top)
+                    .foregroundColor(.white)
+                .frame(width: screenWidth, height: screenHeight*15/100, alignment: .top)
                 VStack{
-                    Spacer()
                     HStack{
                         Text("Fonik")
-                            .font(.system(size: 34, weight: .bold, design: .default))
-                            .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
-
-                            .padding(.top)
+                            .font(.system(size: 50, weight: .bold, design: .default))
                         Spacer()
                     }.padding(.top)
-                }.frame(width: screenWidth, height: screenHeight*10/100, alignment: .top)
+                }.padding(.top)
             }
             Spacer()
         }
@@ -90,9 +88,10 @@ struct FonikView: View {
                         ScrollView() {
                             scrollViewItem()
                         }
-                            .frame(width: 80, height: screenHeight/2, alignment: .center)
+                            .frame(width: 80, height: 400, alignment: .center)
 
                         .background(Color.white)
+                            .frame(width: 70, height: screenHeight/2, alignment: .center)
                             .cornerRadius(10)
                         .padding(.leading, screenWidth*5/100)
 
@@ -114,11 +113,11 @@ struct FonikView: View {
                         }
                         
                     }
-                    Spacer(minLength: screenWidth/20)
+                    Spacer()
                     VStack{
                         Text("\(title)")
                         .font(.system(size: 90, weight: .bold, design: .default))
-                        Text("'\(subTitle)'")
+                        Text("\(subTitle)")
                         .font(.system(size: 25, weight: .medium, design: .default))
                         Button(action: {
                             playFonik(title: self.sound)
@@ -153,11 +152,11 @@ struct SelectableButtonStyle: ButtonStyle {
         configuration.label
             .frame(width: 25, height: 25, alignment: .center)
             .padding()
+            //.foregroundColor(configuration.isPressed ? Color.red : Color.white)
             //.frame(width: 70, height: 70, alignment: .center)
-            .background(configuration.isPressed ?  color2 : color)
-            //.background(isSelected ? color2 : color)
+            .background(configuration.isPressed ?  color2 : Color.white)
             //.clipShape(RoundedRectangle(cornerRadius: isSelected ? 16.0 : 0.0))
-            //.overlay(RoundedRectangle(cornerRadius: isSelected ? 16.0 : 0.0).stroke(lineWidth: isSelected ? 2.0 : 0.0).foregroundColor(Color.pink))
+            .overlay(RoundedRectangle(cornerRadius: isSelected ? 16.0 : 0.0).stroke(lineWidth: isSelected ? 2.0 : 0.0).foregroundColor(Color.pink))
             .animation(.linear(duration: 0.1))
             .cornerRadius(10)
     }
