@@ -265,7 +265,9 @@
 				4BDCB7F224C44AFA00C6A6B6 /* Fonik.swift */,
 				4B68056B24C8A63B000261E6 /* Murid.swift */,
 				4BDCB7F624C44C6D00C6A6B6 /* Soal.swift */,
+
 				4BB7EDD524C93EC6007087CE /* Kuis.swift */,
+
 				4BDCB7F024C42CB100C6A6B6 /* Kelas.swift */,
 			);
 			path = CoreData;
@@ -499,6 +501,7 @@
 				F4C2C86A24C6A2CD00FAB092 /* SoundClassification.swift in Sources */,
 				F4C2C86824C6A21600FAB092 /* MC3-SoundClassifier 2.mlmodel in Sources */,
 				4BDCB7F524C44BBE00C6A6B6 /* SusunKata.swift in Sources */,
+
 
 				4BDCB7E624C21F0500C6A6B6 /* FonikView.swift in Sources */,
 				4BDCB7F124C42CB100C6A6B6 /* Kelas.swift in Sources */,
