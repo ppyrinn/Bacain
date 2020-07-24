@@ -57,16 +57,4 @@ let susunKataBot = [
 
 
 
-let susunKataTop = [
-    "Ba", "ma", "ri", "Ju", "ga", "bo", "la", "bu", "lu", "pa", "ha", "du"
-]
-
-let susunKataBot = [
-"gi", "ku", "to", "pi", "ta", "mu", "ni", "gu", "he", "yo", "zo", "na", "ze", "ro"
-]
-
-
-
-
-
 
