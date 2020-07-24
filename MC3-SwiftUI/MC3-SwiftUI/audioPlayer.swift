@@ -18,7 +18,7 @@ func playFonik(title: String){
     print(path)
             do{
                 player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
-                player.play()
+                //player.play()
 
             }catch{
                 print(error)
