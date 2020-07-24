@@ -25,15 +25,18 @@ struct SusunKataView: View {
         return VStack{
             ZStack{
                 Rectangle()
-                    .foregroundColor(.white)
-                .frame(width: screenWidth, height: screenHeight*15/100, alignment: .top)
+                .foregroundColor(.white)
+                .frame(width: screenWidth, height: screenHeight*1/10, alignment: .top)
                 VStack{
+                    Spacer()
                     HStack{
                         Text("Susun Kata")
-                            .font(.system(size: 50, weight: .bold, design: .default))
+                            .font(.system(size: 34, weight: .bold, design: .default))
+                        .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
+                            .padding(.top)
                         Spacer()
                     }.padding(.top)
-                }.padding(.top)
+                }.frame(width: screenWidth, height: screenHeight*1/10, alignment: .top)
             }
             Spacer()
         }
@@ -58,7 +61,7 @@ struct SusunKataView: View {
                             Text(self.topRow[index].capitalized)
                                 .font(.system(size: 28, weight: .bold, design: .default))
                         }
-                        .buttonStyle(SelectableButtonStyle())
+                        .buttonStyle(SelectableBtnStyle())
 
                     }
                     
@@ -77,8 +80,9 @@ struct SusunKataView: View {
                             Text(self.bottomRow[index].capitalized)
                             .font(.system(size: 28, weight: .bold, design: .default))
                         }
-                    .buttonStyle(SelectableButtonStyle())
-                    .padding()
+                            
+                    .buttonStyle(SelectableBtnStyle())
+//                    .padding()
                     }
                 }
                 .padding()
@@ -86,17 +90,18 @@ struct SusunKataView: View {
                 HStack{
                     TextField("", text: $textField)
                         .multilineTextAlignment(.center)
+                    .layoutPriority(1)
                         .disabled(true)
                         .font(.system(size: 50, weight: .bold, design: .default))
-                        .frame(width: 350, height: 80, alignment: .center)
+                        .frame(width: screenWidth*3/5, height: 80, alignment: .center)
                         .background(Color.white)
                         .cornerRadius(20)
-                        .padding(.leading)
+                        .padding()
                     
                     Button(action: {
                         self.textField = ""
                     }) {
-                        Image(systemName: "arrow.counterclockwise")
+                        Image("reset-button")
                     }
                     .font(.system(size: 30, weight: .bold, design: .rounded))
                     .foregroundColor(Color.red)
@@ -108,7 +113,8 @@ struct SusunKataView: View {
                 Button(action: {
                     print("btn")
                 }) {
-                    Text("Btn SUARA")
+                    Image("sound-button")
+                        .renderingMode(.original)
                 }
             .padding()
             }
@@ -119,5 +125,26 @@ struct SusunKataView: View {
 struct SusunKataView_Previews: PreviewProvider {
     static var previews: some View {
         SusunKataView()
+    }
+}
+
+struct SelectableBtnStyle: ButtonStyle {
+
+    var isSelected = false
+    let color = Color(red: 0.60, green: 0.60, blue: 0.60)
+    let color2 = Color(red: 0.79, green: 0.26, blue: 0.00)
+    
+    func makeBody(configuration: Self.Configuration) -> some View {
+        
+        configuration.label
+            .frame(width: 50, height: 50, alignment: .center)
+            .padding()
+            //.frame(width: 70, height: 70, alignment: .center)
+            .background(configuration.isPressed ?  color2 : color)
+            //.background(isSelected ? color2 : color)
+            //.clipShape(RoundedRectangle(cornerRadius: isSelected ? 16.0 : 0.0))
+            //.overlay(RoundedRectangle(cornerRadius: isSelected ? 16.0 : 0.0).stroke(lineWidth: isSelected ? 2.0 : 0.0).foregroundColor(Color.pink))
+            .animation(.linear(duration: 0.1))
+            .cornerRadius(10)
     }
 }
