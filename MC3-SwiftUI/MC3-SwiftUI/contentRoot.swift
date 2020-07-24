@@ -26,10 +26,10 @@ struct contentRoot: View {
                 Text("Susun Kata")
             }).tag(2)
             //tab bar kuis untuk sementara
-//            KuisView().tabItem({
-//                Image(systemName: "star.fill")
-//                Text("Kuis")
-//            }).tag(3)
+            KuisView().tabItem({
+                Image(systemName: "star.fill")
+                Text("Kuis")
+            }).tag(3)
         }
         .accentColor(Color.red)
     }
