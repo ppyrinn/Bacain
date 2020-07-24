@@ -140,7 +140,6 @@ struct SusunKataView_Previews: PreviewProvider {
 struct SelectableBtnStyle: ButtonStyle {
 
     var isSelected = false
-    let color = Color(red: 0.60, green: 0.60, blue: 0.60)
     let color2 = Color(red: 0.79, green: 0.26, blue: 0.00)
     
     func makeBody(configuration: Self.Configuration) -> some View {
@@ -149,7 +148,7 @@ struct SelectableBtnStyle: ButtonStyle {
             .frame(width: 50, height: 50, alignment: .center)
             .padding()
             //.frame(width: 70, height: 70, alignment: .center)
-            .background(configuration.isPressed ?  color2 : color)
+            .background(configuration.isPressed ?  color2 : Color.white)
             //.background(isSelected ? color2 : color)
             //.clipShape(RoundedRectangle(cornerRadius: isSelected ? 16.0 : 0.0))
             //.overlay(RoundedRectangle(cornerRadius: isSelected ? 16.0 : 0.0).stroke(lineWidth: isSelected ? 2.0 : 0.0).foregroundColor(Color.pink))
