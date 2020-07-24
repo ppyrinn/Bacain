@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct contentRoot: View {
+    
+   
     var body: some View {
         TabView{
             ProgresifView().tabItem({
@@ -29,6 +31,7 @@ struct contentRoot: View {
                 Text("Kuis")
             }).tag(3)
         }
+        .accentColor(Color.red)
     }
 }
 
