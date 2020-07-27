@@ -24,7 +24,7 @@ struct ProgresifView: View {
         List{
             Section(header: Text("Daftar Sekolah")) {
                 ForEach(self.listOfSekolah, id: \.namaSekolah){ item in
-                    NavigationLink(destination: pageDetail(sekolah: item)) {
+                    NavigationLink(destination: pageDetail(filter: item.idSekolah.uuidString, sekolah: item)) {
                         Text("\(item.namaSekolah)")
                         
                     }
