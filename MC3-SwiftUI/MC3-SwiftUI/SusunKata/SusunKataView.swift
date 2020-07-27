@@ -19,6 +19,8 @@ struct SusunKataView: View {
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
     
+    @State var queue: [String] = []
+    
 
     
     fileprivate func titleBar() -> some View {
@@ -52,11 +54,12 @@ struct SusunKataView: View {
                     ForEach(0..<8) {  index in
                         Button(action: {
                             if self.textField == ""{
-                                self.textField += "\(self.topRow[index].capitalized)"
+                                self.textField += "\(self.topRow[index])"
 
                             }else{
-                                self.textField += " - \(self.topRow[index].capitalized)"
+                                self.textField += " - \(self.topRow[index])"
                             }
+                            self.queue.append(self.topRow[index])
                         }) {
                             Text(self.topRow[index].capitalized)
                                 .font(.system(size: 28, weight: .bold, design: .default))
@@ -71,11 +74,13 @@ struct SusunKataView: View {
                     ForEach(0..<7) {  index in
                         Button(action: {
                             if self.textField == ""{
-                                self.textField += "\(self.bottomRow[index].capitalized)"
+                                self.textField += "\(self.bottomRow[index])"
 
                             }else{
-                                self.textField += " - \(self.bottomRow[index].capitalized)"
+                                self.textField += " - \(self.bottomRow[index])"
                             }
+                            self.queue.append(self.bottomRow[index])
+
                         }) {
                             Text(self.bottomRow[index].capitalized)
                             .font(.system(size: 28, weight: .bold, design: .default))
@@ -99,7 +104,10 @@ struct SusunKataView: View {
                         .padding()
                     
                     Button(action: {
+                        self.topRow = susunKataTop.shuffled()
+                        self.bottomRow = susunKataBot.shuffled()
                         self.textField = ""
+                        self.queue.removeAll()
                     }) {
                         Image("reset-button")
                     }
@@ -111,7 +119,8 @@ struct SusunKataView: View {
                 .padding()
                 
                 Button(action: {
-                    print("btn")
+                    print(self.queue)
+                    music(queue: self.queue)
                 }) {
                     Image("sound-button")
                         .renderingMode(.original)

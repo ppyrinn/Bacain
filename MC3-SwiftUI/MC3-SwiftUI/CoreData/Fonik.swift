@@ -46,11 +46,11 @@ let listOfFonik: [Fonik] = [
 ]
 
 let susunKataTop = [
-    "Ba", "ma", "ri", "Ju", "ga", "bo", "la", "bu", "lu", "pa", "ha", "du"
+    "Bo", "Ma", "Ta", "Mu", "Lu", "Zo", "La", "Ni", "Ra", "Pi", "Gu", "Ku", "Ga", "Bu", "Na"
 ]
 
 let susunKataBot = [
-"gi", "ku", "to", "pi", "ta", "mu", "ni", "gu", "he", "yo", "zo", "na", "ze", "ro"
+    "Ja", "Ju", "Sa", "Gi", "Ra", "Pa", "He", "Pu", "Ro", "Du", "Ha", "Yo", "Ba", "Ze", "To", "Li"
 ]
 
 

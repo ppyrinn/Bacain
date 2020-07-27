@@ -7,6 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B603CC324CB08B500A49EFE /* Bo.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CA424CB08B500A49EFE /* Bo.m4a */; };
+		4B603CC424CB08B500A49EFE /* Ma.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CA524CB08B500A49EFE /* Ma.m4a */; };
+		4B603CC524CB08B500A49EFE /* Ta.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CA624CB08B500A49EFE /* Ta.m4a */; };
+		4B603CC624CB08B500A49EFE /* Mu.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CA724CB08B500A49EFE /* Mu.m4a */; };
+		4B603CC724CB08B500A49EFE /* Lu.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CA824CB08B500A49EFE /* Lu.m4a */; };
+		4B603CC824CB08B500A49EFE /* Zo.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CA924CB08B500A49EFE /* Zo.m4a */; };
+		4B603CC924CB08B500A49EFE /* Ni.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CAA24CB08B500A49EFE /* Ni.m4a */; };
+		4B603CCA24CB08B500A49EFE /* La.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CAB24CB08B500A49EFE /* La.m4a */; };
+		4B603CCB24CB08B500A49EFE /* Ra.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CAC24CB08B500A49EFE /* Ra.m4a */; };
+		4B603CCC24CB08B500A49EFE /* Pi.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CAD24CB08B500A49EFE /* Pi.m4a */; };
+		4B603CCD24CB08B500A49EFE /* Ga.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CAE24CB08B500A49EFE /* Ga.m4a */; };
+		4B603CCE24CB08B500A49EFE /* Ku.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CAF24CB08B500A49EFE /* Ku.m4a */; };
+		4B603CCF24CB08B500A49EFE /* Gu.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CB024CB08B500A49EFE /* Gu.m4a */; };
+		4B603CD024CB08B500A49EFE /* Ja.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CB124CB08B500A49EFE /* Ja.m4a */; };
+		4B603CD124CB08B500A49EFE /* Ju.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CB224CB08B500A49EFE /* Ju.m4a */; };
+		4B603CD224CB08B500A49EFE /* Sa.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CB324CB08B500A49EFE /* Sa.m4a */; };
+		4B603CD324CB08B500A49EFE /* Gi.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CB424CB08B500A49EFE /* Gi.m4a */; };
+		4B603CD424CB08B500A49EFE /* Ri.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CB524CB08B500A49EFE /* Ri.m4a */; };
+		4B603CD524CB08B500A49EFE /* Pa.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CB624CB08B500A49EFE /* Pa.m4a */; };
+		4B603CD624CB08B500A49EFE /* He.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CB724CB08B500A49EFE /* He.m4a */; };
+		4B603CD724CB08B500A49EFE /* Pu.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CB824CB08B500A49EFE /* Pu.m4a */; };
+		4B603CD824CB08B500A49EFE /* Ro.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CB924CB08B500A49EFE /* Ro.m4a */; };
+		4B603CD924CB08B500A49EFE /* Du.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CBA24CB08B500A49EFE /* Du.m4a */; };
+		4B603CDA24CB08B500A49EFE /* Ha.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CBB24CB08B500A49EFE /* Ha.m4a */; };
+		4B603CDB24CB08B500A49EFE /* Yo.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CBC24CB08B500A49EFE /* Yo.m4a */; };
+		4B603CDC24CB08B500A49EFE /* Ba.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CBD24CB08B500A49EFE /* Ba.m4a */; };
+		4B603CDD24CB08B500A49EFE /* Ze.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CBE24CB08B500A49EFE /* Ze.m4a */; };
+		4B603CDE24CB08B500A49EFE /* To.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CBF24CB08B500A49EFE /* To.m4a */; };
+		4B603CDF24CB08B500A49EFE /* Bu.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CC024CB08B500A49EFE /* Bu.m4a */; };
+		4B603CE024CB08B500A49EFE /* Na.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CC124CB08B500A49EFE /* Na.m4a */; };
+		4B603CE124CB08B500A49EFE /* Li.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CC224CB08B500A49EFE /* Li.m4a */; };
 		4B68056C24C8A63B000261E6 /* Murid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B68056B24C8A63B000261E6 /* Murid.swift */; };
 		4BB7EDD624C93EC6007087CE /* Kuis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB7EDD524C93EC6007087CE /* Kuis.swift */; };
 		4BB7EDDA24C95643007087CE /* audioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB7EDD924C95643007087CE /* audioPlayer.swift */; };
@@ -55,6 +86,37 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4B603CA424CB08B500A49EFE /* Bo.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bo.m4a; sourceTree = "<group>"; };
+		4B603CA524CB08B500A49EFE /* Ma.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ma.m4a; sourceTree = "<group>"; };
+		4B603CA624CB08B500A49EFE /* Ta.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ta.m4a; sourceTree = "<group>"; };
+		4B603CA724CB08B500A49EFE /* Mu.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mu.m4a; sourceTree = "<group>"; };
+		4B603CA824CB08B500A49EFE /* Lu.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Lu.m4a; sourceTree = "<group>"; };
+		4B603CA924CB08B500A49EFE /* Zo.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zo.m4a; sourceTree = "<group>"; };
+		4B603CAA24CB08B500A49EFE /* Ni.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ni.m4a; sourceTree = "<group>"; };
+		4B603CAB24CB08B500A49EFE /* La.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = La.m4a; sourceTree = "<group>"; };
+		4B603CAC24CB08B500A49EFE /* Ra.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ra.m4a; sourceTree = "<group>"; };
+		4B603CAD24CB08B500A49EFE /* Pi.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pi.m4a; sourceTree = "<group>"; };
+		4B603CAE24CB08B500A49EFE /* Ga.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ga.m4a; sourceTree = "<group>"; };
+		4B603CAF24CB08B500A49EFE /* Ku.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ku.m4a; sourceTree = "<group>"; };
+		4B603CB024CB08B500A49EFE /* Gu.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Gu.m4a; sourceTree = "<group>"; };
+		4B603CB124CB08B500A49EFE /* Ja.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ja.m4a; sourceTree = "<group>"; };
+		4B603CB224CB08B500A49EFE /* Ju.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ju.m4a; sourceTree = "<group>"; };
+		4B603CB324CB08B500A49EFE /* Sa.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sa.m4a; sourceTree = "<group>"; };
+		4B603CB424CB08B500A49EFE /* Gi.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Gi.m4a; sourceTree = "<group>"; };
+		4B603CB524CB08B500A49EFE /* Ri.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ri.m4a; sourceTree = "<group>"; };
+		4B603CB624CB08B500A49EFE /* Pa.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pa.m4a; sourceTree = "<group>"; };
+		4B603CB724CB08B500A49EFE /* He.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = He.m4a; sourceTree = "<group>"; };
+		4B603CB824CB08B500A49EFE /* Pu.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pu.m4a; sourceTree = "<group>"; };
+		4B603CB924CB08B500A49EFE /* Ro.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ro.m4a; sourceTree = "<group>"; };
+		4B603CBA24CB08B500A49EFE /* Du.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Du.m4a; sourceTree = "<group>"; };
+		4B603CBB24CB08B500A49EFE /* Ha.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ha.m4a; sourceTree = "<group>"; };
+		4B603CBC24CB08B500A49EFE /* Yo.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Yo.m4a; sourceTree = "<group>"; };
+		4B603CBD24CB08B500A49EFE /* Ba.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ba.m4a; sourceTree = "<group>"; };
+		4B603CBE24CB08B500A49EFE /* Ze.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ze.m4a; sourceTree = "<group>"; };
+		4B603CBF24CB08B500A49EFE /* To.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = To.m4a; sourceTree = "<group>"; };
+		4B603CC024CB08B500A49EFE /* Bu.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bu.m4a; sourceTree = "<group>"; };
+		4B603CC124CB08B500A49EFE /* Na.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Na.m4a; sourceTree = "<group>"; };
+		4B603CC224CB08B500A49EFE /* Li.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Li.m4a; sourceTree = "<group>"; };
 		4B68056B24C8A63B000261E6 /* Murid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Murid.swift; sourceTree = "<group>"; };
 		4BB7EDD524C93EC6007087CE /* Kuis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kuis.swift; sourceTree = "<group>"; };
 		4BB7EDD924C95643007087CE /* audioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = audioPlayer.swift; sourceTree = "<group>"; };
@@ -115,6 +177,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4B603CA324CB08B500A49EFE /* Record Suara Suku Kata */ = {
+			isa = PBXGroup;
+			children = (
+				4B603CA424CB08B500A49EFE /* Bo.m4a */,
+				4B603CA524CB08B500A49EFE /* Ma.m4a */,
+				4B603CA624CB08B500A49EFE /* Ta.m4a */,
+				4B603CA724CB08B500A49EFE /* Mu.m4a */,
+				4B603CA824CB08B500A49EFE /* Lu.m4a */,
+				4B603CA924CB08B500A49EFE /* Zo.m4a */,
+				4B603CAA24CB08B500A49EFE /* Ni.m4a */,
+				4B603CAB24CB08B500A49EFE /* La.m4a */,
+				4B603CAC24CB08B500A49EFE /* Ra.m4a */,
+				4B603CAD24CB08B500A49EFE /* Pi.m4a */,
+				4B603CAE24CB08B500A49EFE /* Ga.m4a */,
+				4B603CAF24CB08B500A49EFE /* Ku.m4a */,
+				4B603CB024CB08B500A49EFE /* Gu.m4a */,
+				4B603CB124CB08B500A49EFE /* Ja.m4a */,
+				4B603CB224CB08B500A49EFE /* Ju.m4a */,
+				4B603CB324CB08B500A49EFE /* Sa.m4a */,
+				4B603CB424CB08B500A49EFE /* Gi.m4a */,
+				4B603CB524CB08B500A49EFE /* Ri.m4a */,
+				4B603CB624CB08B500A49EFE /* Pa.m4a */,
+				4B603CB724CB08B500A49EFE /* He.m4a */,
+				4B603CB824CB08B500A49EFE /* Pu.m4a */,
+				4B603CB924CB08B500A49EFE /* Ro.m4a */,
+				4B603CBA24CB08B500A49EFE /* Du.m4a */,
+				4B603CBB24CB08B500A49EFE /* Ha.m4a */,
+				4B603CBC24CB08B500A49EFE /* Yo.m4a */,
+				4B603CBD24CB08B500A49EFE /* Ba.m4a */,
+				4B603CBE24CB08B500A49EFE /* Ze.m4a */,
+				4B603CBF24CB08B500A49EFE /* To.m4a */,
+				4B603CC024CB08B500A49EFE /* Bu.m4a */,
+				4B603CC124CB08B500A49EFE /* Na.m4a */,
+				4B603CC224CB08B500A49EFE /* Li.m4a */,
+			);
+			path = "Record Suara Suku Kata";
+			sourceTree = "<group>";
+		};
 		4BB7EDDC24C95E02007087CE /* Audio Fonik */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +305,7 @@
 		F4D5CEE224C1471600C6B104 /* MC3-SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				4B603CA324CB08B500A49EFE /* Record Suara Suku Kata */,
 				4BB7EDDC24C95E02007087CE /* Audio Fonik */,
 				4BDCB7DE24C1874B00C6A6B6 /* CoreData */,
 				F4D5CEE324C1471600C6B104 /* AppDelegate.swift */,
@@ -293,32 +394,63 @@
 				4BB7EE0524C95E03007087CE /* Q.m4a in Resources */,
 				4BB7EE0224C95E03007087CE /* P.m4a in Resources */,
 				4BB7EDFE24C95E03007087CE /* H.m4a in Resources */,
+				4B603CCE24CB08B500A49EFE /* Ku.m4a in Resources */,
 				4BB7EE0B24C95E03007087CE /* V.m4a in Resources */,
+				4B603CD724CB08B500A49EFE /* Pu.m4a in Resources */,
 				4BB7EE0824C95E03007087CE /* E.m4a in Resources */,
 				4BB7EDFC24C95E03007087CE /* Z.m4a in Resources */,
+				4B603CDB24CB08B500A49EFE /* Yo.m4a in Resources */,
+				4B603CD524CB08B500A49EFE /* Pa.m4a in Resources */,
+				4B603CD624CB08B500A49EFE /* He.m4a in Resources */,
 				4BB7EE0E24C95E03007087CE /* U.m4a in Resources */,
 				4BB7EE0424C95E03007087CE /* F.m4a in Resources */,
 				F4D5CEF324C1471900C6B104 /* LaunchScreen.storyboard in Resources */,
 				F4D5CEF024C1471900C6B104 /* Preview Assets.xcassets in Resources */,
+				4B603CDC24CB08B500A49EFE /* Ba.m4a in Resources */,
 				4BB7EE0024C95E03007087CE /* K.m4a in Resources */,
+				4B603CC524CB08B500A49EFE /* Ta.m4a in Resources */,
+				4B603CD124CB08B500A49EFE /* Ju.m4a in Resources */,
 				4BB7EE0A24C95E03007087CE /* A.m4a in Resources */,
 				4BB7EE0C24C95E03007087CE /* W.m4a in Resources */,
 				4BB7EE0F24C95E03007087CE /* T.m4a in Resources */,
 				4BB7EDFD24C95E03007087CE /* L.m4a in Resources */,
+				4B603CC324CB08B500A49EFE /* Bo.m4a in Resources */,
 				4BB7EE0724C95E03007087CE /* D.m4a in Resources */,
 				4BB7EE0924C95E03007087CE /* R.m4a in Resources */,
+				4B603CDA24CB08B500A49EFE /* Ha.m4a in Resources */,
 				4BB7EDFB24C95E03007087CE /* M.m4a in Resources */,
+				4B603CD324CB08B500A49EFE /* Gi.m4a in Resources */,
 				4BB7EDFF24C95E03007087CE /* I.m4a in Resources */,
 				4BB7EDF824C95E03007087CE /* Y.m4a in Resources */,
+				4B603CD824CB08B500A49EFE /* Ro.m4a in Resources */,
+				4B603CE024CB08B500A49EFE /* Na.m4a in Resources */,
 				4BB7EDF924C95E03007087CE /* X.m4a in Resources */,
+				4B603CD224CB08B500A49EFE /* Sa.m4a in Resources */,
 				F4D5CEED24C1471900C6B104 /* Assets.xcassets in Resources */,
 				4BB7EE0324C95E03007087CE /* G.m4a in Resources */,
+				4B603CCB24CB08B500A49EFE /* Ra.m4a in Resources */,
+				4B603CCC24CB08B500A49EFE /* Pi.m4a in Resources */,
+				4B603CCA24CB08B500A49EFE /* La.m4a in Resources */,
+				4B603CDF24CB08B500A49EFE /* Bu.m4a in Resources */,
 				4BB7EE0124C95E03007087CE /* J.m4a in Resources */,
 				4BB7EDFA24C95E03007087CE /* O.m4a in Resources */,
+				4B603CCD24CB08B500A49EFE /* Ga.m4a in Resources */,
+				4B603CDE24CB08B500A49EFE /* To.m4a in Resources */,
+				4B603CD924CB08B500A49EFE /* Du.m4a in Resources */,
+				4B603CC724CB08B500A49EFE /* Lu.m4a in Resources */,
 				4BB7EE0D24C95E03007087CE /* B.m4a in Resources */,
+				4B603CC424CB08B500A49EFE /* Ma.m4a in Resources */,
+				4B603CD424CB08B500A49EFE /* Ri.m4a in Resources */,
+				4B603CC824CB08B500A49EFE /* Zo.m4a in Resources */,
 				4BB7EE1024C95E03007087CE /* C.m4a in Resources */,
 				4BB7EE0624C95E03007087CE /* S.m4a in Resources */,
+				4B603CCF24CB08B500A49EFE /* Gu.m4a in Resources */,
+				4B603CC924CB08B500A49EFE /* Ni.m4a in Resources */,
+				4B603CE124CB08B500A49EFE /* Li.m4a in Resources */,
 				4BB7EDF724C95E02007087CE /* N.m4a in Resources */,
+				4B603CDD24CB08B500A49EFE /* Ze.m4a in Resources */,
+				4B603CC624CB08B500A49EFE /* Mu.m4a in Resources */,
+				4B603CD024CB08B500A49EFE /* Ja.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
