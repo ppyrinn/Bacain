@@ -13,80 +13,122 @@ struct FonikView: View {
     @State var buttonStyle = SelectableButtonStyle()
 
  
-    @State private var gambar = "Gambar Anggur"
+    @State private var gambar = "anggur"
     @State private var gambarDesc = "Anggur"
     @State private var title = "Aa"
     @State private var subTitle = "a..a..a.."
     @State private var sound = "Sound"
+    
+    let screenWidth = UIScreen.main.bounds.width
+    let screenHeight = UIScreen.main.bounds.height
+    @State private var pressed = false
+
+    
+
 
 
 
     fileprivate func scrollViewItem() -> some View {
         return ForEach(listOfFonik, id: \.alfabet){ fonik in
             Button(action: {
-                self.buttonStyle.isSelected = !self.buttonStyle.isSelected
-                self.gambarDesc = "\(fonik.alfabet)"
+                self.buttonStyle.isSelected.toggle()
+                self.gambarDesc = "\(fonik.gambarDesc)"
                 self.gambar = "\(fonik.gambar)"
-                self.title = "\(fonik.title)"
-                self.subTitle = "\(fonik.subTitle)"
-                self.sound = "\(fonik.sound)"
+                self.title = "\(fonik.alfabet + fonik.alfabet.lowercased())"
+                self.subTitle = "\(fonik.alfabet.lowercased())..\(fonik.alfabet.lowercased())..\(fonik.alfabet.lowercased()).."
+                self.sound = "\(fonik.alfabet)"
+                playFonik(title: self.sound)
+
                 
             }) {
+               
                 Text("\(fonik.alfabet)")
-                    .font(.system(size: 30, weight: .medium, design: .default))
+                    .font(.system(size: 28, weight: .medium, design: .default))
+                    
                 
             }
-                
+            .frame(width: 60, height: 60, alignment: .center)
             .buttonStyle(self.buttonStyle)
-            .padding(.top, 5)
-            .padding(.bottom, 3)
-            .padding(.leading, 10)
-            .padding(.trailing,10)
+//            .padding(.top, 5)
+//            .padding(.bottom, 3)
+//            .padding(.leading, 5)
+//            .padding(.trailing, 5)
         }
-        .padding()
+        
+
+    }
+    
+    fileprivate func titleBar() -> some View {
+        return VStack{
+            ZStack{
+                Rectangle()
+                .foregroundColor(.white)
+                .frame(width: screenWidth, height: screenHeight*10/100, alignment: .top)
+                VStack{
+                    Spacer()
+                    HStack{
+                        Text("Fonik")
+                            .font(.system(size: 34, weight: .bold, design: .default))
+                            .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
+
+                            .padding(.top)
+                        Spacer()
+                    }.padding(.top)
+                }.frame(width: screenWidth, height: screenHeight*10/100, alignment: .top)
+            }
+            Spacer()
+        }
     }
     
     var body: some View {
         ZStack{
             Rectangle()
                 .foregroundColor(Color(red: 1, green: 0.81, blue: 0.42))
-            VStack{
-                Text("Fonik")
+            ZStack{
+                titleBar()
                 HStack{
-                    VStack{
-                        Text("Fonik")
                         ScrollView() {
                             scrollViewItem()
-
                         }
-                        .background(Color.white)
-                            .frame(width: 70, height: 400, alignment: .center)
-                            .cornerRadius(10)
-                            
-                    }.padding(.leading, 100)
+                            .frame(width: 80, height: screenHeight/2, alignment: .center)
 
-                    Spacer()
+                        .background(Color.white)
+                            .cornerRadius(10)
+                        .padding(.leading, screenWidth*5/100)
+
+                        Spacer()
                     ZStack{
-                        Rectangle()
-                        .frame(width: 300, height: 500, alignment: .center)
-                        .cornerRadius(50)
-                        .foregroundColor(Color.white)
                         VStack{
-                            Text("\(gambar)")
+                            Rectangle()
+                                .frame(width: screenWidth*4/9, height: screenHeight*8/10, alignment: .center)
+                            .cornerRadius(50)
+                            .foregroundColor(Color.white)
+                            Spacer()
+                        }
+                        VStack{
+                            Image(gambar)
+                                .resizable()
+                                .frame(width: screenWidth/4, height: screenWidth/4, alignment: .center)
                             Text("\(gambarDesc)")
                             .font(.system(size: 34, weight: .bold, design: .default))
                         }
                         
                     }
-                    Spacer()
+                    Spacer(minLength: screenWidth/20)
                     VStack{
                         Text("\(title)")
                         .font(.system(size: 90, weight: .bold, design: .default))
-                        Text("\(subTitle)")
+                        Text("'\(subTitle)'")
                         .font(.system(size: 25, weight: .medium, design: .default))
-                        Text("\(sound)")
+                        Button(action: {
+                            playFonik(title: self.sound)
+                        }) {
+                            Image("sound-button")
+                                .renderingMode(.original)
+                        }
+                    
                         
-                    }.padding(.trailing, 100)
+                    }.padding(.trailing, screenWidth*15/100)
                 }
             }
         }
@@ -109,14 +151,14 @@ struct SelectableButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
         
         configuration.label
-            .frame(width: 20.0, height: 20.0, alignment: .center)
+            .frame(width: 25, height: 25, alignment: .center)
             .padding()
-            //.foregroundColor(configuration.isPressed ? Color.red : Color.white)
-
+            //.frame(width: 70, height: 70, alignment: .center)
             .background(configuration.isPressed ?  color2 : color)
-            .clipShape(RoundedRectangle(cornerRadius: isSelected ? 16.0 : 0.0))
+            //.background(isSelected ? color2 : color)
+            //.clipShape(RoundedRectangle(cornerRadius: isSelected ? 16.0 : 0.0))
             //.overlay(RoundedRectangle(cornerRadius: isSelected ? 16.0 : 0.0).stroke(lineWidth: isSelected ? 2.0 : 0.0).foregroundColor(Color.pink))
             .animation(.linear(duration: 0.1))
-            .cornerRadius(15)
+            .cornerRadius(10)
     }
 }

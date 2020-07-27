@@ -111,6 +111,8 @@ struct addSchool: View {
                         let id = UUID()
                         sekolah.idSekolah = id
                         
+                        print("textnya adalah", self.newSekolah)
+                        
                         do{
                             try self.moc.save()
                         }catch{
