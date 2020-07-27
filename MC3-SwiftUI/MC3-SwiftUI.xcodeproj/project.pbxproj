@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4842B96C24CA5DCF00238A8D /* Subview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842B96B24CA5DCF00238A8D /* Subview.swift */; };
+		4842B96E24CA5F2500238A8D /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842B96D24CA5F2500238A8D /* OnboardingView.swift */; };
+		4842B97024CA60BE00238A8D /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842B96F24CA60BE00238A8D /* PageViewController.swift */; };
+		4842B97224CA6CDB00238A8D /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842B97124CA6CDB00238A8D /* PageControl.swift */; };
+		4855FB4D24C6E7690040C09F /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4855FB4C24C6E7690040C09F /* SearchBar.swift */; };
 		4BDCB7E024C1B9B900C6A6B6 /* Sekolah.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7DF24C1B9B900C6A6B6 /* Sekolah.swift */; };
 		4BDCB7E224C1F50F00C6A6B6 /* pageDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7E124C1F50F00C6A6B6 /* pageDetail.swift */; };
 		4BDCB7E424C21D1800C6A6B6 /* contentRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7E324C21D1800C6A6B6 /* contentRoot.swift */; };
@@ -27,6 +32,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4842B96B24CA5DCF00238A8D /* Subview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subview.swift; sourceTree = "<group>"; };
+		4842B96D24CA5F2500238A8D /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		4842B96F24CA60BE00238A8D /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		4842B97124CA6CDB00238A8D /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
+		4855FB4C24C6E7690040C09F /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		4BDCB7DF24C1B9B900C6A6B6 /* Sekolah.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sekolah.swift; sourceTree = "<group>"; };
 		4BDCB7E124C1F50F00C6A6B6 /* pageDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pageDetail.swift; sourceTree = "<group>"; };
 		4BDCB7E324C21D1800C6A6B6 /* contentRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = contentRoot.swift; sourceTree = "<group>"; };
@@ -92,6 +102,11 @@
 			isa = PBXGroup;
 			children = (
 				F4D5CEEA24C1471600C6B104 /* ProgresifView.swift */,
+				4855FB4C24C6E7690040C09F /* SearchBar.swift */,
+				4842B96B24CA5DCF00238A8D /* Subview.swift */,
+				4842B96D24CA5F2500238A8D /* OnboardingView.swift */,
+				4842B96F24CA60BE00238A8D /* PageViewController.swift */,
+				4842B97124CA6CDB00238A8D /* PageControl.swift */,
 			);
 			path = Progresif;
 			sourceTree = "<group>";
@@ -212,16 +227,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BDCB7EF24C3517E00C6A6B6 /* AlfabetScrollView.swift in Sources */,
+				4842B96C24CA5DCF00238A8D /* Subview.swift in Sources */,
 				F4D5CEE424C1471600C6B104 /* AppDelegate.swift in Sources */,
+				4842B96E24CA5F2500238A8D /* OnboardingView.swift in Sources */,
+				4855FB4D24C6E7690040C09F /* SearchBar.swift in Sources */,
 				4BDCB7E224C1F50F00C6A6B6 /* pageDetail.swift in Sources */,
 				4BDCB7E824C2209800C6A6B6 /* SusunKataView.swift in Sources */,
 				4BDCB7F524C44BBE00C6A6B6 /* SusunKata.swift in Sources */,
 				4BDCB7E624C21F0500C6A6B6 /* FonikView.swift in Sources */,
 				4BDCB7F124C42CB100C6A6B6 /* Kelas.swift in Sources */,
+				4842B97224CA6CDB00238A8D /* PageControl.swift in Sources */,
 				F4D5CEE624C1471600C6B104 /* SceneDelegate.swift in Sources */,
 				4BDCB7F724C44C6D00C6A6B6 /* Soal.swift in Sources */,
 				F4D5CEEB24C1471600C6B104 /* ProgresifView.swift in Sources */,
 				4BDCB7E024C1B9B900C6A6B6 /* Sekolah.swift in Sources */,
+				4842B97024CA60BE00238A8D /* PageViewController.swift in Sources */,
 				F4D5CEE924C1471600C6B104 /* MC3_SwiftUI.xcdatamodeld in Sources */,
 				4BDCB7F324C44AFA00C6A6B6 /* Fonik.swift in Sources */,
 				4BDCB7E424C21D1800C6A6B6 /* contentRoot.swift in Sources */,

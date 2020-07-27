@@ -20,8 +20,23 @@ extension Kelas{
         
         let sort = NSSortDescriptor(key: "namaKelas", ascending: true)
         
+//        request.predicate = NSPredicate(format: "idSekolah = %@", sekolah.idSekolah as CVarArg)
+        
         request.sortDescriptors = [sort]
     
         return request
     }
+    
+    static func getKelasWithId(id: UUID) -> NSFetchRequest<Kelas>{
+        let request: NSFetchRequest<Kelas> = Kelas.fetchRequest() as! NSFetchRequest<Kelas>
+            
+            let sort = NSSortDescriptor(key: "namaKelas", ascending: true)
+            
+            request.predicate = NSPredicate(format: "idSekolah = %@", id as CVarArg)
+            
+            request.sortDescriptors = [sort]
+        
+            return request
+    }
 }
+
