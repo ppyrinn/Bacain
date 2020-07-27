@@ -13,7 +13,9 @@ struct pageDetail: View {
     var sekolah: Sekolah
     
     @Environment(\.managedObjectContext) var moc
-    //    @FetchRequest(fetchRequest: Kelas.getKelasWithId(id: sekolah.idSekolah)) var listOfKelas: FetchedResults<Kelas>
+//    @FetchRequest(fetchRequest: Kelas.getKelasWithId(id: sekolah.idSekolah)) var listOfKelas: FetchedResults<Kelas>
+    
+    var fetchRequest: FetchRequest<Kelas>
     
     @State var showingDetail = false
     @State private var searchText = ""
@@ -31,9 +33,33 @@ struct pageDetail: View {
     
     @State var Grid : [Int] = []
     
+    init(filter: String, sekolah: Sekolah){
+        fetchRequest = FetchRequest<Kelas>(entity: Kelas.entity(), sortDescriptors: [], predicate: NSPredicate(format: "idSekolah = %@", filter))
+        self.sekolah = sekolah
+    }
+    
+    
+    
 
     var body: some View {
         VStack{
+            List(fetchRequest.wrappedValue, id: \.self) { Kelas in
+                Text("\(Kelas.namaKelas)")
+            }
+            
+            Button("add Examples"){
+                let taylor = Kelas(context: self.moc)
+                taylor.idKelas = UUID()
+                taylor.namaKelas = "Kelas 1"
+                taylor.idSekolah = self.sekolah.idSekolah
+                
+                do{
+                    try self.moc.save()
+                }catch{
+                    print(error)
+                }
+            }
+            
             HStack{
                 SearchBar(text: $searchText)
             }
@@ -48,6 +74,8 @@ struct pageDetail: View {
                 self.generateGrid()
             }
         }
+            
+        
         
             
         
@@ -128,6 +156,7 @@ struct Card : View {
                     Image(data.gambarKelas)
                         .renderingMode(.original)
                         .resizable()
+                        .aspectRatio(contentMode: .fit)
                         .frame(width: (UIScreen.main.bounds.width - 45) / 3)
                         .cornerRadius(12)
                         .padding(.bottom, 10)
@@ -190,8 +219,8 @@ struct Type {
 }
 
 
-struct pageDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        pageDetail(sekolah: Sekolah())
-    }
-}
+//struct pageDetail_Previews: PreviewProvider {
+//    static var previews: some View {
+//        pageDetail(sekolah: Sekolah())
+//    }
+//}

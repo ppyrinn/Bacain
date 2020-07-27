@@ -40,6 +40,17 @@
 		4B603CE024CB08B500A49EFE /* Na.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CC124CB08B500A49EFE /* Na.m4a */; };
 		4B603CE124CB08B500A49EFE /* Li.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CC224CB08B500A49EFE /* Li.m4a */; };
 
+		4842B96C24CA5DCF00238A8D /* Subview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842B96B24CA5DCF00238A8D /* Subview.swift */; };
+		4842B96E24CA5F2500238A8D /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842B96D24CA5F2500238A8D /* OnboardingView.swift */; };
+		4842B97024CA60BE00238A8D /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842B96F24CA60BE00238A8D /* PageViewController.swift */; };
+		4842B97224CA6CDB00238A8D /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842B97124CA6CDB00238A8D /* PageControl.swift */; };
+		4855FB4D24C6E7690040C09F /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4855FB4C24C6E7690040C09F /* SearchBar.swift */; };
+		48CCC06F24CE8953002A89D5 /* SoundClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CCC06B24CE8953002A89D5 /* SoundClassification.swift */; };
+		48CCC07024CE8953002A89D5 /* MC3-SoundClassifier 2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 48CCC06C24CE8953002A89D5 /* MC3-SoundClassifier 2.mlmodel */; };
+		48CCC07124CE8953002A89D5 /* ResultsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CCC06D24CE8953002A89D5 /* ResultsObserver.swift */; };
+		48CCC07224CE8953002A89D5 /* SoundClassifierDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CCC06E24CE8953002A89D5 /* SoundClassifierDelegate.swift */; };
+		48CCC07424CE8986002A89D5 /* KuisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CCC07324CE8986002A89D5 /* KuisView.swift */; };
+
 		4B68056C24C8A63B000261E6 /* Murid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B68056B24C8A63B000261E6 /* Murid.swift */; };
 		4BB7EDD624C93EC6007087CE /* Kuis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB7EDD524C93EC6007087CE /* Kuis.swift */; };
 		4BB7EDDA24C95643007087CE /* audioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB7EDD924C95643007087CE /* audioPlayer.swift */; };
@@ -78,11 +89,6 @@
 		4BDCB7F124C42CB100C6A6B6 /* Kelas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7F024C42CB100C6A6B6 /* Kelas.swift */; };
 		4BDCB7F324C44AFA00C6A6B6 /* Fonik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7F224C44AFA00C6A6B6 /* Fonik.swift */; };
 		4BDCB7F724C44C6D00C6A6B6 /* Soal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7F624C44C6D00C6A6B6 /* Soal.swift */; };
-		F424196D24CAA7B1000F1CA4 /* KuisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F424196C24CAA7B1000F1CA4 /* KuisView.swift */; };
-		F424197324CAA7BA000F1CA4 /* MC3-SoundClassifier 2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F424196F24CAA7BA000F1CA4 /* MC3-SoundClassifier 2.mlmodel */; };
-		F424197424CAA7BA000F1CA4 /* SoundClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F424197024CAA7BA000F1CA4 /* SoundClassification.swift */; };
-		F424197524CAA7BA000F1CA4 /* SoundClassifierDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F424197124CAA7BA000F1CA4 /* SoundClassifierDelegate.swift */; };
-		F424197624CAA7BA000F1CA4 /* ResultsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F424197224CAA7BA000F1CA4 /* ResultsObserver.swift */; };
 		F4D5CEE424C1471600C6B104 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5CEE324C1471600C6B104 /* AppDelegate.swift */; };
 		F4D5CEE624C1471600C6B104 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5CEE524C1471600C6B104 /* SceneDelegate.swift */; };
 		F4D5CEE924C1471600C6B104 /* MC3_SwiftUI.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F4D5CEE724C1471600C6B104 /* MC3_SwiftUI.xcdatamodeld */; };
@@ -93,6 +99,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+
 		4B603CA424CB08B500A49EFE /* Bo.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bo.m4a; sourceTree = "<group>"; };
 		4B603CA524CB08B500A49EFE /* Ma.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ma.m4a; sourceTree = "<group>"; };
 		4B603CA624CB08B500A49EFE /* Ta.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ta.m4a; sourceTree = "<group>"; };
@@ -124,6 +131,18 @@
 		4B603CC024CB08B500A49EFE /* Bu.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bu.m4a; sourceTree = "<group>"; };
 		4B603CC124CB08B500A49EFE /* Na.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Na.m4a; sourceTree = "<group>"; };
 		4B603CC224CB08B500A49EFE /* Li.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Li.m4a; sourceTree = "<group>"; };
+
+
+		4842B96B24CA5DCF00238A8D /* Subview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subview.swift; sourceTree = "<group>"; };
+		4842B96D24CA5F2500238A8D /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		4842B96F24CA60BE00238A8D /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		4842B97124CA6CDB00238A8D /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
+		4855FB4C24C6E7690040C09F /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		48CCC06B24CE8953002A89D5 /* SoundClassification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoundClassification.swift; path = "../../../Desktop/masuk/MC3/MC3-SwiftUI/MC3-SwiftUI/CreateML/SoundClassification.swift"; sourceTree = "<group>"; };
+		48CCC06C24CE8953002A89D5 /* MC3-SoundClassifier 2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = "MC3-SoundClassifier 2.mlmodel"; path = "../../../Desktop/masuk/MC3/MC3-SwiftUI/MC3-SwiftUI/CreateML/MC3-SoundClassifier 2.mlmodel"; sourceTree = "<group>"; };
+		48CCC06D24CE8953002A89D5 /* ResultsObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResultsObserver.swift; path = "../../../Desktop/masuk/MC3/MC3-SwiftUI/MC3-SwiftUI/CreateML/ResultsObserver.swift"; sourceTree = "<group>"; };
+		48CCC06E24CE8953002A89D5 /* SoundClassifierDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoundClassifierDelegate.swift; path = "../../../Desktop/masuk/MC3/MC3-SwiftUI/MC3-SwiftUI/CreateML/SoundClassifierDelegate.swift"; sourceTree = "<group>"; };
+		48CCC07324CE8986002A89D5 /* KuisView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KuisView.swift; path = "../../../../../../../Desktop/masuk/MC3/MC3-SwiftUI/MC3-SwiftUI/Progresif/KuisView.swift"; sourceTree = "<group>"; };
 
 		4B68056B24C8A63B000261E6 /* Murid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Murid.swift; sourceTree = "<group>"; };
 		4BB7EDD524C93EC6007087CE /* Kuis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kuis.swift; sourceTree = "<group>"; };
@@ -163,11 +182,6 @@
 		4BDCB7F024C42CB100C6A6B6 /* Kelas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kelas.swift; sourceTree = "<group>"; };
 		4BDCB7F224C44AFA00C6A6B6 /* Fonik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonik.swift; sourceTree = "<group>"; };
 		4BDCB7F624C44C6D00C6A6B6 /* Soal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Soal.swift; sourceTree = "<group>"; };
-		F424196C24CAA7B1000F1CA4 /* KuisView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KuisView.swift; path = ../../../../../../Downloads/KuisView.swift; sourceTree = "<group>"; };
-		F424196F24CAA7BA000F1CA4 /* MC3-SoundClassifier 2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "MC3-SoundClassifier 2.mlmodel"; sourceTree = "<group>"; };
-		F424197024CAA7BA000F1CA4 /* SoundClassification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundClassification.swift; sourceTree = "<group>"; };
-		F424197124CAA7BA000F1CA4 /* SoundClassifierDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundClassifierDelegate.swift; sourceTree = "<group>"; };
-		F424197224CAA7BA000F1CA4 /* ResultsObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsObserver.swift; sourceTree = "<group>"; };
 		F4D5CEE024C1471600C6B104 /* Bacain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bacain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4D5CEE324C1471600C6B104 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4D5CEE524C1471600C6B104 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -298,8 +312,17 @@
 		4BDCB7EB24C2211A00C6A6B6 /* Progresif */ = {
 			isa = PBXGroup;
 			children = (
+				48CCC07324CE8986002A89D5 /* KuisView.swift */,
 				F4D5CEEA24C1471600C6B104 /* ProgresifView.swift */,
+<<<<<<< HEAD
 				F424196C24CAA7B1000F1CA4 /* KuisView.swift */,
+=======
+				4855FB4C24C6E7690040C09F /* SearchBar.swift */,
+				4842B96B24CA5DCF00238A8D /* Subview.swift */,
+				4842B96D24CA5F2500238A8D /* OnboardingView.swift */,
+				4842B96F24CA60BE00238A8D /* PageViewController.swift */,
+				4842B97124CA6CDB00238A8D /* PageControl.swift */,
+>>>>>>> "Core Data Udah Bisa"
 			);
 			path = Progresif;
 			sourceTree = "<group>";
@@ -307,10 +330,10 @@
 		F424196E24CAA7BA000F1CA4 /* CreateML */ = {
 			isa = PBXGroup;
 			children = (
-				F424196F24CAA7BA000F1CA4 /* MC3-SoundClassifier 2.mlmodel */,
-				F424197024CAA7BA000F1CA4 /* SoundClassification.swift */,
-				F424197124CAA7BA000F1CA4 /* SoundClassifierDelegate.swift */,
-				F424197224CAA7BA000F1CA4 /* ResultsObserver.swift */,
+				48CCC06C24CE8953002A89D5 /* MC3-SoundClassifier 2.mlmodel */,
+				48CCC06D24CE8953002A89D5 /* ResultsObserver.swift */,
+				48CCC06B24CE8953002A89D5 /* SoundClassification.swift */,
+				48CCC06E24CE8953002A89D5 /* SoundClassifierDelegate.swift */,
 			);
 			name = CreateML;
 			path = ../../../../../Downloads/CreateML;
@@ -500,10 +523,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F424197424CAA7BA000F1CA4 /* SoundClassification.swift in Sources */,
-				F424197524CAA7BA000F1CA4 /* SoundClassifierDelegate.swift in Sources */,
 				4BDCB7EF24C3517E00C6A6B6 /* AlfabetScrollView.swift in Sources */,
 				4BB7EDD624C93EC6007087CE /* Kuis.swift in Sources */,
+
 				F4D5CEE424C1471600C6B104 /* AppDelegate.swift in Sources */,
 				4BDCB7E224C1F50F00C6A6B6 /* pageDetail.swift in Sources */,
 				4BDCB7E824C2209800C6A6B6 /* SusunKataView.swift in Sources */,
@@ -517,6 +539,16 @@
 
 				F424197624CAA7BA000F1CA4 /* ResultsObserver.swift in Sources */,
 
+
+				4842B96C24CA5DCF00238A8D /* Subview.swift in Sources */,
+				48CCC07224CE8953002A89D5 /* SoundClassifierDelegate.swift in Sources */,
+				F4D5CEE424C1471600C6B104 /* AppDelegate.swift in Sources */,
+				4842B96E24CA5F2500238A8D /* OnboardingView.swift in Sources */,
+				48CCC07024CE8953002A89D5 /* MC3-SoundClassifier 2.mlmodel in Sources */,
+				4855FB4D24C6E7690040C09F /* SearchBar.swift in Sources */,
+				4BDCB7E224C1F50F00C6A6B6 /* pageDetail.swift in Sources */,
+				4BDCB7E824C2209800C6A6B6 /* SusunKataView.swift in Sources */,
+
 				4BDCB7E624C21F0500C6A6B6 /* FonikView.swift in Sources */,
 				4BDCB7F124C42CB100C6A6B6 /* Kelas.swift in Sources */,
 				F4D5CEE624C1471600C6B104 /* SceneDelegate.swift in Sources */,
@@ -524,12 +556,18 @@
 				F4D5CEEB24C1471600C6B104 /* ProgresifView.swift in Sources */,
 				4BDCB7E024C1B9B900C6A6B6 /* Sekolah.swift in Sources */,
 				4B68056C24C8A63B000261E6 /* Murid.swift in Sources */,
+
 				F424196D24CAA7B1000F1CA4 /* KuisView.swift in Sources */,
+
+				48CCC06F24CE8953002A89D5 /* SoundClassification.swift in Sources */,
+				48CCC07124CE8953002A89D5 /* ResultsObserver.swift in Sources */,
+				4842B97024CA60BE00238A8D /* PageViewController.swift in Sources */,
+
 				F4D5CEE924C1471600C6B104 /* MC3_SwiftUI.xcdatamodeld in Sources */,
+				48CCC07424CE8986002A89D5 /* KuisView.swift in Sources */,
 				4BB7EDDA24C95643007087CE /* audioPlayer.swift in Sources */,
 				4BDCB7F324C44AFA00C6A6B6 /* Fonik.swift in Sources */,
 				4BDCB7E424C21D1800C6A6B6 /* contentRoot.swift in Sources */,
-				F424197324CAA7BA000F1CA4 /* MC3-SoundClassifier 2.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
