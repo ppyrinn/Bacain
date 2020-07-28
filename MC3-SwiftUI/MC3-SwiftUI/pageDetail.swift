@@ -13,7 +13,7 @@ struct pageDetail: View {
     var sekolah: Sekolah
     
     @Environment(\.managedObjectContext) var moc
-//    @FetchRequest(fetchRequest: Kelas.getKelasWithId(id: sekolah.idSekolah)) var listOfKelas: FetchedResults<Kelas>
+
     
     var fetchRequest: FetchRequest<Kelas>
     
@@ -21,7 +21,7 @@ struct pageDetail: View {
     @State private var searchText = ""
     
     @State var data = [
-        
+
         Type(namaKelas: "Kelas 1", gambarKelas: "1"),
         Type(namaKelas: "Kelas 2", gambarKelas: "2"),
         Type(namaKelas: "Kelas 3", gambarKelas: "3"),
@@ -30,6 +30,8 @@ struct pageDetail: View {
 //        Type(namaKelas: "Kelas 6", gambarKelas: "6"),
 
     ]
+    
+    var kelases: FetchedResults<Kelas> { fetchRequest.wrappedValue }
     
     @State var Grid : [Int] = []
     
@@ -43,9 +45,16 @@ struct pageDetail: View {
 
     var body: some View {
         VStack{
-            List(fetchRequest.wrappedValue, id: \.self) { Kelas in
+//            List(fetchRequest.wrappedValue, id: \.self) { Kelas in
+//                Text("\(Kelas.namaKelas)")
+//            }
+            
+            ForEach(fetchRequest.wrappedValue, id: \.self){ Kelas in
                 Text("\(Kelas.namaKelas)")
+//                data.append("\(Kelas.namaKelas)")
             }
+            
+            Text("\(kelases.count)")
             
             Button("add Examples"){
                 let taylor = Kelas(context: self.moc)
@@ -65,6 +74,7 @@ struct pageDetail: View {
             }
             
             VStack(spacing: 0){
+                
                 MainView(data: self.$data, Grid: self.$Grid)
             }
             .background(Color.black.opacity(0.06).edgesIgnoringSafeArea(.top))
@@ -75,45 +85,19 @@ struct pageDetail: View {
             }
         }
             
-        
-        
             
-        
-        
-        
-        
-//        ZStack{
-//            VStack{
-//                HStack{
-//                    Text("Hello")
-//                    Text("\(self.sekolah.idSekolah)")
-//                }
-//            }
-//        }
-    
-            
-//                                Text("\(sekolah.namaSekolah)")
-//
-//
-//                            }
-//                            List{
-//                                ForEach(self.listOfKelas, id: \.idKelas){ item in
-//                                        Text("\(item.namaKelas)")
-//                                }
-//                            }
-//                        }
-            .navigationBarTitle("Daftar Kelas")
-            .navigationBarItems(trailing:
-                Button(action: {
-                    self.showingDetail.toggle()
-                }) {
-                    Image(systemName: "plus")
-                        .foregroundColor(.orange)
-                        .imageScale(.large)
-                }.sheet(isPresented: $showingDetail) {
-                    addClass()
-                        .environment(\.managedObjectContext, self.moc)
-                }
+        .navigationBarTitle("Daftar Kelas")
+        .navigationBarItems(trailing:
+            Button(action: {
+                self.showingDetail.toggle()
+            }) {
+                Image(systemName: "plus")
+                    .foregroundColor(.orange)
+                    .imageScale(.large)
+            }.sheet(isPresented: $showingDetail) {
+                addClass(filter: String, sekolah: sekolah.idSekolah)
+                    .environment(\.managedObjectContext, self.moc)
+            }
         )
         
         
@@ -135,6 +119,7 @@ struct pageDetail: View {
 
 struct Card : View {
     
+    
     var data : Type
     
     var body: some View{
@@ -142,11 +127,16 @@ struct Card : View {
         VStack(spacing: 15){
             
             Button(action: {
+                //
                 
+//                NavigationLink(destination: pageDetail(filter: , sekolah: item)) {
+//                    Text("\(item.namaSekolah)")
+                    
+                }
             }) {
                 VStack{
                     Text(data.namaKelas)
-//                        .bold()
+                        .bold()
                         .foregroundColor(.black)
                         .frame(width: (UIScreen.main.bounds.width - 70) / 3)
                         .padding(.vertical,10)
@@ -216,6 +206,80 @@ struct Type {
     
     var namaKelas : String
     var gambarKelas : String
+}
+
+struct addClass: View {
+    @Environment(\.managedObjectContext) var moc
+   
+    var sekolah: Sekolah
+    var fetchRequest: FetchRequest<Kelas>
+    
+    init(filter: String, sekolah: Sekolah){
+        fetchRequest = FetchRequest<Kelas>(entity: Kelas.entity(), sortDescriptors: [], predicate: NSPredicate(format: "idSekolah = %@", filter))
+        self.sekolah = sekolah
+    }
+    
+    @State private var newKelas = ""
+    @State var showDetail = true
+    
+    var body: some View {
+        ZStack{
+            VStack{
+                HStack {
+                    Button(action: {
+                        self.showDetail.toggle()
+                    }) {
+                        Text("Batal")
+                            .foregroundColor(.orange)
+                    }
+                    Spacer()
+                    
+                    Button(action: {
+                        let kelas = Kelas(context: self.moc)
+                        kelas.idKelas = UUID()
+                        kelas.namaKelas = self.newKelas
+                        kelas.idSekolah = self.sekolah.idSekolah
+                        
+                        
+                        do{
+                            try self.moc.save()
+                        }catch{
+                            print(error)
+                        }
+                        self.newKelas = ""
+                        
+                    }) {
+                        Text("Tambah Kelas")
+                            .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
+                    }
+                    
+                    
+                }
+                .padding(30)
+                
+                Spacer()
+                
+                HStack{
+                    Text("Tambah Kelas")
+                        .font(.largeTitle)
+                        .foregroundColor(.orange)
+                }
+                HStack{
+                    Text("Tambah Kelas yang ingin kamu simpan/track perkembangan murdinya")
+                    
+                }
+                HStack{
+                    Text("Kelas")
+                        .foregroundColor(.orange)
+                        .bold()
+                    TextField("Kelas Baru", text: self.$newKelas)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                }
+                .padding(30)
+                Spacer()
+            }
+        }
+    }
 }
 
 
