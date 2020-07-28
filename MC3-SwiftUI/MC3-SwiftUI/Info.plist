@@ -58,5 +58,7 @@
 	<string>Ucapan anda akan direkam saat mengaktifkan tombol &apos;record&apos;</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Ucapan anda akan direkam untuk menilai kecakapan saat membaca soal</string>
+	<key>UIRequiresFullScreen</key>
+	<string>YES</string>
 </dict>
 </plist>
