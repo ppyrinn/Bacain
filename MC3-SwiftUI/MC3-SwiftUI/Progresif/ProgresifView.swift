@@ -13,9 +13,13 @@ struct ProgresifView: View {
     @FetchRequest(fetchRequest: Sekolah.getAllSekolah()) var listOfSekolah: FetchedResults<Sekolah>
     
     @State private var newSekolah = ""
+    @State var showingDetail = false
     
     var body: some View {
        NavigationView {
+        
+//                contentRoot()
+                
                 List{
                     Section(header: Text("Tambah Sekolah Baru")) {
                         HStack{
@@ -23,15 +27,13 @@ struct ProgresifView: View {
                             Button(action: {
                                 let sekolah = Sekolah(context: self.moc)
                                 sekolah.namaSekolah = self.newSekolah
-                                let uuid = UUID()
-                                sekolah.idSekolah = uuid
-                                
+
                                 do{
                                     try self.moc.save()
                                 }catch{
                                     print(error)
                                 }
-                                
+
                                 self.newSekolah = ""
                             }) {
                                 Image(systemName: "plus.circle.fill")
@@ -41,19 +43,39 @@ struct ProgresifView: View {
                         }
                         .font(.headline)
                     }
+                    
                     Section(header: Text("Daftar Sekolah")) {
-                        ForEach(self.listOfSekolah, id: \.idSekolah){ item in
+                        ForEach(self.listOfSekolah, id: \.namaSekolah){ item in
                             NavigationLink(destination: pageDetail(sekolah: item)) {
                                     Text("\(item.namaSekolah)")
 
                             }
+                            .padding(15)
+                            .background(Color.orange)
+                            .cornerRadius(15)
 
                         }
                         .onDelete(perform: deleteItem)
                     }
             }
+            .onAppear {
+                UITableView.appearance().separatorStyle = .none
+            }
+                    
             .navigationBarTitle("Progresif")
-            .navigationBarItems(trailing: EditButton())
+            .navigationBarItems(trailing:
+                Button(action: {
+                    self.showingDetail.toggle()
+                }) {
+                    Image(systemName: "plus.circle.fill")
+                    .foregroundColor(.orange)
+                    .imageScale(.large)
+                }.sheet(isPresented: $showingDetail) {
+                    addSchool()
+                    .environment(\.managedObjectContext, self.moc)
+                }
+                
+            )
         }
     }
     
@@ -108,8 +130,6 @@ struct addSchool: View {
                         // show new task view
                         let sekolah = Sekolah(context: self.moc)
                         sekolah.namaSekolah = self.newSekolah
-                        let id = UUID()
-                        sekolah.idSekolah = id
                         
                         print("textnya adalah", self.newSekolah)
                         

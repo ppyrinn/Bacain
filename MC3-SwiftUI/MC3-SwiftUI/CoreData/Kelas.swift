@@ -12,7 +12,6 @@ class Kelas: NSManagedObject, Identifiable{
     @NSManaged public var idKelas: UUID
     @NSManaged public var namaKelas: String
     @NSManaged public var idSekolah:  UUID
-
 }
 
 extension Kelas{
