@@ -86,6 +86,7 @@
 		4BDCB7F324C44AFA00C6A6B6 /* Fonik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7F224C44AFA00C6A6B6 /* Fonik.swift */; };
 		4BDCB7F724C44C6D00C6A6B6 /* Soal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7F624C44C6D00C6A6B6 /* Soal.swift */; };
 		F424198124CFC608000F1CA4 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F424198024CFC608000F1CA4 /* OnboardingView.swift */; };
+		F424198524CFDC1F000F1CA4 /* SoalKuis.swift in Sources */ = {isa = PBXBuildFile; fileRef = F424198424CFDC1F000F1CA4 /* SoalKuis.swift */; };
 		F4D5CEE424C1471600C6B104 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5CEE324C1471600C6B104 /* AppDelegate.swift */; };
 		F4D5CEE624C1471600C6B104 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5CEE524C1471600C6B104 /* SceneDelegate.swift */; };
 		F4D5CEE924C1471600C6B104 /* MC3_SwiftUI.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F4D5CEE724C1471600C6B104 /* MC3_SwiftUI.xcdatamodeld */; };
@@ -175,6 +176,7 @@
 		4BDCB7F224C44AFA00C6A6B6 /* Fonik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonik.swift; sourceTree = "<group>"; };
 		4BDCB7F624C44C6D00C6A6B6 /* Soal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Soal.swift; sourceTree = "<group>"; };
 		F424198024CFC608000F1CA4 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnboardingView.swift; path = "../../../../../../Downloads/MC3-master/MC3-SwiftUI/MC3-SwiftUI/OnBoarding/OnboardingView.swift"; sourceTree = "<group>"; };
+		F424198424CFDC1F000F1CA4 /* SoalKuis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoalKuis.swift; sourceTree = "<group>"; };
 		F4D5CEE024C1471600C6B104 /* Bacain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bacain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4D5CEE324C1471600C6B104 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4D5CEE524C1471600C6B104 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -312,7 +314,7 @@
 		4BDCB7EB24C2211A00C6A6B6 /* Progresif */ = {
 			isa = PBXGroup;
 			children = (
-				4B6F45BF24CEAA8200BD17EF /* KuisView.swift */,
+				F424198324CFDBFA000F1CA4 /* Kuis */,
 				F4D5CEEA24C1471600C6B104 /* ProgresifView.swift */,
 				4855FB4C24C6E7690040C09F /* SearchBar.swift */,
 			);
@@ -329,6 +331,15 @@
 			);
 			name = CreateML;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		F424198324CFDBFA000F1CA4 /* Kuis */ = {
+			isa = PBXGroup;
+			children = (
+				4B6F45BF24CEAA8200BD17EF /* KuisView.swift */,
+				F424198424CFDC1F000F1CA4 /* SoalKuis.swift */,
+			);
+			path = Kuis;
 			sourceTree = "<group>";
 		};
 		F4D5CED724C1471600C6B104 = {
@@ -528,6 +539,7 @@
 				4BDCB7F724C44C6D00C6A6B6 /* Soal.swift in Sources */,
 				F4D5CEEB24C1471600C6B104 /* ProgresifView.swift in Sources */,
 				4B6F45C724CEFFA300BD17EF /* PageControl.swift in Sources */,
+				F424198524CFDC1F000F1CA4 /* SoalKuis.swift in Sources */,
 				4BDCB7E024C1B9B900C6A6B6 /* Sekolah.swift in Sources */,
 				4B6F45C224CEEF8900BD17EF /* ViewRouter.swift in Sources */,
 				4B68056C24C8A63B000261E6 /* Murid.swift in Sources */,

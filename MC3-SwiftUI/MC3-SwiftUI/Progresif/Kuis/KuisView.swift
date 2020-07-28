@@ -15,13 +15,16 @@ struct KuisView: View {
 //    @Binding var showKuisView: Bool
     
     var namaMurid = "Agus"
-    var soal = "LARI"
+    var soalLvl2 = ["LARI","POHON","MENYANYI","DIAM","SUSAH","GAMPANG","BUDI","BACA","PUTIH","BOLA"]
     var ejaan = ["la","ri"]
+    var soalKuis = SoalKuis()
     
     @State var resultString : String = ""
     @State var isRecording : Bool = false
     @State var showEjaan : Bool = false
     @State var idxEjaan : Int = 0
+    @State var soal : String = "Lari"
+    @State var isAnswered : Bool = false
     
     var soundClassification = SoundClassification()
     
@@ -53,6 +56,7 @@ struct KuisView: View {
                             .fontWeight(.bold)
                             .font(.system(size: 17))
                             .font(.custom("SF Compact Text", size: 17))
+                            .foregroundColor(.black)
                         Spacer()
                         Button(action: {
                             //
@@ -71,45 +75,78 @@ struct KuisView: View {
                     
                     Spacer()
                     
-                    Image("lari")
+//                    self.soal = soalKuis.randomizeSoal(level : 1)
                     
-                    Text(soal)
+                    Image(soal.lowercased()).padding(.top, -90)
+                    
+                    Text(soal.uppercased())
                         .fontWeight(.bold)
                         .font(.system(size: 57))
                         .font(.custom("SF Compact Text", size: 57))
+                        .foregroundColor(.black)
                     
                     if(self.showEjaan == true){
                         HStack{
                             ForEach(ejaan, id :\.self){ eja in
                                 Text("\(eja) •")
+                                    .font(.system(size: 28))
+                                    .font(.custom("SF Compact Text", size: 28))
+                                    .foregroundColor(.black)
+                            }
+                            Image("ceklis").resizable()
+                            .frame(width: 28, height: 28, alignment: .center)
+                            .opacity(0)
+                            if(self.resultString.uppercased() == self.soal.uppercased()){
+                                Image("ceklis").resizable()
+                                .frame(width: 28, height: 28, alignment: .center)
+                                .opacity(1)
+                            }
+                        }
+                        .padding(.top, -20)
+                    }else{
+                        HStack{
+                            
+                            Text(" ")
                                 .font(.system(size: 28))
                                 .font(.custom("SF Compact Text", size: 28))
-                            }
-                            if(self.resultString.uppercased() == self.soal.uppercased()){
-                                Image("ceklis")
-                            }
+                                .foregroundColor(.black)
+                            
+                            Image("ceklis").resizable()
+                                .frame(width: 28, height: 28, alignment: .center)
+                                .opacity(0)
                         }
+                        .padding(.top, -20)
                     }
                     
-                    
-                    if(self.isRecording == true){
-                        Button(action: {
-                            self.resultString = self.soundClassification.stopRecording()
-                            self.isRecording = false
-                            self.showEjaan = true
-                        }){
-                            Image("stop-button")
+                    if(self.isAnswered == false){
+                        if(self.isRecording == true){
+                            Button(action: {
+                                self.resultString =  self.soundClassification.stopRecording()
+                                self.isRecording = false
+                                self.showEjaan = true
+                                self.isAnswered = true
+                            }){
+                                Image("stop-button")
+                            }
+                        }else{
+                            Button(action: {
+                                
+                                self.soundClassification.recordAndRecognizeSpeech()
+                                self.isRecording = true
+                                self.showEjaan = false
+                            }){
+                                Image("record-button")
+                            }
+                            //                        Text("Hasil : " + resultString)
+                            
                         }
-                        Text("Sedang mendengarkan...")
                     }else{
                         Button(action: {
-                            self.soundClassification.recordAndRecognizeSpeech()
-                            self.isRecording = true
+                            self.isAnswered = false
+                            self.soal = self.soalKuis.randomizeSoal(level : 2)
                         }){
-                            Image("record-button")
+                            Image("ejaanselanjutnya-button")
                         }
-//                        Text("Hasil : " + resultString)
-                        
                     }
                     
                     Spacer()
@@ -129,3 +166,10 @@ struct KuisView_Previews: PreviewProvider {
     }
 }
 
+extension KuisView: SoundClassifierDelegate {
+    func displayPredictionResult(identifier: String, confidence: Double) {
+        DispatchQueue.main.async {
+            print("Recognition: \(identifier)\nConfidence \(confidence)")
+        }
+    }
+}
