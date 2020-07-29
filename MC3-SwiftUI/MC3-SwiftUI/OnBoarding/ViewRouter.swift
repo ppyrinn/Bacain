@@ -12,15 +12,18 @@ import SwiftUI
 
 class ViewRouter: ObservableObject {
 
+
     init() {
-        if !UserDefaults.standard.bool(forKey: "didLaunchBefore") {
-            UserDefaults.standard.set(true, forKey: "didLaunchBefore")
-            currentPage = "onboardingView"
-        } else {
-            currentPage = "homeView"
+        if !UserDefaults.standard.bool(forKey: "didOnboard"){
+            UserDefaults.standard.set(true, forKey: "didOnboard")
+
+                currentView = "onboardingView"
+        }else{
+            currentView = "homeView"
         }
     }
     
-    @Published var currentPage: String
-    
+    @Published var currentView: String
+
 }
+

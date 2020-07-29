@@ -35,7 +35,9 @@ struct SusunKataView: View {
                         Text("Susun Kata")
                             .font(.system(size: 34, weight: .bold, design: .default))
                         .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
-                            .padding(.top)
+                            .padding()
+                        .accessibility(label: Text("Susun Kata"))
+
                         Spacer()
                     }.padding(.top)
                 }.frame(width: screenWidth, height: screenHeight*1/10, alignment: .top)
@@ -62,8 +64,10 @@ struct SusunKataView: View {
                             self.queue.append(self.topRow[index])
                         }) {
                             Text(self.topRow[index].capitalized)
+                                .foregroundColor(.black)
                                 .font(.system(size: 28, weight: .bold, design: .default))
                         }
+                        .accessibility(label: Text(self.topRow[index]))
                         .buttonStyle(SelectableBtnStyle())
 
                     }
@@ -83,8 +87,11 @@ struct SusunKataView: View {
 
                         }) {
                             Text(self.bottomRow[index].capitalized)
+                                .foregroundColor(.black)
                             .font(.system(size: 28, weight: .bold, design: .default))
                         }
+                            .accessibility(label: Text(self.bottomRow[index]))
+
                             
                     .buttonStyle(SelectableBtnStyle())
 //                    .padding()
@@ -94,6 +101,8 @@ struct SusunKataView: View {
                 
                 HStack{
                     TextField("", text: $textField)
+                        .accessibility(label: Text(textField))
+
                         .multilineTextAlignment(.center)
                     .layoutPriority(1)
                         .disabled(true)
@@ -104,27 +113,29 @@ struct SusunKataView: View {
                         .padding()
                     
                     Button(action: {
+                        player.stop()
                         self.topRow = susunKataTop.shuffled()
                         self.bottomRow = susunKataBot.shuffled()
                         self.textField = ""
                         self.queue.removeAll()
                     }) {
                         Image("reset-button")
+                            .renderingMode(.original)
                     }
-                    .font(.system(size: 30, weight: .bold, design: .rounded))
-                    .foregroundColor(Color.red)
+                    .accessibility(label: Text("Reset"))
 
                 .padding()
                 }
                 .padding()
                 
                 Button(action: {
-                    print(self.queue)
                     music(queue: self.queue)
                 }) {
                     Image("sound-button")
                         .renderingMode(.original)
                 }
+                    .accessibility(label: Text("Speaker"))
+
             .padding()
             }
         }
