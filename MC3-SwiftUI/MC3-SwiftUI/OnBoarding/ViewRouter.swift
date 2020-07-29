@@ -17,18 +17,13 @@ class ViewRouter: ObservableObject {
         if !UserDefaults.standard.bool(forKey: "didOnboard"){
             UserDefaults.standard.set(true, forKey: "didOnboard")
 
-                currentView = .onboarding
+                currentView = "onboardingView"
         }else{
-            currentView = .initial
+            currentView = "homeView"
         }
     }
     
-    @Published var currentView: Houses
+    @Published var currentView: String
 
 }
 
-extension ViewRouter {
-    enum Houses {
-        case onboarding, initial
-    }
-}
