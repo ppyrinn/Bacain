@@ -36,6 +36,7 @@ func music(queue: [String]){
    
     quePlayer = AVQueuePlayer(items: itemQue)
     quePlayer.play()
+    
 }
 // Delegate method for AVAudioPlayerDelegate which is called every time when song finished.
 //func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool){

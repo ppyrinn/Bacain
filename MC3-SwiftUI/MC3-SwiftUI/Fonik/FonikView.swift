@@ -42,6 +42,7 @@ struct FonikView: View {
                
                 Text("\(fonik.alfabet)")
                     .font(.system(size: 28, weight: .medium, design: .default))
+                    .foregroundColor(.black)
                     
                 
             }
@@ -108,18 +109,24 @@ struct FonikView: View {
                                 .accessibility(label: Text(gambarDesc))
                             Text("\(gambarDesc)")
                             .font(.system(size: 34, weight: .bold, design: .default))
+                                .foregroundColor(.black)
                             .accessibility(label: Text(gambarDesc))
                         }
                         
                     }
-                    Spacer(minLength: screenWidth/20)
+                    Spacer()
                     VStack{
                         Text("\(title)")
                         .font(.system(size: 90, weight: .bold, design: .default))
                             .multilineTextAlignment(.center)
+                            .foregroundColor(.black)
                         .accessibility(label: Text(title))
+                            .frame(width: 170)
                         Text("'\(subTitle)'")
                         .font(.system(size: 25, weight: .medium, design: .default))
+                            .foregroundColor(.black)
+                            .frame(width: 170)
+
                         .multilineTextAlignment(.center)
                         .accessibility(label: Text(subTitle))
 
@@ -132,7 +139,8 @@ struct FonikView: View {
                         .accessibility(label: Text("Speaker"))
                     
                         
-                    }.padding(.trailing, screenWidth*15/100)
+                    }//.frame(width: 120)
+                    .padding(.trailing, screenWidth*15/100)
                 }
             }
         }

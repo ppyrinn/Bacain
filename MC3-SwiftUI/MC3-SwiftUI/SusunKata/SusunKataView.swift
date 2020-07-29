@@ -101,6 +101,7 @@ struct SusunKataView: View {
                 
                 HStack{
                     TextField("", text: $textField)
+                        .foregroundColor(.black)
                         .accessibility(label: Text(textField))
 
                         .multilineTextAlignment(.center)
@@ -113,7 +114,7 @@ struct SusunKataView: View {
                         .padding()
                     
                     Button(action: {
-                        player.stop()
+                        quePlayer.pause()
                         self.topRow = susunKataTop.shuffled()
                         self.bottomRow = susunKataBot.shuffled()
                         self.textField = ""
