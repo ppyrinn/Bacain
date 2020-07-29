@@ -31,6 +31,7 @@ struct FonikView: View {
     fileprivate func scrollViewItem() -> some View {
         return ForEach(listOfFonik, id: \.alfabet){ fonik in
             Button(action: {
+                player.stop()
                 self.buttonStyle.isSelected.toggle()
                 self.gambarDesc = "\(fonik.gambarDesc)"
                 self.gambar = "\(fonik.gambar)"
@@ -143,6 +144,8 @@ struct FonikView: View {
                     .padding(.trailing, screenWidth*15/100)
                 }
             }
+        }.onDisappear{
+            player.stop()
         }
     
     }
