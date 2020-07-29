@@ -26,6 +26,7 @@ struct OnboardingView: View {
             HStack{
                 Text("Selamat Datang di")
                 .font(.system(size: 50, weight: .bold, design: .default))
+                    .foregroundColor(.black)
                 Text("Bacain")
                 .font(.system(size: 50, weight: .bold, design: .default))
                 .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
@@ -44,13 +45,13 @@ struct OnboardingView: View {
                             VStack(alignment: .leading) {
                                 Text(self.titles[index])
                                     .font(.system(size: 25, weight: .bold, design: .default))
-                                .animation(Animation.interpolatingSpring(stiffness: 48, damping: 7).delay(0.1))
+                                
                                     .accessibility(label: Text(self.titles[index]))
 
                                 Text(self.captions[index])
                                     .font(.system(size: 17, weight: .medium, design: .default))
-                                .foregroundColor(.gray)
-                                .frame(width: 300, alignment: .leading)
+                                .foregroundColor(.black)
+                                .frame(alignment: .leading)
                                 .accessibility(label: Text(self.captions[index]))
                             }.padding()
                         }

@@ -36,7 +36,7 @@ let listOfFonik: [Fonik] = [
     Fonik(alfabet: "Q", gambar: "quran", gambarDesc: "Quran", subTitle: "kweh..kweh..kweh"),
     Fonik(alfabet: "R", gambar: "roti2", gambarDesc: "Roti", subTitle: "rrr..rrr..rrr"),
     Fonik(alfabet: "S", gambar: "sepatu", gambarDesc: "Sepatu", subTitle: "sss..sss..sss"),
-    Fonik(alfabet: "T", gambar: "tangga-", gambarDesc: "Tangga", subTitle: "teh..teg..teh"),
+    Fonik(alfabet: "T", gambar: "tangga-", gambarDesc: "Tangga", subTitle: "teh..teh..teh"),
     Fonik(alfabet: "U", gambar: "ular", gambarDesc: "Ular", subTitle: "u..u..u.."),
     Fonik(alfabet: "V", gambar: "vanili", gambarDesc: "Vanili", subTitle: "veh..veh..veh"),
     Fonik(alfabet: "W", gambar: "wajan 2", gambarDesc: "Wajan", subTitle: "weh..weh..weh.."),
