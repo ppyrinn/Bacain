@@ -31,7 +31,8 @@ struct contentRoot: View {
                 Text("Kuis")
             }).tag(3)
         }
-        .accentColor(Color.red)
+        .accentColor(Color(red: 0.79, green: 0.26, blue: 0.00)
+)
     }
 }
 

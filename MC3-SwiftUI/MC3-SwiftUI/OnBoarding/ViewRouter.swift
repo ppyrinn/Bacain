@@ -12,15 +12,35 @@ import SwiftUI
 
 class ViewRouter: ObservableObject {
 
+    @Published private(set) var currentView: Houses
+
     init() {
-        if !UserDefaults.standard.bool(forKey: "didLaunchBefore") {
-            UserDefaults.standard.set(true, forKey: "didLaunchBefore")
-            currentPage = "onboardingView"
-        } else {
-            currentPage = "homeView"
+        guard UserDefaults.standard.bool(forKey: "didOnboard")
+            else {
+                currentView = .onboarding
+                return
+        }
+        currentView = .initial
+    }
+
+    public func didOnboard() {
+        UserDefaults.standard.set(true, forKey: "didOnboard")
+        withAnimation {
+            currentView = .initial
+        }
+    }
+
+    public func redoOnboard() {
+        UserDefaults.standard.set(false, forKey: "didOnboard")
+        withAnimation {
+            currentView = .onboarding
         }
     }
     
-    @Published var currentPage: String
-    
+}
+
+extension ViewRouter {
+    enum Houses {
+        case onboarding, initial
+    }
 }
