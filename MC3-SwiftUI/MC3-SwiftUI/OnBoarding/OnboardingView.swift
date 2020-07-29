@@ -70,7 +70,8 @@ struct OnboardingView: View {
             PageControl(numberOfPages: subviews.count, currentPageIndex: $step)
                 Button(action: {
                     if self.step+1 == self.subviews.count {
-                        self.viewRouter.didOnboard()
+                        self.viewRouter.currentView = .initial
+                        
                     } else {
                         self.step += 1
                     }
@@ -125,10 +126,7 @@ extension OnboardingView{
             }
             if self.dragged.width < -40 {
                 guard self.isThereMoreToLearn else {
-                    self.viewRouter.didOnboard()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        self.step = 0
-                    }
+                    self.viewRouter.currentView = .initial
                     return }
                 self.step += 1
             }

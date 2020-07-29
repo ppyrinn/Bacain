@@ -12,31 +12,19 @@ import SwiftUI
 
 class ViewRouter: ObservableObject {
 
-    @Published private(set) var currentView: Houses
 
     init() {
-        guard UserDefaults.standard.bool(forKey: "didOnboard")
-            else {
-                currentView = .onboarding
-                return
-        }
-        currentView = .initial
-    }
+        if !UserDefaults.standard.bool(forKey: "didOnboard"){
+            UserDefaults.standard.set(true, forKey: "didOnboard")
 
-    public func didOnboard() {
-        UserDefaults.standard.set(true, forKey: "didOnboard")
-        withAnimation {
+                currentView = .onboarding
+        }else{
             currentView = .initial
         }
     }
-
-    public func redoOnboard() {
-        UserDefaults.standard.set(false, forKey: "didOnboard")
-        withAnimation {
-            currentView = .onboarding
-        }
-    }
     
+    @Published var currentView: Houses
+
 }
 
 extension ViewRouter {
