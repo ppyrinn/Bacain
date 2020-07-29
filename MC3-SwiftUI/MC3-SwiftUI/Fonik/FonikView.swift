@@ -17,7 +17,7 @@ struct FonikView: View {
     @State private var gambarDesc = "Anggur"
     @State private var title = "Aa"
     @State private var subTitle = "a..a..a"
-    @State private var sound = "Sound"
+    @State private var sound = "A"
     
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
@@ -37,9 +37,7 @@ struct FonikView: View {
                 self.title = "\(fonik.alfabet + fonik.alfabet.lowercased())"
                 self.subTitle = fonik.subTitle
                 self.sound = "\(fonik.alfabet)"
-                playFonik(title: self.sound)
-
-                
+ 
             }) {
                
                 Text("\(fonik.alfabet)")
@@ -47,6 +45,7 @@ struct FonikView: View {
                     
                 
             }
+            .accessibility(label: Text("\(fonik.alfabet)"))
             .frame(width: 60, height: 60, alignment: .center)
             .buttonStyle(self.buttonStyle)
         }
@@ -66,6 +65,7 @@ struct FonikView: View {
                         Text("Fonik")
                             .font(.system(size: 34, weight: .bold, design: .default))
                             .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
+                        .accessibility(label: Text("Fonik"))
 
                             .padding()
                         Spacer()
@@ -105,8 +105,10 @@ struct FonikView: View {
                             Image(gambar)
                                 .resizable()
                                 .frame(width: screenWidth/4, height: screenWidth/4, alignment: .center)
+                                .accessibility(label: Text(gambarDesc))
                             Text("\(gambarDesc)")
                             .font(.system(size: 34, weight: .bold, design: .default))
+                            .accessibility(label: Text(gambarDesc))
                         }
                         
                     }
@@ -115,9 +117,11 @@ struct FonikView: View {
                         Text("\(title)")
                         .font(.system(size: 90, weight: .bold, design: .default))
                             .multilineTextAlignment(.center)
+                        .accessibility(label: Text(title))
                         Text("'\(subTitle)'")
                         .font(.system(size: 25, weight: .medium, design: .default))
                         .multilineTextAlignment(.center)
+                        .accessibility(label: Text(subTitle))
 
                         Button(action: {
                             playFonik(title: self.sound)
@@ -125,6 +129,7 @@ struct FonikView: View {
                             Image("sound-button")
                                 .renderingMode(.original)
                         }
+                        .accessibility(label: Text("Speaker"))
                     
                         
                     }.padding(.trailing, screenWidth*15/100)

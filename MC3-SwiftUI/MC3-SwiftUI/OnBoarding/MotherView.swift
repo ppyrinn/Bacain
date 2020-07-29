@@ -12,15 +12,14 @@ struct MotherView: View {
     
     @ObservedObject var viewRouter: ViewRouter
 
-    @ViewBuilder
     var body: some View {
-        ZStack {
-            if viewRouter.currentView == .onboarding {
-                OnboardingView(viewRouter: ViewRouter())
+        VStack {
+            if viewRouter.currentView == "onboardingView" {
+                OnboardingView(viewRouter: viewRouter)
                     .transition(
                         .asymmetric(insertion: .opacity, removal: .move(edge: .leading)))
 
-            } else if viewRouter.currentView == .initial {
+            } else if viewRouter.currentView == "homeView" {
                 contentRoot()
                     .transition(
                         .asymmetric(insertion: .move(edge:. trailing), removal: .opacity))

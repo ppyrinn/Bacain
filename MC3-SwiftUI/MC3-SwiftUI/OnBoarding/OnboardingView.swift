@@ -29,8 +29,7 @@ struct OnboardingView: View {
                 Text("Bacain")
                 .font(.system(size: 50, weight: .bold, design: .default))
                 .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
-
-            }
+                }.accessibility(label: Text("Selamat Datang di Bacain"))
                 .padding()
             GeometryReader{ gr in
                 HStack{
@@ -46,11 +45,13 @@ struct OnboardingView: View {
                                 Text(self.titles[index])
                                     .font(.system(size: 25, weight: .bold, design: .default))
                                 .animation(Animation.interpolatingSpring(stiffness: 48, damping: 7).delay(0.1))
+                                    .accessibility(label: Text(self.titles[index]))
 
                                 Text(self.captions[index])
                                     .font(.system(size: 17, weight: .medium, design: .default))
                                 .foregroundColor(.gray)
                                 .frame(width: 300, alignment: .leading)
+                                .accessibility(label: Text(self.captions[index]))
                             }.padding()
                         }
                         .frame(width: gr.frame(in: .global).width)
@@ -70,7 +71,7 @@ struct OnboardingView: View {
             PageControl(numberOfPages: subviews.count, currentPageIndex: $step)
                 Button(action: {
                     if self.step+1 == self.subviews.count {
-                        self.viewRouter.currentView = .initial
+                        self.viewRouter.currentView = "homeView"
                         
                     } else {
                         self.step += 1
@@ -81,15 +82,15 @@ struct OnboardingView: View {
                         .renderingMode(.original)
                         .padding()
                         .cornerRadius(30)
+                        .accessibility(label: Text("Mulai"))
                     }else{
                         Image("lanjut-button")
                         .renderingMode(.original)
                         .padding()
                         .cornerRadius(30)
+                        .accessibility(label: Text("Lanjut"))
+
                     }
-                    //.resizable()
-                    //.foregroundColor(.white)
-                    //.background(Color.orange)
 
                 }
             
@@ -126,7 +127,7 @@ extension OnboardingView{
             }
             if self.dragged.width < -40 {
                 guard self.isThereMoreToLearn else {
-                    self.viewRouter.currentView = .initial
+                    self.viewRouter.currentView = "homeView"
                     return }
                 self.step += 1
             }

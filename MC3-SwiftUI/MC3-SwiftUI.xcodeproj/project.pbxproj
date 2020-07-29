@@ -82,7 +82,6 @@
 		4BDCB7E424C21D1800C6A6B6 /* contentRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7E324C21D1800C6A6B6 /* contentRoot.swift */; };
 		4BDCB7E624C21F0500C6A6B6 /* FonikView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7E524C21F0500C6A6B6 /* FonikView.swift */; };
 		4BDCB7E824C2209800C6A6B6 /* SusunKataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7E724C2209800C6A6B6 /* SusunKataView.swift */; };
-		4BDCB7EF24C3517E00C6A6B6 /* AlfabetScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7EE24C3517E00C6A6B6 /* AlfabetScrollView.swift */; };
 		4BDCB7F124C42CB100C6A6B6 /* Kelas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7F024C42CB100C6A6B6 /* Kelas.swift */; };
 		4BDCB7F324C44AFA00C6A6B6 /* Fonik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7F224C44AFA00C6A6B6 /* Fonik.swift */; };
 		4BDCB7F724C44C6D00C6A6B6 /* Soal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDCB7F624C44C6D00C6A6B6 /* Soal.swift */; };
@@ -172,7 +171,6 @@
 		4BDCB7E324C21D1800C6A6B6 /* contentRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = contentRoot.swift; sourceTree = "<group>"; };
 		4BDCB7E524C21F0500C6A6B6 /* FonikView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FonikView.swift; sourceTree = "<group>"; };
 		4BDCB7E724C2209800C6A6B6 /* SusunKataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SusunKataView.swift; sourceTree = "<group>"; };
-		4BDCB7EE24C3517E00C6A6B6 /* AlfabetScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlfabetScrollView.swift; sourceTree = "<group>"; };
 		4BDCB7F024C42CB100C6A6B6 /* Kelas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kelas.swift; sourceTree = "<group>"; };
 		4BDCB7F224C44AFA00C6A6B6 /* Fonik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonik.swift; sourceTree = "<group>"; };
 		4BDCB7F624C44C6D00C6A6B6 /* Soal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Soal.swift; sourceTree = "<group>"; };
@@ -306,7 +304,6 @@
 			isa = PBXGroup;
 			children = (
 				4BDCB7E524C21F0500C6A6B6 /* FonikView.swift */,
-				4BDCB7EE24C3517E00C6A6B6 /* AlfabetScrollView.swift */,
 			);
 			path = Fonik;
 			sourceTree = "<group>";
@@ -519,7 +516,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4BDCB7EF24C3517E00C6A6B6 /* AlfabetScrollView.swift in Sources */,
 				4B6F45C424CEEFE400BD17EF /* MotherView.swift in Sources */,
 				4BB7EDD624C93EC6007087CE /* Kuis.swift in Sources */,
 				4B15D68724D1209D005C4DB1 /* OnboardingView.swift in Sources */,
@@ -686,7 +682,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"MC3-SwiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = 7LUWAU8N83;
+				DEVELOPMENT_TEAM = 9G44XW2W74;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "MC3-SwiftUI/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -706,7 +702,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"MC3-SwiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = 7LUWAU8N83;
+				DEVELOPMENT_TEAM = 9G44XW2W74;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "MC3-SwiftUI/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
