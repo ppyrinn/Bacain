@@ -13,9 +13,9 @@ struct MotherView: View {
     
     var body: some View {
         VStack {
-            if viewRouter.currentPage == "onboardingView" {
+            if viewRouter.currentView == .onboarding {
                 OnboardingView(viewRouter: viewRouter)
-            } else if viewRouter.currentPage == "homeView" {
+            } else if viewRouter.currentView == .initial {
                 contentRoot()
             }
         }

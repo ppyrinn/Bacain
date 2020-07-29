@@ -35,7 +35,7 @@ struct SusunKataView: View {
                         Text("Susun Kata")
                             .font(.system(size: 34, weight: .bold, design: .default))
                         .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
-                            .padding(.top)
+                            .padding()
                         Spacer()
                     }.padding(.top)
                 }.frame(width: screenWidth, height: screenHeight*1/10, alignment: .top)
@@ -104,6 +104,7 @@ struct SusunKataView: View {
                         .padding()
                     
                     Button(action: {
+                        player.stop()
                         self.topRow = susunKataTop.shuffled()
                         self.bottomRow = susunKataBot.shuffled()
                         self.textField = ""
@@ -112,7 +113,6 @@ struct SusunKataView: View {
                         Image("reset-button")
                     }
                     .font(.system(size: 30, weight: .bold, design: .rounded))
-                    .foregroundColor(Color.red)
 
                 .padding()
                 }

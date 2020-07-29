@@ -16,7 +16,7 @@ struct FonikView: View {
     @State private var gambar = "anggur"
     @State private var gambarDesc = "Anggur"
     @State private var title = "Aa"
-    @State private var subTitle = "a..a..a.."
+    @State private var subTitle = "a..a..a"
     @State private var sound = "Sound"
     
     let screenWidth = UIScreen.main.bounds.width
@@ -35,7 +35,7 @@ struct FonikView: View {
                 self.gambarDesc = "\(fonik.gambarDesc)"
                 self.gambar = "\(fonik.gambar)"
                 self.title = "\(fonik.alfabet + fonik.alfabet.lowercased())"
-                self.subTitle = "\(fonik.alfabet.lowercased())..\(fonik.alfabet.lowercased())..\(fonik.alfabet.lowercased()).."
+                self.subTitle = fonik.subTitle
                 self.sound = "\(fonik.alfabet)"
                 playFonik(title: self.sound)
 
@@ -49,10 +49,6 @@ struct FonikView: View {
             }
             .frame(width: 60, height: 60, alignment: .center)
             .buttonStyle(self.buttonStyle)
-//            .padding(.top, 5)
-//            .padding(.bottom, 3)
-//            .padding(.leading, 5)
-//            .padding(.trailing, 5)
         }
         
 
@@ -71,7 +67,7 @@ struct FonikView: View {
                             .font(.system(size: 34, weight: .bold, design: .default))
                             .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
 
-                            .padding(.top)
+                            .padding()
                         Spacer()
                     }.padding(.top)
                 }.frame(width: screenWidth, height: screenHeight*10/100, alignment: .top)
@@ -118,8 +114,11 @@ struct FonikView: View {
                     VStack{
                         Text("\(title)")
                         .font(.system(size: 90, weight: .bold, design: .default))
+                            .multilineTextAlignment(.center)
                         Text("'\(subTitle)'")
                         .font(.system(size: 25, weight: .medium, design: .default))
+                        .multilineTextAlignment(.center)
+
                         Button(action: {
                             playFonik(title: self.sound)
                         }) {
