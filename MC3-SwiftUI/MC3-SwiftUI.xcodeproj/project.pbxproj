@@ -681,6 +681,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"MC3-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = 9G44XW2W74;
 				ENABLE_PREVIEWS = YES;
@@ -689,6 +690,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.poppy.MC3-SwiftUI";
 				PRODUCT_NAME = Bacain;
 				SWIFT_VERSION = 5.0;
@@ -701,6 +703,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"MC3-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = 9G44XW2W74;
 				ENABLE_PREVIEWS = YES;
@@ -709,6 +712,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.poppy.MC3-SwiftUI";
 				PRODUCT_NAME = Bacain;
 				SWIFT_VERSION = 5.0;

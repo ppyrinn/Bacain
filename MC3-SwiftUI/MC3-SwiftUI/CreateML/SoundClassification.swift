@@ -21,6 +21,8 @@ public class SoundClassification{
     
     public var resultString : String = ""
     
+    var isRecognitionAvailable = true
+    
     //Sound Analyzer
     private var soundClassifier = MC3_SoundClassifier_2()
     var analyzer: SNAudioStreamAnalyzer!
@@ -35,18 +37,10 @@ public class SoundClassification{
             buffer, _ in self.request.append(buffer)
         }
         
-        //        if(isRecord){
         //Sound Analyzer
-        inputFormat = audioEngine.inputNode.inputFormat(forBus: 0)
+        inputFormat = node.inputFormat(forBus: 0)
         analyzer = SNAudioStreamAnalyzer(format: inputFormat)
         
-        do {
-            let request = try SNClassifySoundRequest(mlModel: soundClassifier.model)
-            try analyzer.add(request, withObserver: resultsObserver)
-        } catch {
-            print("Unable to prepare request: \(error.localizedDescription)")
-            return
-        }
         
         audioEngine.prepare()
         do {
@@ -57,37 +51,41 @@ public class SoundClassification{
         
         
         //Speech Recognizer
-        guard let myRecognizer = SFSpeechRecognizer() else { return print("recognition is not supported for the current locale") }
-        if !myRecognizer.isAvailable{
-            return print("recognizer is not available right now")
+        guard let myRecognizer = SFSpeechRecognizer() else {
+            print("recognition is not supported for the current locale")
+            return isRecognitionAvailable = false
         }
-        
-        recognitionTask = speechRecognizer?.recognitionTask(with: request, resultHandler: { result, error in
-            if let result = result{
-                let bestString = result.bestTranscription.formattedString
-                self.resultString = bestString
-                print("best string = " + bestString)
-            }else if let error = error{
-                print(error)
+        if !myRecognizer.isAvailable{
+            print("recognizer is not available right now")
+            print("sound classification")
+            do {
+                let request = try SNClassifySoundRequest(mlModel: soundClassifier.model)
+                try analyzer.add(request, withObserver: resultsObserver)
+            } catch {
+                print("Unable to prepare request: \(error.localizedDescription)")
+                return
             }
-            
-        })
-        //        }else{
-        //            audioEngine.stop()
-        //            node.removeTap(onBus: 0)
-        //            self.request = nil
-        //            self.recognitionTask = nil
-        //            print("recording is stopped")
-        //        }
-        
+            //            return
+        }else{
+            print("speech recognition")
+            recognitionTask = speechRecognizer?.recognitionTask(with: request, resultHandler: { result, error in
+                if let result = result{
+                    let bestString = result.bestTranscription.formattedString
+                    self.resultString = bestString
+                    print("best string = " + bestString)
+                }else if let error = error{
+                    print(error)
+                }
+            })
+        }
         
     }
     
     public func stopRecording() -> String{
         audioEngine.stop()
-        //        node.removeTap(onBus: 0)
-        //        self.request = nil
-        //        self.recognitionTask = nil
+        audioEngine.inputNode.removeTap(onBus: 0)
+        self.request.endAudio()
+        self.recognitionTask = nil
         print("recording is stopped")
         return resultString
     }
