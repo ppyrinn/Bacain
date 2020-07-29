@@ -16,15 +16,19 @@ struct KuisView: View {
     
     var namaMurid = "Agus"
     var soalLvl2 = ["LARI","POHON","MENYANYI","DIAM","SUSAH","GAMPANG","BUDI","BACA","PUTIH","BOLA"]
-    var ejaan = ["la","ri"]
     var soalKuis = SoalKuis()
     
+    @State var soalEjaan = SoalEjaan()
     @State var resultString : String = ""
     @State var isRecording : Bool = false
     @State var showEjaan : Bool = false
     @State var idxEjaan : Int = 0
     @State var soal : String = "Lari"
+    @State var ejaan = ["la","ri"]
     @State var isAnswered : Bool = false
+    
+    let screenWidth = UIScreen.main.bounds.width
+    let screenHeight = UIScreen.main.bounds.height
     
     var soundClassification = SoundClassification()
     
@@ -35,8 +39,8 @@ struct KuisView: View {
                     .foregroundColor(Color(red: 1.00, green: 0.81, blue: 0.42))
                 RoundedRectangle(cornerRadius: 80)
                     .foregroundColor(.white)
-                    .frame(height: 800)
-                    .position(x: 596, y: 300)
+                    .frame(height: screenHeight)
+                    .position(x: screenWidth / 2, y: screenHeight / 3)
                 VStack{
                     HStack{
                         Button(action: {
@@ -49,6 +53,7 @@ struct KuisView: View {
                                     .font(.custom("SF Compact Text", size: 17))
                                     .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
                             }
+                            .accessibility(label: Text("Keluar kuis"))
                             
                         }
                         Spacer()
@@ -57,6 +62,7 @@ struct KuisView: View {
                             .font(.system(size: 17))
                             .font(.custom("SF Compact Text", size: 17))
                             .foregroundColor(.black)
+                        .accessibility(label: Text(namaMurid))
                         Spacer()
                         Button(action: {
                             //
@@ -67,6 +73,7 @@ struct KuisView: View {
                                     .fontWeight(.bold)
                                     .font(.system(size: 17))
                                     .font(.custom("SF Compact Text", size: 17))
+                                .accessibility(label: Text("Lewati murid"))
                             }
                             
                         }
@@ -74,8 +81,6 @@ struct KuisView: View {
                     .padding(20)
                     
                     Spacer()
-                    
-//                    self.soal = soalKuis.randomizeSoal(level : 1)
                     
                     Image(soal.lowercased()).padding(.top, -90)
                     
@@ -92,6 +97,7 @@ struct KuisView: View {
                                     .font(.system(size: 28))
                                     .font(.custom("SF Compact Text", size: 28))
                                     .foregroundColor(.black)
+                                    .accessibility(label: Text(self.soal.lowercased()))
                             }
                             Image("ceklis").resizable()
                             .frame(width: 28, height: 28, alignment: .center)
@@ -100,6 +106,7 @@ struct KuisView: View {
                                 Image("ceklis").resizable()
                                 .frame(width: 28, height: 28, alignment: .center)
                                 .opacity(1)
+                                    .accessibility(label: Text(soal.lowercased()))
                             }
                         }
                         .padding(.top, -20)
@@ -128,6 +135,7 @@ struct KuisView: View {
                             }){
                                 Image("stop-button")
                             }
+                            .accessibility(label: Text("Hentikan Rekaman"))
                         }else{
                             Button(action: {
                                 
@@ -137,16 +145,20 @@ struct KuisView: View {
                             }){
                                 Image("record-button")
                             }
-                            //                        Text("Hasil : " + resultString)
+                            .accessibility(label: Text("Mulai Rekam"))
                             
                         }
                     }else{
                         Button(action: {
                             self.isAnswered = false
-                            self.soal = self.soalKuis.randomizeSoal(level : 2)
+                            self.soalEjaan = self.soalKuis.randomizeSoalStruct(level: 2)
+                            self.soal = self.soalEjaan.soal
+                            self.ejaan = self.soalEjaan.ejaan
+                            self.showEjaan = false
                         }){
                             Image("ejaanselanjutnya-button")
                         }
+                        .accessibility(label: Text("Ejaan Selanjutnya"))
                     }
                     
                     Spacer()

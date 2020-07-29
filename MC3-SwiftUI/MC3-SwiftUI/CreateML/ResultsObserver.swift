@@ -20,7 +20,7 @@ public class ResultsObserver: NSObject, SNResultsObserving {
         
         if confidence > 60 {
             delegate?.displayPredictionResult(identifier: classification.identifier, confidence: confidence)
-//            print("identifier : \(classification.identifier) || confidence : \(confidence)")
+            print("identifier : \(classification.identifier) || confidence : \(confidence)")
         }
     }
 }
