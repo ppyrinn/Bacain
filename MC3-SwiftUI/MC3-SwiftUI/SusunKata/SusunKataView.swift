@@ -32,11 +32,11 @@ struct SusunKataView: View {
                 VStack{
                     Spacer()
                     HStack{
-                        Text("Susun Kata")
+                        Text("Eksplorasi")
                             .font(.system(size: 34, weight: .bold, design: .default))
                         .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
                             .padding()
-                        .accessibility(label: Text("Susun Kata"))
+                        .accessibility(label: Text("Eksplorasi"))
 
                         Spacer()
                     }.padding(.top)
@@ -105,7 +105,7 @@ struct SusunKataView: View {
                         .accessibility(label: Text(textField))
 
                         .multilineTextAlignment(.center)
-                    .layoutPriority(1)
+                        .layoutPriority(1)
                         .disabled(true)
                         .font(.system(size: 50, weight: .bold, design: .default))
                         .frame(width: screenWidth*3/5, height: 80, alignment: .center)

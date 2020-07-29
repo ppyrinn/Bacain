@@ -14,16 +14,19 @@ struct contentRoot: View {
     var body: some View {
         TabView{
             ProgresifView().tabItem({
-                Image(systemName: "star.fill")
+                Image("Progresif ga aktif")
+                    .renderingMode(.template)
                 Text("Progresif")
             }).tag(0)
             FonikView().tabItem({
-                Image(systemName: "star.fill")
+                Image("Fonik ga aktif")
+                .renderingMode(.template)
                 Text("Fonik")
             }).tag(1)
             SusunKataView().tabItem({
-                Image(systemName: "star.fill")
-                Text("Susun Kata")
+                Image("Susun kata ga aktif")
+                .renderingMode(.template)
+                Text("Eksplorasi")
             }).tag(2)
             //tab bar kuis untuk sementara
             KuisView().tabItem({
