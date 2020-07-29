@@ -76,7 +76,6 @@ public class SoundClassification{
                 }else if let error = error{
                     print(error)
                 }
-                
             })
         }
         

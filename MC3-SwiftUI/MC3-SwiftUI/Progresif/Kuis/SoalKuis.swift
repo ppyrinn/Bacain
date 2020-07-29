@@ -12,16 +12,16 @@ public class SoalKuis{
     var lvl1 = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
     //    var lvl2 = ["LARI","POHON","MENYANYI","DIAM","SUSAH","GAMPANG","BUDI","BACA","PUTIH","BOLA"]
     var lvl2 = [
-        SoalEjaan(soal: "LARI", ejaan: ["la","ri"]),
-        SoalEjaan(soal: "POHON", ejaan: ["po","hon"]),
-        SoalEjaan(soal: "MENYANYI", ejaan: ["me","nya","nyi"]),
-        SoalEjaan(soal: "DIAM", ejaan: ["di","am"]),
-        SoalEjaan(soal: "SUSAH", ejaan: ["su","sah"]),
-        SoalEjaan(soal: "GAMPANG", ejaan: ["gam","pang"]),
-        SoalEjaan(soal: "BUDI", ejaan: ["bu","di"]),
-        SoalEjaan(soal: "BACA", ejaan: ["ba","ca"]),
-        SoalEjaan(soal: "PUTIH", ejaan: ["pu","tih"]),
-        SoalEjaan(soal: "BOLA", ejaan: ["bo","la"]),
+        SoalEjaan(soal: "LARI", ejaan: Ejaan(sukuKata: ["la","ri"], isCorrect: [false,false])),
+        SoalEjaan(soal: "POHON", ejaan: Ejaan(sukuKata: ["po","hon"], isCorrect: [false,false])),
+        SoalEjaan(soal: "MENYANYI", ejaan: Ejaan(sukuKata: ["me","nya","nyi"], isCorrect: [false,false,false])),
+        SoalEjaan(soal: "DIAM", ejaan: Ejaan(sukuKata: ["di","am"], isCorrect: [false,false])),
+        SoalEjaan(soal: "SUSAH", ejaan: Ejaan(sukuKata: ["su","sah"], isCorrect: [false,false])),
+        SoalEjaan(soal: "GAMPANG", ejaan: Ejaan(sukuKata: ["gam","pang"], isCorrect: [false,false])),
+        SoalEjaan(soal: "BUDI", ejaan: Ejaan(sukuKata: ["bu","di"], isCorrect: [false,false])),
+        SoalEjaan(soal: "BACA", ejaan: Ejaan(sukuKata: ["ba","ca"], isCorrect: [false,false])),
+        SoalEjaan(soal: "PUTIH", ejaan: Ejaan(sukuKata: ["pu","tih"], isCorrect: [false,false])),
+        SoalEjaan(soal: "BOLA", ejaan: Ejaan(sukuKata: ["bo","la"], isCorrect: [false,false])),
     ]
     var lvl3 = [
         "jendela kamar",
@@ -68,18 +68,23 @@ public class SoalKuis{
 //        case 1:
 //            return lvl1.randomElement() ?? SoalEjaan(soal: "", ejaan: [])
         case 2:
-            return lvl2.randomElement() ?? SoalEjaan(soal: "", ejaan: [])
+            return lvl2.randomElement() ?? SoalEjaan(soal: "", ejaan: Ejaan(sukuKata: [], isCorrect: []))
 //        case 3:
 //            return lvl3.randomElement() ?? SoalEjaan(soal: "", ejaan: [])
 //        case 4:
 //            return lvl4.randomElement() ?? SoalEjaan(soal: "", ejaan: [])
         default:
-            return SoalEjaan(soal: "", ejaan: [])
+            return SoalEjaan(soal: "", ejaan: Ejaan(sukuKata: [], isCorrect: []))
         }
     }
 }
 
 public struct SoalEjaan {
     var soal : String = ""
-    var ejaan : [String] = []
+    var ejaan = Ejaan()
+}
+
+public struct Ejaan{
+    var sukuKata : [String] = []
+    var isCorrect : [Bool] = []
 }
