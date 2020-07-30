@@ -30,6 +30,8 @@ struct KuisView: View {
     @State var soalIdx = 0
     @State var tempCorrect = false
     @State var finalVerdict = false
+    @State var sukuKata1Lvl3 : String = ""
+    @State var sukuKata2Lvl3 : String = ""
     
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
@@ -79,6 +81,82 @@ struct KuisView: View {
                 answeredEjaan.sukuKata.append(eja)
                 answeredEjaan.isCorrect.append(tempCorrect)
             }
+        }
+        else{
+            answeredEjaan.sukuKata = ejaan
+            for _ in ejaan{
+                answeredEjaan.isCorrect.append(false)
+            }
+            finalVerdict = false
+        }
+    }
+    
+    func showResultLevel3(resultString:String, soal:String, soalEjaan : SoalEjaan) {
+        if(resultString.uppercased() == soal.uppercased()){
+            answeredEjaan.sukuKata = ejaan
+            for _ in ejaan{
+                answeredEjaan.isCorrect.append(true)
+            }
+            finalVerdict = true
+        }
+        else if(resultString.count == soal.count){
+            soalIdx = 0
+            for eja in ejaan{
+                tempCorrect = false
+                idxEjaan = 0
+                for alfabet in eja{
+                    if(alfabet.uppercased() == resultString[resultString.index(resultString.startIndex, offsetBy: soalIdx)].uppercased()){
+                        print("bener di \(alfabet)")
+                        if(idxEjaan == 0){
+                            tempCorrect = true
+                        }else{
+                            if(!tempCorrect){
+                                tempCorrect = false
+                            }else{
+                                tempCorrect = true
+                            }
+                        }
+                    }else{
+                        print("salah di \(alfabet)")
+                        if(idxEjaan == 0){
+                            tempCorrect = false
+                        }else{
+                            if(tempCorrect){
+                                tempCorrect = false
+                            }else{
+                                tempCorrect = true
+                            }
+                        }
+                    }
+                    soalIdx+=1
+                    idxEjaan+=1
+                }
+                answeredEjaan.sukuKata.append(eja)
+                answeredEjaan.isCorrect.append(tempCorrect)
+            }
+        }else if(resultString.count != soal.count && (resultString.firstIndex(of: " ") != nil)){
+            if let spaceIdxLvl3 = soal.firstIndex(of: " "){
+                sukuKata1Lvl3 = String(soal[soal.startIndex..<soal.index(before:spaceIdxLvl3)])
+                sukuKata2Lvl3 = String(soal[soal.index(after: spaceIdxLvl3)..<soal.endIndex])
+                
+                if(ejaan[0].uppercased() == sukuKata1Lvl3.uppercased()){
+                    answeredEjaan.sukuKata.append(ejaan[0])
+                    answeredEjaan.isCorrect.append(true)
+                }else{
+                    answeredEjaan.sukuKata.append(ejaan[0])
+                    answeredEjaan.isCorrect.append(false)
+                }
+                
+                if(ejaan[1].uppercased() == sukuKata2Lvl3.uppercased()){
+                    answeredEjaan.sukuKata.append(ejaan[1])
+                    answeredEjaan.isCorrect.append(true)
+                }else{
+                    answeredEjaan.sukuKata.append(ejaan[1])
+                    answeredEjaan.isCorrect.append(false)
+                }
+                
+            }
+            
         }
         else{
             answeredEjaan.sukuKata = ejaan
@@ -139,7 +217,8 @@ struct KuisView: View {
                     
                     Spacer()
                     
-                    Image(soal.lowercased()).padding(.top, -90)
+                    Image(soal.lowercased())
+                        .padding(.top, -90)
                     
                     Text(soal.uppercased())
                         .fontWeight(.bold)
@@ -208,7 +287,15 @@ struct KuisView: View {
                                 self.isRecording = false
                                 self.showEjaan = true
                                 self.isAnswered = true
-                                self.showResultLevel2(resultString: self.resultString, soal: self.soal, soalEjaan: self.soalEjaan)
+                                if self.levelMurid == 1{
+                                    
+                                }else if self.levelMurid == 2{
+                                    self.showResultLevel2(resultString: self.resultString, soal: self.soal, soalEjaan: self.soalEjaan)
+                                }else if self.levelMurid == 3{
+                                    self.showResultLevel3(resultString: self.resultString, soal: self.soal, soalEjaan: self.soalEjaan)
+                                }else if self.levelMurid == 4{
+                                    
+                                }
                             }){
                                 Image("stop-button")
                             }
@@ -230,7 +317,7 @@ struct KuisView: View {
                     }else{
                         Button(action: {
                             self.isAnswered = false
-                            self.soalEjaan = self.soalKuis.randomizeSoalStruct(level: 2)
+                            self.soalEjaan = self.soalKuis.randomizeSoalStruct(level: self.levelMurid)
                             self.soal = self.soalEjaan.soal
                             self.ejaan = self.soalEjaan.ejaan.sukuKata
                             self.showEjaan = false
