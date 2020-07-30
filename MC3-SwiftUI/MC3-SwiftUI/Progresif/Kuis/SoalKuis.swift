@@ -23,17 +23,29 @@ public class SoalKuis{
         SoalEjaan(soal: "PUTIH", ejaan: Ejaan(sukuKata: ["pu","tih"], isCorrect: [false,false])),
         SoalEjaan(soal: "BOLA", ejaan: Ejaan(sukuKata: ["bo","la"], isCorrect: [false,false])),
     ]
+//    var lvl3 = [
+//        "jendela kamar",
+//        "ruang tamu",
+//        "kipas angin",
+//        "baju kemeja",
+//        "botol minum",
+//        "pintu kayu",
+//        "sandal jepit",
+//        "tempat tidur",
+//        "buku gambar",
+//        "tas sekolah"
+//    ]
     var lvl3 = [
-        "jendela kamar",
-        "ruang tamu",
-        "kipas angin",
-        "baju kemeja",
-        "botol minum",
-        "pintu kayu",
-        "sandal jepit",
-        "tempat tidur",
-        "buku gambar",
-        "tas sekolah"
+        SoalEjaan(soal: "jendela kamar", ejaan: Ejaan(sukuKata: ["jendela","kamar"], isCorrect: [false,false])),
+        SoalEjaan(soal: "ruang tamu", ejaan: Ejaan(sukuKata: ["ruang","tamu"], isCorrect: [false,false])),
+        SoalEjaan(soal: "kipas angin", ejaan: Ejaan(sukuKata: ["kipas","angin"], isCorrect: [false,false])),
+        SoalEjaan(soal: "baju kemeja", ejaan: Ejaan(sukuKata: ["baju","kemeja"], isCorrect: [false,false])),
+        SoalEjaan(soal: "botol minum", ejaan: Ejaan(sukuKata: ["botol","minum"], isCorrect: [false,false])),
+        SoalEjaan(soal: "pintu kayu", ejaan: Ejaan(sukuKata: ["pintu","kayu"], isCorrect: [false,false])),
+        SoalEjaan(soal: "sandal jepit", ejaan: Ejaan(sukuKata: ["sandal","jepit"], isCorrect: [false,false])),
+        SoalEjaan(soal: "tempat tidur", ejaan: Ejaan(sukuKata: ["tempat","tidur"], isCorrect: [false,false])),
+        SoalEjaan(soal: "buku gambar", ejaan: Ejaan(sukuKata: ["buku","gambar"], isCorrect: [false,false])),
+        SoalEjaan(soal: "tas sekolah", ejaan: Ejaan(sukuKata: ["tas","sekolah"], isCorrect: [false,false])),
     ]
     var lvl4 = [
         "ini bapak budi",
@@ -69,8 +81,8 @@ public class SoalKuis{
 //            return lvl1.randomElement() ?? SoalEjaan(soal: "", ejaan: [])
         case 2:
             return lvl2.randomElement() ?? SoalEjaan(soal: "", ejaan: Ejaan(sukuKata: [], isCorrect: []))
-//        case 3:
-//            return lvl3.randomElement() ?? SoalEjaan(soal: "", ejaan: [])
+        case 3:
+            return lvl3.randomElement() ?? SoalEjaan(soal: "", ejaan: Ejaan(sukuKata: [], isCorrect: []))
 //        case 4:
 //            return lvl4.randomElement() ?? SoalEjaan(soal: "", ejaan: [])
         default:

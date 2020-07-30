@@ -140,6 +140,9 @@ struct SusunKataView: View {
             .padding()
             }
         }
+        .onDisappear{
+            quePlayer.pause()
+        }
     }
 }
 
