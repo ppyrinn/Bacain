@@ -11,6 +11,7 @@
 		4803A4EB24D7C6410010BC9D /* DetailScoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803A4EA24D7C6410010BC9D /* DetailScoring.swift */; };
 		4803A4ED24D7C6780010BC9D /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803A4EC24D7C6780010BC9D /* ProgressBar.swift */; };
 		4855FB4D24C6E7690040C09F /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4855FB4C24C6E7690040C09F /* SearchBar.swift */; };
+		4B132EEC24D7DE030042A9C4 /* Jawaban.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B132EEB24D7DE030042A9C4 /* Jawaban.swift */; };
 		4B15D68724D1209D005C4DB1 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B15D68624D1209D005C4DB1 /* OnboardingView.swift */; };
 		4B603CC324CB08B500A49EFE /* Bo.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CA424CB08B500A49EFE /* Bo.m4a */; };
 		4B603CC424CB08B500A49EFE /* Ma.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CA524CB08B500A49EFE /* Ma.m4a */; };
@@ -103,6 +104,7 @@
 		4803A4EA24D7C6410010BC9D /* DetailScoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScoring.swift; sourceTree = "<group>"; };
 		4803A4EC24D7C6780010BC9D /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		4855FB4C24C6E7690040C09F /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		4B132EEB24D7DE030042A9C4 /* Jawaban.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jawaban.swift; sourceTree = "<group>"; };
 		4B15D68624D1209D005C4DB1 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		4B603CA424CB08B500A49EFE /* Bo.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bo.m4a; sourceTree = "<group>"; };
 		4B603CA524CB08B500A49EFE /* Ma.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ma.m4a; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				4BDCB7F624C44C6D00C6A6B6 /* Soal.swift */,
 				4BB7EDD524C93EC6007087CE /* Kuis.swift */,
 				4BDCB7F024C42CB100C6A6B6 /* Kelas.swift */,
+				4B132EEB24D7DE030042A9C4 /* Jawaban.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 				4BDCB7F124C42CB100C6A6B6 /* Kelas.swift in Sources */,
 				F4D5CEE624C1471600C6B104 /* SceneDelegate.swift in Sources */,
 				4BDCB7F724C44C6D00C6A6B6 /* Soal.swift in Sources */,
+				4B132EEC24D7DE030042A9C4 /* Jawaban.swift in Sources */,
 				F4D5CEEB24C1471600C6B104 /* ProgresifView.swift in Sources */,
 				4B6F45C724CEFFA300BD17EF /* PageControl.swift in Sources */,
 				F424198524CFDC1F000F1CA4 /* SoalKuis.swift in Sources */,
