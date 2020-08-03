@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4803A4E924D7C5EC0010BC9D /* DetailStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803A4E824D7C5EC0010BC9D /* DetailStudent.swift */; };
+		4803A4EB24D7C6410010BC9D /* DetailScoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803A4EA24D7C6410010BC9D /* DetailScoring.swift */; };
+		4803A4ED24D7C6780010BC9D /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803A4EC24D7C6780010BC9D /* ProgressBar.swift */; };
 		4855FB4D24C6E7690040C09F /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4855FB4C24C6E7690040C09F /* SearchBar.swift */; };
 		4B15D68724D1209D005C4DB1 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B15D68624D1209D005C4DB1 /* OnboardingView.swift */; };
 		4B603CC324CB08B500A49EFE /* Bo.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CA424CB08B500A49EFE /* Bo.m4a */; };
@@ -96,6 +99,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4803A4E824D7C5EC0010BC9D /* DetailStudent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStudent.swift; sourceTree = "<group>"; };
+		4803A4EA24D7C6410010BC9D /* DetailScoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScoring.swift; sourceTree = "<group>"; };
+		4803A4EC24D7C6780010BC9D /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		4855FB4C24C6E7690040C09F /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		4B15D68624D1209D005C4DB1 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		4B603CA424CB08B500A49EFE /* Bo.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bo.m4a; sourceTree = "<group>"; };
@@ -314,6 +320,9 @@
 				F424198324CFDBFA000F1CA4 /* Kuis */,
 				F4D5CEEA24C1471600C6B104 /* ProgresifView.swift */,
 				4855FB4C24C6E7690040C09F /* SearchBar.swift */,
+				4803A4E824D7C5EC0010BC9D /* DetailStudent.swift */,
+				4803A4EA24D7C6410010BC9D /* DetailScoring.swift */,
+				4803A4EC24D7C6780010BC9D /* ProgressBar.swift */,
 			);
 			path = Progresif;
 			sourceTree = "<group>";
@@ -538,12 +547,15 @@
 				F424198524CFDC1F000F1CA4 /* SoalKuis.swift in Sources */,
 				4BDCB7E024C1B9B900C6A6B6 /* Sekolah.swift in Sources */,
 				4B6F45C224CEEF8900BD17EF /* ViewRouter.swift in Sources */,
+				4803A4ED24D7C6780010BC9D /* ProgressBar.swift in Sources */,
 				4B68056C24C8A63B000261E6 /* Murid.swift in Sources */,
 				4B6F45BD24CEAA4C00BD17EF /* ResultsObserver.swift in Sources */,
 				F4D5CEE924C1471600C6B104 /* MC3_SwiftUI.xcdatamodeld in Sources */,
 				4B6F45C024CEAA8200BD17EF /* KuisView.swift in Sources */,
 				4BB7EDDA24C95643007087CE /* audioPlayer.swift in Sources */,
 				4BDCB7F324C44AFA00C6A6B6 /* Fonik.swift in Sources */,
+				4803A4E924D7C5EC0010BC9D /* DetailStudent.swift in Sources */,
+				4803A4EB24D7C6410010BC9D /* DetailScoring.swift in Sources */,
 				4BDCB7E424C21D1800C6A6B6 /* contentRoot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
