@@ -72,7 +72,7 @@ struct DetailStudent: View {
     }
     
     func generateGrid(){
-        
+        Grid.removeAll()
         for i in stride(from: 0, to: self.data.count, by: 2){
             
             if i != self.data.count{
