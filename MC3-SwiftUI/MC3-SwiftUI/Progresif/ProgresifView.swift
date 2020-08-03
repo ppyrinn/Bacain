@@ -10,7 +10,8 @@ import SwiftUI
 
 struct ProgresifView: View {
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(fetchRequest: Sekolah.getAllSekolah()) var listOfSekolah: FetchedResults<Sekolah>
+    @FetchRequest(fetchRequest: Sekolah.getAllSekolah())
+    var listOfSekolah: FetchedResults<Sekolah>
     
     @State private var newSekolah = ""
     @State var showingDetail = false
@@ -34,13 +35,13 @@ struct ProgresifView: View {
                     
                 }
                 .onDelete(perform: deleteItem)
-            }
+            }.accessibility(label: Text("Daftar Sekolah"))
         }
         .onAppear {
             UITableView.appearance().separatorStyle = .none
         }
             
-        .navigationBarTitle("Progresif")
+        .navigationBarTitle("Progresif").accessibility(label: Text("Progresif"))
         
         .navigationBarItems(trailing:
             Button(action: {
@@ -49,6 +50,7 @@ struct ProgresifView: View {
                 Image(systemName: "plus")
                     .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
                     .imageScale(.large)
+                    .accessibility(label: Text("Tambah Sekolah"))
             }.sheet(isPresented: $showingDetail) {
                 addSchool()
                     .environment(\.managedObjectContext, self.moc)
@@ -66,7 +68,7 @@ struct ProgresifView: View {
                     .bold()
                     .padding(.top, -200)
             }
-        .navigationBarTitle("Daftar Kelas")
+        .navigationBarTitle("Daftar Kelas").accessibility(label: Text("Daftar Kelas"))
         }
         
         
@@ -102,7 +104,7 @@ struct addSchool: View {
                     }) {
                         Text("Batal")
                             .foregroundColor(.orange)
-                    }
+                    }.accessibility(label: Text("Batal"))
                     Spacer()
                     
                     Button(action: {
@@ -111,7 +113,7 @@ struct addSchool: View {
                         let id = UUID()
                         sekolah.idSekolah = id
                         
-                        print("textnya adalah", self.newSekolah)
+//                        print("textnya adalah", self.newSekolah)
                         
                         do{
                             try self.moc.save()
@@ -121,7 +123,7 @@ struct addSchool: View {
                         self.newSekolah = ""
                         
                     }) {
-                        Text("Tambah Sekolah")
+                        Text("Tambah Sekolah").accessibility(label: Text("Tambah Sekolah"))
                             .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
                     }
                     
@@ -135,16 +137,16 @@ struct addSchool: View {
                     Text("Tambah Sekolah")
                         .font(.largeTitle)
                         .foregroundColor(.orange)
-                }
+                }.accessibility(label: Text("Tambah Sekolah"))
                 HStack{
                     Text("Tambah Sekolah yang ingin kamu simpan/track perkembangan murdinya")
                         
-                }
+                }.accessibility(label: Text("Tambah Sekolah yang ingin kamu simpan/track perkembangan murdinya"))
                 HStack{
                     Text("Sekolah")
                     .foregroundColor(.orange)
                     .bold()
-                    TextField("Sekolah Baru", text: self.$newSekolah)
+                    TextField("Sekolah Baru", text: self.$newSekolah).accessibility(label: Text("Masukkan Sekolah Baru yang ingin ditambahkan"))
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     .onAppear {
                         UITableView.appearance().separatorStyle = .singleLine

@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		48421ECA24D28A1000F2C14D /* DetailScoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48421EC924D28A1000F2C14D /* DetailScoring.swift */; };
 		4842B96C24CA5DCF00238A8D /* Subview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842B96B24CA5DCF00238A8D /* Subview.swift */; };
 		4842B96E24CA5F2500238A8D /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842B96D24CA5F2500238A8D /* OnboardingView.swift */; };
 		4842B97024CA60BE00238A8D /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842B96F24CA60BE00238A8D /* PageViewController.swift */; };
 		4842B97224CA6CDB00238A8D /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4842B97124CA6CDB00238A8D /* PageControl.swift */; };
 		4855FB4D24C6E7690040C09F /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4855FB4C24C6E7690040C09F /* SearchBar.swift */; };
+		487DF24324D1E193006191BC /* DetailStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487DF24224D1E193006191BC /* DetailStudent.swift */; };
+		48AF88E324D63C99000547C0 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AF88E224D63C99000547C0 /* ProgressBar.swift */; };
 		48CCC06F24CE8953002A89D5 /* SoundClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CCC06B24CE8953002A89D5 /* SoundClassification.swift */; };
 		48CCC07024CE8953002A89D5 /* MC3-SoundClassifier 2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 48CCC06C24CE8953002A89D5 /* MC3-SoundClassifier 2.mlmodel */; };
 		48CCC07124CE8953002A89D5 /* ResultsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CCC06D24CE8953002A89D5 /* ResultsObserver.swift */; };
@@ -65,11 +68,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		48421EC924D28A1000F2C14D /* DetailScoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScoring.swift; sourceTree = "<group>"; };
 		4842B96B24CA5DCF00238A8D /* Subview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subview.swift; sourceTree = "<group>"; };
 		4842B96D24CA5F2500238A8D /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		4842B96F24CA60BE00238A8D /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		4842B97124CA6CDB00238A8D /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
 		4855FB4C24C6E7690040C09F /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		487DF24224D1E193006191BC /* DetailStudent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStudent.swift; sourceTree = "<group>"; };
+		48AF88E224D63C99000547C0 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		48CCC06B24CE8953002A89D5 /* SoundClassification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoundClassification.swift; path = "../../../Desktop/masuk/MC3/MC3-SwiftUI/MC3-SwiftUI/CreateML/SoundClassification.swift"; sourceTree = "<group>"; };
 		48CCC06C24CE8953002A89D5 /* MC3-SoundClassifier 2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = "MC3-SoundClassifier 2.mlmodel"; path = "../../../Desktop/masuk/MC3/MC3-SwiftUI/MC3-SwiftUI/CreateML/MC3-SoundClassifier 2.mlmodel"; sourceTree = "<group>"; };
 		48CCC06D24CE8953002A89D5 /* ResultsObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResultsObserver.swift; path = "../../../Desktop/masuk/MC3/MC3-SwiftUI/MC3-SwiftUI/CreateML/ResultsObserver.swift"; sourceTree = "<group>"; };
@@ -208,6 +214,9 @@
 				4842B96D24CA5F2500238A8D /* OnboardingView.swift */,
 				4842B96F24CA60BE00238A8D /* PageViewController.swift */,
 				4842B97124CA6CDB00238A8D /* PageControl.swift */,
+				487DF24224D1E193006191BC /* DetailStudent.swift */,
+				48421EC924D28A1000F2C14D /* DetailScoring.swift */,
+				48AF88E224D63C99000547C0 /* ProgressBar.swift */,
 			);
 			path = Progresif;
 			sourceTree = "<group>";
@@ -369,10 +378,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BDCB7EF24C3517E00C6A6B6 /* AlfabetScrollView.swift in Sources */,
+				487DF24324D1E193006191BC /* DetailStudent.swift in Sources */,
 				4BB7EDD624C93EC6007087CE /* Kuis.swift in Sources */,
 				4842B96C24CA5DCF00238A8D /* Subview.swift in Sources */,
 				48CCC07224CE8953002A89D5 /* SoundClassifierDelegate.swift in Sources */,
 				F4D5CEE424C1471600C6B104 /* AppDelegate.swift in Sources */,
+				48421ECA24D28A1000F2C14D /* DetailScoring.swift in Sources */,
 				4842B96E24CA5F2500238A8D /* OnboardingView.swift in Sources */,
 				48CCC07024CE8953002A89D5 /* MC3-SoundClassifier 2.mlmodel in Sources */,
 				4855FB4D24C6E7690040C09F /* SearchBar.swift in Sources */,
@@ -381,6 +392,7 @@
 				4BDCB7E624C21F0500C6A6B6 /* FonikView.swift in Sources */,
 				4BDCB7F124C42CB100C6A6B6 /* Kelas.swift in Sources */,
 				4842B97224CA6CDB00238A8D /* PageControl.swift in Sources */,
+				48AF88E324D63C99000547C0 /* ProgressBar.swift in Sources */,
 				F4D5CEE624C1471600C6B104 /* SceneDelegate.swift in Sources */,
 				4BDCB7F724C44C6D00C6A6B6 /* Soal.swift in Sources */,
 				F4D5CEEB24C1471600C6B104 /* ProgresifView.swift in Sources */,
@@ -531,7 +543,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"MC3-SwiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = 7LUWAU8N83;
+				DEVELOPMENT_TEAM = HUQMNJMH26;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "MC3-SwiftUI/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -551,7 +563,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"MC3-SwiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = 7LUWAU8N83;
+				DEVELOPMENT_TEAM = HUQMNJMH26;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "MC3-SwiftUI/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

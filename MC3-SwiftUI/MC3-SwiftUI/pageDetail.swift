@@ -10,83 +10,51 @@ import SwiftUI
 
 
 struct pageDetail: View {
-    var sekolah: Sekolah
     
     @Environment(\.managedObjectContext) var moc
 
-    
-    var fetchRequest: FetchRequest<Kelas>
-    
     @State var showingDetail = false
     @State private var searchText = ""
-    
-    @State var data = [
-
-        Type(namaKelas: "Kelas 1", gambarKelas: "1"),
-        Type(namaKelas: "Kelas 2", gambarKelas: "2"),
-        Type(namaKelas: "Kelas 3", gambarKelas: "3"),
-        Type(namaKelas: "Kelas 4", gambarKelas: "4"),
-        Type(namaKelas: "Kelas 5", gambarKelas: "5"),
-//        Type(namaKelas: "Kelas 6", gambarKelas: "6"),
-
-    ]
-    
-    var kelases: FetchedResults<Kelas> { fetchRequest.wrappedValue }
-    
+    @State var data : [Type] = []
     @State var Grid : [Int] = []
+
+    var sekolah: Sekolah
+    var fetchRequest: FetchRequest<Kelas>
+    
     
     init(filter: String, sekolah: Sekolah){
         fetchRequest = FetchRequest<Kelas>(entity: Kelas.entity(), sortDescriptors: [], predicate: NSPredicate(format: "idSekolah = %@", filter))
         self.sekolah = sekolah
+        
+    }
+    func appendData() {
+        data.removeAll()
+        for kelas in fetchRequest.wrappedValue {
+            data.append(Type(namaKelas: kelas.namaKelas, gambarKelas: "1", idKelas: kelas.idKelas))
+           }
     }
     
-    
-    
-
     var body: some View {
         VStack{
-//            List(fetchRequest.wrappedValue, id: \.self) { Kelas in
-//                Text("\(Kelas.namaKelas)")
-//            }
-            
-            ForEach(fetchRequest.wrappedValue, id: \.self){ Kelas in
-                Text("\(Kelas.namaKelas)")
-//                data.append("\(Kelas.namaKelas)")
-            }
-            
-            Text("\(kelases.count)")
-            
-            Button("add Examples"){
-                let taylor = Kelas(context: self.moc)
-                taylor.idKelas = UUID()
-                taylor.namaKelas = "Kelas 1"
-                taylor.idSekolah = self.sekolah.idSekolah
-                
-                do{
-                    try self.moc.save()
-                }catch{
-                    print(error)
-                }
-            }
-            
-            HStack{
+            HStack(spacing: 0){
                 SearchBar(text: $searchText)
+            }
+            if data.count == 0 {
+                Color(red: 1.00, green: 0.81, blue: 0.42)
+                    .padding(.bottom, -50)
             }
             
             VStack(spacing: 0){
-                
                 MainView(data: self.$data, Grid: self.$Grid)
             }
             .background(Color.black.opacity(0.06).edgesIgnoringSafeArea(.top))
             .edgesIgnoringSafeArea(.bottom)
             .onAppear {
-                
+                self.appendData()
                 self.generateGrid()
             }
         }
-            
-            
-        .navigationBarTitle("Daftar Kelas")
+        .navigationBarTitle("Daftar Kelas").accessibility(label: Text("Daftar Kelas"))
         .navigationBarItems(trailing:
             Button(action: {
                 self.showingDetail.toggle()
@@ -94,17 +62,17 @@ struct pageDetail: View {
                 Image(systemName: "plus")
                     .foregroundColor(.orange)
                     .imageScale(.large)
-            }.sheet(isPresented: $showingDetail) {
-                addClass(filter: String, sekolah: sekolah.idSekolah)
+            }.accessibility(label: Text("Tambah Kelas"))
+            .sheet(isPresented: $showingDetail) {
+                addClass(sekolah: self.sekolah, pageDetil: self)
                     .environment(\.managedObjectContext, self.moc)
+                
             }
         )
-        
-        
     }
     
     func generateGrid(){
-        
+        Grid.removeAll()
         for i in stride(from: 0, to: self.data.count, by: 2){
             
             if i != self.data.count{
@@ -114,51 +82,43 @@ struct pageDetail: View {
             
         }
     }
-    
 }
 
 struct Card : View {
     
-    
     var data : Type
+    @State var showingDetail = false
     
     var body: some View{
         
-        VStack(spacing: 15){
+        
+        NavigationLink(destination: DetailStudent(data : data)){
             
-            Button(action: {
-                //
-                
-//                NavigationLink(destination: pageDetail(filter: , sekolah: item)) {
-//                    Text("\(item.namaSekolah)")
-                    
-                }
-            }) {
-                VStack{
-                    Text(data.namaKelas)
-                        .bold()
-                        .foregroundColor(.black)
-                        .frame(width: (UIScreen.main.bounds.width - 70) / 3)
-                        .padding(.vertical,10)
-                        .padding(.top, 10)
-                        
-                    
-                    Image(data.gambarKelas)
-                        .renderingMode(.original)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: (UIScreen.main.bounds.width - 45) / 3)
-                        .cornerRadius(12)
-                        .padding(.bottom, 10)
-                        
-                }
+            VStack{
+//                Text(data.idKelas.uuidString)
+                Text(data.namaKelas)
+                    .bold()
+                    .foregroundColor(.black)
+                    .frame(width: (UIScreen.main.bounds.width - 70) / 3)
+                    .padding(.vertical,10)
+                    .padding(.top, 10)
+                    .accessibility(label: Text(data.namaKelas))
                 
                 
-            }.background(Color.white)
-            .cornerRadius(10)
+                Image(data.gambarKelas)
+                    .renderingMode(.original)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: (UIScreen.main.bounds.width - 200) / 3)
+                    .cornerRadius(12)
+                    .padding(.bottom, 10)
+                
+            }
+            
+        }.background(Color.white)
+        .cornerRadius(10)
             .shadow(radius: 6)
-            
-        }.padding(5)
+        
     }
 }
 
@@ -179,6 +139,7 @@ struct MainView : View {
                                 
                                 VStack{
                                     if j != self.data.count {
+                                        
                                         Card(data: self.data[j])
                                     }
                                 }
@@ -186,7 +147,7 @@ struct MainView : View {
                             
                             if i == self.Grid.last! && self.data.count % 2 != 0{
 
-                                Spacer(minLength: 0)
+                                Spacer(minLength: 10)
                             }
                         }
                     }
@@ -206,18 +167,23 @@ struct Type {
     
     var namaKelas : String
     var gambarKelas : String
+    var idKelas : UUID
 }
 
 struct addClass: View {
     @Environment(\.managedObjectContext) var moc
+    @State var data : [Type] = []
+//    var fetchRequest: FetchRequest<Kelas>
    
     var sekolah: Sekolah
-    var fetchRequest: FetchRequest<Kelas>
+    var halamanDetail : pageDetail
     
-    init(filter: String, sekolah: Sekolah){
-        fetchRequest = FetchRequest<Kelas>(entity: Kelas.entity(), sortDescriptors: [], predicate: NSPredicate(format: "idSekolah = %@", filter))
+    init(sekolah: Sekolah, pageDetil: pageDetail){
+
         self.sekolah = sekolah
+        self.halamanDetail = pageDetil
     }
+    
     
     @State private var newKelas = ""
     @State var showDetail = true
@@ -239,6 +205,7 @@ struct addClass: View {
                         kelas.idKelas = UUID()
                         kelas.namaKelas = self.newKelas
                         kelas.idSekolah = self.sekolah.idSekolah
+//                        self.halamanDetail.generateGrid()
                         
                         
                         do{
@@ -252,6 +219,8 @@ struct addClass: View {
                         Text("Tambah Kelas")
                             .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
                     }
+//                    self.generateGrid()
+
                     
                     
                 }
@@ -278,8 +247,15 @@ struct addClass: View {
                 .padding(30)
                 Spacer()
             }
+            
         }
     }
+    
+//    func appendDataa() {
+//        for kelas in fetchRequest.wrappedValue{
+//            data.append(Type(namaKelas: kelas.namaKelas, gambarKelas: "1", idKelas: kelas.idKelas))
+//        }
+//    }
 }
 
 
