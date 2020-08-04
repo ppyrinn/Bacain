@@ -3,8 +3,9 @@
     <entity name="Jawaban" representedClassName=".Jawaban" syncable="YES">
         <attribute name="ejaan" optional="YES" attributeType="String"/>
         <attribute name="idJawaban" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="idKuis" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="score" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="adaDikuis" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kuis" inverseName="punyaJawaban" inverseEntity="Kuis"/>
+        <relationship name="adaDiKuis" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kuis" inverseName="punyaJawaban" inverseEntity="Kuis"/>
     </entity>
     <entity name="Kelas" representedClassName=".Kelas" syncable="YES">
         <attribute name="idKelas" attributeType="UUID" usesScalarValueType="NO"/>
@@ -18,7 +19,7 @@
         <attribute name="idKuis" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="idMurid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="tanggalKuis" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="punyaJawaban" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Jawaban" inverseName="adaDikuis" inverseEntity="Jawaban"/>
+        <relationship name="punyaJawaban" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Jawaban" inverseName="adaDiKuis" inverseEntity="Jawaban"/>
     </entity>
     <entity name="Murid" representedClassName=".Murid" syncable="YES">
         <attribute name="idKelas" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -33,10 +34,10 @@
         <relationship name="punyaKelas" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Kelas" inverseName="diDalemSekolah" inverseEntity="Kelas"/>
     </entity>
     <elements>
+        <element name="Jawaban" positionX="162" positionY="144" width="128" height="118"/>
         <element name="Kelas" positionX="316.56640625" positionY="0.4375" width="128" height="118"/>
         <element name="Kuis" positionX="144" positionY="126" width="128" height="118"/>
         <element name="Murid" positionX="-13.6796875" positionY="139.56640625" width="128" height="118"/>
         <element name="Sekolah" positionX="-45" positionY="0" width="128" height="88"/>
-        <element name="Jawaban" positionX="135" positionY="117" width="128" height="103"/>
     </elements>
 </model>
