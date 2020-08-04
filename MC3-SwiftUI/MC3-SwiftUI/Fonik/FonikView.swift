@@ -118,7 +118,7 @@ struct FonikView: View {
                     HStack{
                         Text("Fonik")
                             .font(.system(size: 34, weight: .bold, design: .default))
-                            .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
+                            .foregroundColor(.black)
                         .accessibility(label: Text("Fonik"))
 
                             .padding()
@@ -135,71 +135,73 @@ struct FonikView: View {
                 .foregroundColor(Color(red: 1, green: 0.81, blue: 0.42))
             ZStack{
                 titleBar()
-                VStack{
+                
+               
                     VStack{
-                        HStack{
-                            ZStack{
-                                    Rectangle()
-                                        .frame(width: screenWidth*4/8, height: screenHeight*4/10, alignment: .center)
-                                    .cornerRadius(50)
-                                    .foregroundColor(Color.white)
-                                
-                                VStack{
-                                    Image(gambar)
-                                        .resizable()
-                                        .frame(width: screenWidth/4, height: screenWidth/4, alignment: .center)
+                        Spacer().frame(height: 90)
+                        ZStack{
+                            Rectangle()
+                                .frame(width: screenWidth*6/8, height: screenHeight*5/10, alignment: .center)
+                            .cornerRadius(50)
+                            .foregroundColor(Color.white)
+                            HStack{
+                                Spacer()
+                                    VStack{
+                                        Image(gambar)
+                                            .resizable()
+                                            .frame(width: screenWidth/4, height: screenWidth/4, alignment: .center)
+                                            .accessibility(label: Text(gambarDesc))
+                                        Text("\(gambarDesc)")
+                                        .font(.system(size: 34, weight: .bold, design: .default))
+                                            .foregroundColor(.black)
                                         .accessibility(label: Text(gambarDesc))
-                                    Text("\(gambarDesc)")
-                                    .font(.system(size: 34, weight: .bold, design: .default))
-                                        .foregroundColor(.black)
-                                    .accessibility(label: Text(gambarDesc))
-                                }
+                                    }.frame(width: screenWidth*3/8, height: screenHeight*5/10, alignment: .center)
+
                                 
-                            }
-                            Spacer()
-                            
-                            ZStack{
+                                Spacer()
                                 Rectangle()
-                                    .frame(width: screenWidth*4/8, height: screenHeight*4/10, alignment: .center)
+                                    .frame(width: 1, height: screenHeight*4/10, alignment: .center)
                                 .cornerRadius(50)
-                                .foregroundColor(Color.white)
-                                VStack{
-                                    Text("\(title)")
-                                    .font(.system(size: 90, weight: .bold, design: .default))
-                                        .multilineTextAlignment(.center)
-                                        .foregroundColor(.black)
-                                    .accessibility(label: Text(title))
-                                        .frame(width: 170)
-                                    Text("'\(subTitle)'")
-                                    .font(.system(size: 25, weight: .medium, design: .default))
-                                        .foregroundColor(.black)
-                                        .frame(width: 170)
-
-                                    .multilineTextAlignment(.center)
-                                    .accessibility(label: Text(subTitle))
-
-                                    Button(action: {
-                                        playFonik(title: self.sound)
-                                    }) {
-                                        Image("sound-button")
-                                            .renderingMode(.original)
-                                    }
-                                    .accessibility(label: Text("Speaker"))
+                                .foregroundColor(Color.black)
+                                Spacer()
                                 
+                                    VStack{
+                                        Text("\(title)")
+                                        .font(.system(size: 90, weight: .bold, design: .default))
+                                            .multilineTextAlignment(.center)
+                                            .foregroundColor(.black)
+                                        .accessibility(label: Text(title))
+                                            .frame(width: 170)
+                                        Text("'\(subTitle)'")
+                                        .font(.system(size: 25, weight: .medium, design: .default))
+                                            .foregroundColor(.black)
+                                            .frame(width: 170)
+
+                                        .multilineTextAlignment(.center)
+                                        .accessibility(label: Text(subTitle))
+
+                                        Button(action: {
+                                            playFonik(title: self.sound)
+                                        }) {
+                                            Image("sound-button")
+                                                .renderingMode(.original)
+                                        }
+                                        .accessibility(label: Text("Speaker"))
                                     
-                                }
-                                //.padding(.trailing, screenWidth*15/100)
+                                        
+                                    }.frame(width: screenWidth*3/8, height: screenHeight*5/10, alignment: .center)
+                                Spacer()
                             }
+                            .frame(width: screenWidth*6/8, height: screenHeight*5/10, alignment: .center)
                         }
+                        Spacer()
                         scrollViewItem()
                             .onAppear{
                                 self.starting()
                         }
-                        .cornerRadius(10)
-                        .frame(width: 150, alignment: .center)
-                        .padding(.leading, 40)
+                        Spacer()
                     }
-                }
+                
                 
             }
         }.onDisappear{

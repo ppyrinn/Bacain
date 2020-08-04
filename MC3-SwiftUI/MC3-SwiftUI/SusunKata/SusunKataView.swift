@@ -52,19 +52,17 @@ struct SusunKataView: View {
             ZStack{
                 Rectangle()
                 .foregroundColor(.white)
-                .frame(width: screenWidth, height: screenHeight*1/10, alignment: .top)
+                .frame(width: screenWidth, height: 74, alignment: .top)
                 VStack{
                     Spacer()
                     HStack{
                         Text("Eksplorasi")
                             .font(.system(size: 34, weight: .bold, design: .default))
-                        .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
+                            .foregroundColor(.black)
                             .padding()
                         .accessibility(label: Text("Eksplorasi"))
-
-                        Spacer()
-                    }.padding(.top)
-                }.frame(width: screenWidth, height: screenHeight*1/10, alignment: .top)
+                    }
+                }.frame(width: screenWidth, height: 74, alignment: .top)
             }
             Spacer()
         }
