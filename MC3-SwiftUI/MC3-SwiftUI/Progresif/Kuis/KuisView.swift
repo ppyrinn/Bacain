@@ -32,11 +32,57 @@ struct KuisView: View {
     @State var finalVerdict = false
     @State var sukuKata1Lvl3 : String = ""
     @State var sukuKata2Lvl3 : String = ""
+    @State var resultEjaanLvl4 : [String] = []
+    @State var tempString = ""
+    @State var limit = 0
+    @State var tempScore : Double = 0
+    @State var score : Int64 = 0
+    
+    @Environment(\.managedObjectContext) var moc
     
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
     
     var soundClassification = SoundClassification()
+    
+//    func setKuisToCoreData() {
+//        let jawaban = Jawaban(context: self.moc)
+//        jawaban.ejaan = self.soal
+//        jawaban.score = self.score
+//        let id = UUID()
+//        jawaban.idJawaban = id
+//        do{
+//            try self.moc.save()
+//            print("Sukses set kuis to core data")
+//        }catch{
+//            print(error)
+//        }
+//    }
+    
+    func calculateScore() {
+        tempScore = 0
+        for answer in answeredEjaan.isCorrect{
+            if answer{
+                tempScore += 1
+            }
+        }
+        tempScore /= Double(answeredEjaan.isCorrect.count)
+        score = Int64(tempScore * 100)
+        print("Score : \(score)")
+//        setKuisToCoreData()
+    }
+    
+    func showResultLevel1(resultString:String, soal:String) {
+        answeredEjaan.sukuKata = ejaan
+        if resultString.uppercased() == soal.uppercased() {
+            answeredEjaan.isCorrect.append(true)
+            finalVerdict = true
+        }else{
+            answeredEjaan.isCorrect.append(false)
+            finalVerdict = false
+        }
+        calculateScore()
+    }
     
     func showResultLevel2(resultString:String, soal:String, soalEjaan : SoalEjaan) {
         if(resultString.uppercased() == soal.uppercased()){
@@ -53,7 +99,6 @@ struct KuisView: View {
                 idxEjaan = 0
                 for alfabet in eja{
                     if(alfabet.uppercased() == resultString[resultString.index(resultString.startIndex, offsetBy: soalIdx)].uppercased()){
-                        print("bener di \(alfabet)")
                         if(idxEjaan == 0){
                             tempCorrect = true
                         }else{
@@ -64,7 +109,6 @@ struct KuisView: View {
                             }
                         }
                     }else{
-                        print("salah di \(alfabet)")
                         if(idxEjaan == 0){
                             tempCorrect = false
                         }else{
@@ -89,6 +133,7 @@ struct KuisView: View {
             }
             finalVerdict = false
         }
+        calculateScore()
     }
     
     func showResultLevel3(resultString:String, soal:String, soalEjaan : SoalEjaan) {
@@ -165,6 +210,42 @@ struct KuisView: View {
             }
             finalVerdict = false
         }
+        calculateScore()
+    }
+    
+    func showResultLevel4(resultString:String, soal:String, soalEjaan : SoalEjaan) {
+        if(resultString.uppercased() == soal.uppercased()){
+            answeredEjaan.sukuKata = ejaan
+            for _ in ejaan{
+                answeredEjaan.isCorrect.append(true)
+            }
+            finalVerdict = true
+        }
+        else {
+            finalVerdict = false
+            
+            tempString = ""
+            resultEjaanLvl4 = []
+            for char in resultString{
+                if char != " "{
+                    tempString.append(char)
+                }else{
+                    resultEjaanLvl4.append(tempString)
+                    tempString = ""
+                }
+            }
+            soalIdx = 0
+            for eja in resultEjaanLvl4{
+                answeredEjaan.sukuKata.append(ejaan[soalIdx])
+                if eja.uppercased() == ejaan[soalIdx].uppercased() {
+                    answeredEjaan.isCorrect.append(true)
+                }else{
+                    answeredEjaan.isCorrect.append(false)
+                }
+                soalIdx += 1
+            }
+        }
+        calculateScore()
     }
     
     var body: some View {
@@ -288,13 +369,13 @@ struct KuisView: View {
                                 self.showEjaan = true
                                 self.isAnswered = true
                                 if self.levelMurid == 1{
-                                    
+                                    self.showResultLevel1(resultString: self.resultString, soal: self.soal)
                                 }else if self.levelMurid == 2{
                                     self.showResultLevel2(resultString: self.resultString, soal: self.soal, soalEjaan: self.soalEjaan)
                                 }else if self.levelMurid == 3{
                                     self.showResultLevel3(resultString: self.resultString, soal: self.soal, soalEjaan: self.soalEjaan)
                                 }else if self.levelMurid == 4{
-                                    
+                                    self.showResultLevel4(resultString: self.resultString, soal: self.soal, soalEjaan: self.soalEjaan)
                                 }
                             }){
                                 Image("stop-button")
@@ -315,16 +396,26 @@ struct KuisView: View {
                             
                         }
                     }else{
-                        Button(action: {
-                            self.isAnswered = false
-                            self.soalEjaan = self.soalKuis.randomizeSoalStruct(level: self.levelMurid)
-                            self.soal = self.soalEjaan.soal
-                            self.ejaan = self.soalEjaan.ejaan.sukuKata
-                            self.showEjaan = false
-                        }){
-                            Image("ejaanselanjutnya-button")
+                        if limit < 3{
+                            Button(action: {
+                                self.isAnswered = false
+                                self.soalEjaan = self.soalKuis.randomizeSoalStruct(level: self.levelMurid)
+                                self.soal = self.soalEjaan.soal
+                                self.ejaan = self.soalEjaan.ejaan.sukuKata
+                                self.showEjaan = false
+                                self.limit += 1
+                            }){
+                                Image("ejaan-selanjutnya")
+                            }
+                            .accessibility(label: Text("Ejaan Selanjutnya"))
+                        }else{
+                            Button(action: {
+                                
+                            }){
+                                Image("selesaikan-kuis")
+                            }
+                            .accessibility(label: Text("Selesai"))
                         }
-                        .accessibility(label: Text("Ejaan Selanjutnya"))
                     }
                     
                     Spacer()
