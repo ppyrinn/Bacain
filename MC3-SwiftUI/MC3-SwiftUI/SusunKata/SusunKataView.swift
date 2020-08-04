@@ -9,13 +9,11 @@
 import SwiftUI
 
 struct SusunKataView: View {
-    @Environment(\.managedObjectContext) var moc
-    @FetchRequest(fetchRequest: Eksplorasi.getAllSukuKata())
-    var listEksplorasi: FetchedResults<Eksplorasi>
-        
     
+    @State private var textField = ""
     
-    @State public var textField = ""
+    @State private var topRow = susunKataTop.shuffled()
+    @State private var bottomRow = susunKataBot.shuffled()
 
     
     let screenWidth = UIScreen.main.bounds.width
@@ -23,29 +21,7 @@ struct SusunKataView: View {
     
     @State var queue: [String] = []
     
-    
-    func generateArr() -> [Eksplorasi]{
-        var arr:[Eksplorasi] = []
-        for i in 0..<listEksplorasi.count{
-            if i < listEksplorasi.count/2{
-               arr.append(listEksplorasi[i])
-            }
-        }
-        return arr
-    }
-    func resetisSelected(){
-        for object in listEksplorasi{
-            
-            object.setValue(false, forKey: "isSelected")
-            do{
-                try self.moc.save()
-            }
-            catch
-            {
-                print(error)
-            }
-        }
-    }
+
     
     fileprivate func titleBar() -> some View {
         return VStack{
@@ -70,53 +46,58 @@ struct SusunKataView: View {
         }
     }
 
-    fileprivate func buttonsukuKata() -> some View{
-        if self.listEksplorasi.isEmpty{
-                for dummy in ArrsusunKata{
-                    let eksplorasi = Eksplorasi(context: self.moc)
-                    eksplorasi.sukuKata = dummy.sukuKata
-                    eksplorasi.isSelected = dummy.isSelected
-                    
-                    do{
-                        try self.moc.save()
-                    }catch{
-                        print(error)
-                    }
-                }
-            }
-        
-        if eksplorasiTop.isEmpty && eksplorasiBot.isEmpty{
-            for i in 0..<self.listEksplorasi.count{
-                if i < self.listEksplorasi.count/2{
-                    eksplorasiTop.append(self.listEksplorasi[i])
-                }else{
-                    eksplorasiBot.append(self.listEksplorasi[i])
-                }
-            }
-        }
-        
-        return VStack{
-                HStack{
-                    ForEach(0..<8) { index in
-                        eksplorasiDetil(eksplorasi: eksplorasiTop[index], eksplorasiView: self)
-                    }
-                }
-                HStack{
-                    ForEach(0..<7) { index in
-                        eksplorasiDetil(eksplorasi: eksplorasiBot[index], eksplorasiView: self)
-                    }
-                }
-        }
-    }
-    
-    
     var body: some View {
         ZStack{
             Rectangle()
                 .foregroundColor(Color(red: 1, green: 0.81, blue: 0.42))
             titleBar()
             VStack{
-                buttonsukuKata()
+                HStack{
+                    ForEach(0..<8) {  index in
+                        Button(action: {
+                            if self.textField == ""{
+                                self.textField += "\(self.topRow[index])"
+
+                            }else{
+                                self.textField += " - \(self.topRow[index])"
+                            }
+                            self.queue.append(self.topRow[index])
+                        }) {
+                            Text(self.topRow[index].capitalized)
+                                .foregroundColor(.black)
+                                .font(.system(size: 28, weight: .bold, design: .default))
+                        }
+                        .accessibility(label: Text(self.topRow[index]))
+                        .buttonStyle(SelectableBtnStyle())
+
+                    }
+                    
+                }
+                .padding()
+                HStack{
+                    ForEach(0..<7) {  index in
+                        Button(action: {
+                            if self.textField == ""{
+                                self.textField += "\(self.bottomRow[index])"
+
+                            }else{
+                                self.textField += " - \(self.bottomRow[index])"
+                            }
+                            self.queue.append(self.bottomRow[index])
+
+                        }) {
+                            Text(self.bottomRow[index].capitalized)
+                                .foregroundColor(.black)
+                            .font(.system(size: 28, weight: .bold, design: .default))
+                        }
+                            .accessibility(label: Text(self.bottomRow[index]))
+
+                            
+                    .buttonStyle(SelectableBtnStyle())
+//                    .padding()
+                    }
+                }
+                .padding()
                 
                 HStack{
                     TextField("", text: $textField)
@@ -134,11 +115,10 @@ struct SusunKataView: View {
                     
                     Button(action: {
                         quePlayer.pause()
-                        eksplorasiTop = eksplorasiTop.shuffled()
-                        eksplorasiBot = eksplorasiBot.shuffled()
+                        self.topRow = susunKataTop.shuffled()
+                        self.bottomRow = susunKataBot.shuffled()
                         self.textField = ""
                         self.queue.removeAll()
-                        self.resetisSelected()
                     }) {
                         Image("reset-button")
                             .renderingMode(.original)
@@ -169,5 +149,25 @@ struct SusunKataView: View {
 struct SusunKataView_Previews: PreviewProvider {
     static var previews: some View {
         SusunKataView()
+    }
+}
+
+struct SelectableBtnStyle: ButtonStyle {
+
+    var isSelected = false
+    let color2 = Color(red: 0.79, green: 0.26, blue: 0.00)
+    
+    func makeBody(configuration: Self.Configuration) -> some View {
+        
+        configuration.label
+            .frame(width: 50, height: 50, alignment: .center)
+            .padding()
+            //.frame(width: 70, height: 70, alignment: .center)
+            .background(configuration.isPressed ?  color2 : Color.white)
+            //.background(isSelected ? color2 : color)
+            //.clipShape(RoundedRectangle(cornerRadius: isSelected ? 16.0 : 0.0))
+            //.overlay(RoundedRectangle(cornerRadius: isSelected ? 16.0 : 0.0).stroke(lineWidth: isSelected ? 2.0 : 0.0).foregroundColor(Color.pink))
+            .animation(.linear(duration: 0.1))
+            .cornerRadius(10)
     }
 }

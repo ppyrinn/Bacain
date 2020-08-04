@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Eksplorasi" representedClassName=".Eksplorasi" syncable="YES">
-        <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="sukuKata" optional="YES" attributeType="String"/>
-    </entity>
-    <entity name="FonikCD" representedClassName=".FonikCD" syncable="YES">
-        <attribute name="alfabet" optional="YES" attributeType="String"/>
-        <attribute name="gambar" optional="YES" attributeType="String"/>
-        <attribute name="gambarDesc" optional="YES" attributeType="String"/>
-        <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="subTitle" optional="YES" attributeType="String"/>
+    <entity name="Jawaban" representedClassName=".Jawaban" syncable="YES">
+        <attribute name="ejaan" optional="YES" attributeType="String"/>
+        <attribute name="idJawaban" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="score" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="adaDikuis" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kuis" inverseName="punyaJawaban" inverseEntity="Kuis"/>
     </entity>
     <entity name="Jawaban" representedClassName=".Jawaban" syncable="YES">
         <attribute name="ejaan" optional="YES" attributeType="String"/>
@@ -25,9 +20,11 @@
         <relationship name="punyaMurid" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Murid" inverseName="diDalemKelas" inverseEntity="Murid"/>
     </entity>
     <entity name="Kuis" representedClassName=".Kuis" syncable="YES">
+        <attribute name="idJawaban" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="idKuis" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="idMurid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="tanggalKuis" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="punyaJawaban" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Jawaban" inverseName="adaDikuis" inverseEntity="Jawaban"/>
     </entity>
     <entity name="Murid" representedClassName=".Murid" syncable="YES">
         <attribute name="idKelas" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -49,5 +46,6 @@
         <element name="Murid" positionX="-13.6796875" positionY="139.56640625" width="128" height="118"/>
         <element name="Sekolah" positionX="-45" positionY="0" width="128" height="88"/>
         <element name="Jawaban" positionX="162" positionY="144" width="128" height="103"/>
+
     </elements>
 </model>
