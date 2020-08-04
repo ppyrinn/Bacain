@@ -22,27 +22,29 @@ struct eksplorasiDetil: View {
         var body: some View {
             ZStack{
                 Image(self.eksplorasi.isSelected ? "fonik-aktif" : "fonik-default")
-                     .onTapGesture {
-                        if self.eksplorasiView.queue.count < 5{
-                            self.eksplorasi.isSelected = true
-                            if self.eksplorasiView.textField == ""{
-                                self.eksplorasiView.textField += "\(self.eksplorasi.sukuKata)"
-        
-                            }else{
-                                self.eksplorasiView.textField += " - \(self.eksplorasi.sukuKata)"
-                            }
-                            self.eksplorasiView.queue.append(self.eksplorasi.sukuKata)
-                        }
-                 }
+                    .resizable()
+                .frame(width: 80, height: 80, alignment: .center)
+
+                     
                 Text("\(eksplorasi.sukuKata)")
-                    .font(.system(size: 28, weight: .medium, design: .default))
+                    .font(.system(size: 35, weight: .bold, design: .default))
                     .foregroundColor(.black)
                     .offset(x: 2)
              }
+                .onTapGesture {
+                    if self.eksplorasiView.queue.count < 5{
+                        self.eksplorasi.isSelected = true
+                        if self.eksplorasiView.textField == ""{
+                            self.eksplorasiView.textField += "\(self.eksplorasi.sukuKata)"
+    
+                        }else{
+                            self.eksplorasiView.textField += " - \(self.eksplorasi.sukuKata)"
+                        }
+                        self.eksplorasiView.queue.append(self.eksplorasi.sukuKata)
+                    }
+                 }
             
             .accessibility(label: Text("\(eksplorasi.sukuKata)"))
-            .frame(width: 44, height: 44, alignment: .center)
-        
     }
 }
 
