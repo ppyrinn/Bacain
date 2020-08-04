@@ -13,8 +13,6 @@ class Murid: NSManagedObject, Identifiable{
     @NSManaged public var idMurid:  UUID
     @NSManaged public var idKelas:  UUID
     @NSManaged public var progress:  Int64
-
-
 }
 
 extension Murid{
