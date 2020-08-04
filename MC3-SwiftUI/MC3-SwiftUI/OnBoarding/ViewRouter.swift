@@ -17,11 +17,10 @@ class ViewRouter: ObservableObject {
         if !UserDefaults.standard.bool(forKey: "didOnboard"){
             UserDefaults.standard.set(true, forKey: "didOnboard")
 
-            currentView = "onboardingView"
+                currentView = "onboardingView"
         }else{
             currentView = "homeView"
         }
-        
     }
     
     @Published var currentView: String

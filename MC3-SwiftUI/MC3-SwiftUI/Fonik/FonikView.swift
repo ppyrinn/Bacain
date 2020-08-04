@@ -9,101 +9,49 @@
 import SwiftUI
 
 struct FonikView: View {
-    @Environment(\.managedObjectContext) var moc
-    @FetchRequest(fetchRequest: FonikCD.getAllFonik())
-    var listFonik: FetchedResults<FonikCD>
+    
+    @State var buttonStyle = SelectableButtonStyle()
+
  
-    @State public var gambar = "anggur"
-    @State public var gambarDesc = "Anggur"
-    @State public var title = "Aa"
-    @State public var subTitle = "a..a..a"
-    @State public var sound = "A"
+    @State private var gambar = "anggur"
+    @State private var gambarDesc = "Anggur"
+    @State private var title = "Aa"
+    @State private var subTitle = "a..a..a"
+    @State private var sound = "A"
     
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
     @State private var pressed = false
-        
-    func resetisSelected(){
-        for object in listFonik{
-            
-            object.setValue(false, forKey: "isSelected")
-            do{
-                try self.moc.save()
-            }
-            catch
-            {
-                print(error)
-            }
-        }
-    }
+
     
-    func starting(){
-        let object = listFonik.first
-        object?.setValue(true, forKey: "isSelected")
-            do{
-                try self.moc.save()
-            }
-            catch
-            {
-                print(error)
-            }
-        gambar = "anggur"
-        gambarDesc = "Anggur"
-        title = "Aa"
-        subTitle = "a..a..a"
-        sound = "A"
-    }
-    
+
+
+
 
     fileprivate func scrollViewItem() -> some View {
-        if listFonik.isEmpty{
-            for dummy in listOfFonik{
-                let fonikCD = FonikCD(context: self.moc)
-                fonikCD.alfabet = dummy.alfabet
-                fonikCD.gambar = dummy.gambar
-                fonikCD.gambarDesc = dummy.gambarDesc
-                fonikCD.subTitle = dummy.subTitle
-                fonikCD.isSelected = dummy.isSelected
+        return ForEach(listOfFonik, id: \.alfabet){ fonik in
+            Button(action: {
+                player.stop()
+                self.buttonStyle.isSelected.toggle()
+                self.gambarDesc = "\(fonik.gambarDesc)"
+                self.gambar = "\(fonik.gambar)"
+                self.title = "\(fonik.alfabet + fonik.alfabet.lowercased())"
+                self.subTitle = fonik.subTitle
+                self.sound = "\(fonik.alfabet)"
+ 
+            }) {
+               
+                Text("\(fonik.alfabet)")
+                    .font(.system(size: 28, weight: .medium, design: .default))
+                    .foregroundColor(.black)
+                    
                 
-                do{
-                    try self.moc.save()
-                }catch{
-                    print(error)
-                }
             }
+            .accessibility(label: Text("\(fonik.alfabet)"))
+            .frame(width: 60, height: 60, alignment: .center)
+            .buttonStyle(self.buttonStyle)
         }
         
-        var fonikAwal: [FonikCD] = []
-        var fonikTengah: [FonikCD] = []
-        var fonikAkhir: [FonikCD] = []
-
-        for i in 0..<listFonik.count{
-            if i < 11{
-                fonikAwal.append(listFonik[i])
-            }else if i < 20{
-                fonikTengah.append(listFonik[i])
-            }else{
-                fonikAkhir.append(listFonik[i])
-            }
-        }
-        return VStack{
-            HStack{
-                ForEach(fonikAwal, id: \.self){ fonik in
-                    buttonDetail(fonik: fonik, fonikView: self)
-                }
-            }
-            HStack{
-                ForEach(fonikTengah, id: \.self){ fonik in
-                    buttonDetail(fonik: fonik, fonikView: self)
-                }
-            }
-            HStack{
-                ForEach(fonikAkhir, id: \.self){ fonik in
-                    buttonDetail(fonik: fonik, fonikView: self)
-                }
-            }
-        }
-    
 
     }
     
@@ -112,7 +60,7 @@ struct FonikView: View {
             ZStack{
                 Rectangle()
                 .foregroundColor(.white)
-                .frame(width: screenWidth, height: 74, alignment: .top)
+                .frame(width: screenWidth, height: screenHeight*10/100, alignment: .top)
                 VStack{
                     Spacer()
                     HStack{
@@ -122,8 +70,9 @@ struct FonikView: View {
                         .accessibility(label: Text("Fonik"))
 
                             .padding()
-                    }
-                }.frame(width: screenWidth, height: 74, alignment: .top)
+                        Spacer()
+                    }.padding(.top)
+                }.frame(width: screenWidth, height: screenHeight*10/100, alignment: .top)
             }
             Spacer()
         }
@@ -135,76 +84,68 @@ struct FonikView: View {
                 .foregroundColor(Color(red: 1, green: 0.81, blue: 0.42))
             ZStack{
                 titleBar()
-                VStack{
-                    VStack{
-                        HStack{
-                            ZStack{
-                                    Rectangle()
-                                        .frame(width: screenWidth*4/8, height: screenHeight*4/10, alignment: .center)
-                                    .cornerRadius(50)
-                                    .foregroundColor(Color.white)
-                                
-                                VStack{
-                                    Image(gambar)
-                                        .resizable()
-                                        .frame(width: screenWidth/4, height: screenWidth/4, alignment: .center)
-                                        .accessibility(label: Text(gambarDesc))
-                                    Text("\(gambarDesc)")
-                                    .font(.system(size: 34, weight: .bold, design: .default))
-                                        .foregroundColor(.black)
-                                    .accessibility(label: Text(gambarDesc))
-                                }
-                                
-                            }
+                HStack{
+                        ScrollView() {
+                            scrollViewItem()
+                        }
+                            .frame(width: 80, height: screenHeight/2, alignment: .center)
+
+                        .background(Color.white)
+                            .cornerRadius(10)
+                        .padding(.leading, screenWidth*5/100)
+
+                        Spacer()
+                    ZStack{
+                        VStack{
+                            Rectangle()
+                                .frame(width: screenWidth*4/9, height: screenHeight*8/10, alignment: .center)
+                            .cornerRadius(50)
+                            .foregroundColor(Color.white)
                             Spacer()
-                            
-                            ZStack{
-                                Rectangle()
-                                    .frame(width: screenWidth*4/8, height: screenHeight*4/10, alignment: .center)
-                                .cornerRadius(50)
-                                .foregroundColor(Color.white)
-                                VStack{
-                                    Text("\(title)")
-                                    .font(.system(size: 90, weight: .bold, design: .default))
-                                        .multilineTextAlignment(.center)
-                                        .foregroundColor(.black)
-                                    .accessibility(label: Text(title))
-                                        .frame(width: 170)
-                                    Text("'\(subTitle)'")
-                                    .font(.system(size: 25, weight: .medium, design: .default))
-                                        .foregroundColor(.black)
-                                        .frame(width: 170)
-
-                                    .multilineTextAlignment(.center)
-                                    .accessibility(label: Text(subTitle))
-
-                                    Button(action: {
-                                        playFonik(title: self.sound)
-                                    }) {
-                                        Image("sound-button")
-                                            .renderingMode(.original)
-                                    }
-                                    .accessibility(label: Text("Speaker"))
-                                
-                                    
-                                }
-                                //.padding(.trailing, screenWidth*15/100)
-                            }
                         }
-                        scrollViewItem()
-                            .onAppear{
-                                self.starting()
+                        VStack{
+                            Image(gambar)
+                                .resizable()
+                                .frame(width: screenWidth/4, height: screenWidth/4, alignment: .center)
+                                .accessibility(label: Text(gambarDesc))
+                            Text("\(gambarDesc)")
+                            .font(.system(size: 34, weight: .bold, design: .default))
+                                .foregroundColor(.black)
+                            .accessibility(label: Text(gambarDesc))
                         }
-                        .cornerRadius(10)
-                        .frame(width: 150, alignment: .center)
-                        .padding(.leading, 40)
+                        
                     }
+                    Spacer()
+                    VStack{
+                        Text("\(title)")
+                        .font(.system(size: 90, weight: .bold, design: .default))
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.black)
+                        .accessibility(label: Text(title))
+                            .frame(width: 170)
+                        Text("'\(subTitle)'")
+                        .font(.system(size: 25, weight: .medium, design: .default))
+                            .foregroundColor(.black)
+                            .frame(width: 170)
+
+                        .multilineTextAlignment(.center)
+                        .accessibility(label: Text(subTitle))
+
+                        Button(action: {
+                            playFonik(title: self.sound)
+                        }) {
+                            Image("sound-button")
+                                .renderingMode(.original)
+                        }
+                        .accessibility(label: Text("Speaker"))
+                    
+                        
+                    }//.frame(width: 120)
+                    .padding(.trailing, screenWidth*15/100)
                 }
-                
             }
         }.onDisappear{
             player.stop()
-            self.resetisSelected()
         }
     
     }
@@ -225,7 +166,8 @@ struct SelectableButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
         
         configuration.label
-            .frame(width: 44, height: 44, alignment: .center)
+            .frame(width: 25, height: 25, alignment: .center)
+            .padding()
             //.frame(width: 70, height: 70, alignment: .center)
             .background(configuration.isPressed ?  color2 : color)
             //.background(isSelected ? color2 : color)
