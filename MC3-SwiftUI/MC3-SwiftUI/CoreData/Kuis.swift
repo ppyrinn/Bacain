@@ -11,9 +11,8 @@ import CoreData
 class Kuis: NSManagedObject, Identifiable{
     @NSManaged public var idMurid:  UUID
     @NSManaged public var idKuis:  UUID
-    @NSManaged public var levelSoal:  Int64
+    @NSManaged public var idJawaban:  UUID
     @NSManaged public var tanggalKuis: Date
-    @NSManaged public var nilai: Int64
 
     
 }
