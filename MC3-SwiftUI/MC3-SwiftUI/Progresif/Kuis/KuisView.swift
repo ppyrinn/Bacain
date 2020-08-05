@@ -45,19 +45,21 @@ struct KuisView: View {
     
     var soundClassification = SoundClassification()
     
-//    func setKuisToCoreData() {
-//        let jawaban = Jawaban(context: self.moc)
-//        jawaban.ejaan = self.soal
-//        jawaban.score = self.score
-//        let id = UUID()
-//        jawaban.idJawaban = id
-//        do{
-//            try self.moc.save()
-//            print("Sukses set kuis to core data")
-//        }catch{
-//            print(error)
-//        }
-//    }
+    func setKuisToCoreData() {
+        let jawaban = Jawaban(context: self.moc)
+        jawaban.ejaan = self.soal
+        jawaban.score = self.score
+        let id = UUID()
+        jawaban.idJawaban = id
+        let idKuis = UUID()
+        jawaban.idKuis = idKuis
+        do{
+            try self.moc.save()
+            print("Sukses set kuis to core data")
+        }catch{
+            print(error)
+        }
+    }
     
     func calculateScore() {
         tempScore = 0
@@ -69,7 +71,7 @@ struct KuisView: View {
         tempScore /= Double(answeredEjaan.isCorrect.count)
         score = Int64(tempScore * 100)
         print("Score : \(score)")
-//        setKuisToCoreData()
+        setKuisToCoreData()
     }
     
     func showResultLevel1(resultString:String, soal:String) {
