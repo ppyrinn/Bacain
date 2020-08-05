@@ -22,21 +22,22 @@ struct buttonDetail: View {
     var body: some View {
         ZStack{
             Image(self.fonik.isSelected ? "fonik-aktif" : "fonik-default")
-                 .onTapGesture {
-                    self.fonikView.resetisSelected()
-                     player.stop()
-                    self.fonik.isSelected = true
-                    self.fonikView.gambar = self.fonik.gambar
-                    self.fonikView.gambarDesc = "\(self.fonik.gambarDesc)"
-                    self.fonikView.gambar = "\(self.fonik.gambar)"
-                    self.fonikView.title = "\(self.fonik.alfabet + self.fonik.alfabet.lowercased())"
-                    self.fonikView.subTitle = self.fonik.subTitle
-                    self.fonikView.sound = "\(self.fonik.alfabet)"
-             }
+                .resizable()
+                .frame(width: 50, height: 50, alignment: .center)
             Text("\(fonik.alfabet)")
-                .font(.system(size: 28, weight: .medium, design: .default))
+                .font(.system(size: 28, weight: .bold, design: .default))
                 .foregroundColor(.black)
                 .offset(x: 2)
+         }.onTapGesture {
+                self.fonikView.resetisSelected()
+                 player.stop()
+                self.fonik.isSelected = true
+                self.fonikView.gambar = self.fonik.gambar
+                self.fonikView.gambarDesc = "\(self.fonik.gambarDesc)"
+                self.fonikView.gambar = "\(self.fonik.gambar)"
+                self.fonikView.title = "\(self.fonik.alfabet + self.fonik.alfabet.lowercased())"
+                self.fonikView.subTitle = self.fonik.subTitle
+                self.fonikView.sound = "\(self.fonik.alfabet)"
          }
         
         .accessibility(label: Text("\(fonik.alfabet)"))
