@@ -32,22 +32,27 @@ func music(queue: [String]){
         guard let path = Bundle.main.path(forResource: title, ofType: "m4a") else {return}
         let item = AVPlayerItem(url: URL(fileURLWithPath: path))
         itemQue.append(item)
+        
+        if quePlayer.currentItem == item{
+            
+        }
     }
-   
+    
     quePlayer = AVQueuePlayer(items: itemQue)
     quePlayer.play()
     
+    
 }
-// Delegate method for AVAudioPlayerDelegate which is called every time when song finished.
-//func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool){
-//
-//    if flag {
-//        counter += 1
-//    }
-//
-//    if ((counter + 1) == song.count) {
-//        counter = 0
-//    }
-//
-//    music()
-//}
+
+func checkIndex(queue: [String]) -> Int{
+    for i in 0..<queue.count{
+        guard let path = Bundle.main.path(forResource: queue[i], ofType: "m4a") else {return 0}
+        let item = AVPlayerItem(url: URL(fileURLWithPath: path))
+        //itemQue.append(item)
+        
+        if quePlayer.currentItem == item{
+            return i
+        }
+    }
+    return 0
+}

@@ -89,17 +89,17 @@ struct FonikView: View {
         return VStack{
             HStack{
                 ForEach(fonikAwal, id: \.self){ fonik in
-                    buttonDetail(fonik: fonik, fonikView: self)
+                    buttonDetail(fonik: fonik, fonikView: self).padding(5)
                 }
             }
             HStack{
                 ForEach(fonikTengah, id: \.self){ fonik in
-                    buttonDetail(fonik: fonik, fonikView: self)
+                    buttonDetail(fonik: fonik, fonikView: self).padding(5)
                 }
             }
             HStack{
                 ForEach(fonikAkhir, id: \.self){ fonik in
-                    buttonDetail(fonik: fonik, fonikView: self)
+                    buttonDetail(fonik: fonik, fonikView: self).padding(5)
                 }
             }
         }
@@ -138,68 +138,69 @@ struct FonikView: View {
                 
                
                     VStack{
-                        Spacer().frame(height: 90)
-                        ZStack{
-                            Rectangle()
-                                .frame(width: screenWidth*6/8, height: screenHeight*5/10, alignment: .center)
-                            .cornerRadius(50)
-                            .foregroundColor(Color.white)
-                            HStack{
-                                Spacer()
-                                    VStack{
-                                        Image(gambar)
-                                            .resizable()
-                                            .frame(width: screenWidth/4, height: screenWidth/4, alignment: .center)
-                                            .accessibility(label: Text(gambarDesc))
-                                        Text("\(gambarDesc)")
-                                        .font(.system(size: 34, weight: .bold, design: .default))
-                                            .foregroundColor(.black)
-                                        .accessibility(label: Text(gambarDesc))
-                                    }.frame(width: screenWidth*3/8, height: screenHeight*5/10, alignment: .center)
-
-                                
-                                Spacer()
+                        Spacer().frame(height: 74)
+                        VStack{
+                            Spacer()
+                            ZStack{
                                 Rectangle()
-                                    .frame(width: 1, height: screenHeight*4/10, alignment: .center)
+                                    .frame(width: screenWidth*6/8, height: screenHeight*5/10, alignment: .center)
                                 .cornerRadius(50)
-                                .foregroundColor(Color.black)
-                                Spacer()
-                                
-                                    VStack{
-                                        Text("\(title)")
-                                        .font(.system(size: 90, weight: .bold, design: .default))
-                                            .multilineTextAlignment(.center)
-                                            .foregroundColor(.black)
-                                        .accessibility(label: Text(title))
-                                            .frame(width: 170)
-                                        Text("'\(subTitle)'")
-                                        .font(.system(size: 25, weight: .medium, design: .default))
-                                            .foregroundColor(.black)
-                                            .frame(width: 170)
+                                .foregroundColor(Color.white)
+                                HStack{
+                                    Spacer()
+                                        VStack{
+                                            Image(gambar)
+                                                .resizable()
+                                                .frame(width: screenWidth/4, height: screenWidth/4, alignment: .center)
+                                                .accessibility(label: Text(gambarDesc))
+                                            Text("\(gambarDesc)")
+                                            .font(.system(size: 34, weight: .bold, design: .default))
+                                                .foregroundColor(.black)
+                                            .accessibility(label: Text(gambarDesc))
+                                        }.frame(width: screenWidth*3/8, height: screenHeight*5/10, alignment: .center)
 
-                                        .multilineTextAlignment(.center)
-                                        .accessibility(label: Text(subTitle))
-
-                                        Button(action: {
-                                            playFonik(title: self.sound)
-                                        }) {
-                                            Image("sound-button")
-                                                .renderingMode(.original)
-                                        }
-                                        .accessibility(label: Text("Speaker"))
                                     
+                                    Spacer()
+                                    Rectangle()
+                                        .frame(width: 1, height: screenHeight*4/10, alignment: .center)
+                                    .cornerRadius(50)
+                                    .foregroundColor(Color.black)
+                                    Spacer()
+                                    
+                                        VStack{
+                                            Text("\(title)")
+                                            .font(.system(size: 90, weight: .bold, design: .default))
+                                                .multilineTextAlignment(.center)
+                                                .foregroundColor(.black)
+                                            .accessibility(label: Text(title))
+                                            Text("'\(subTitle)'")
+                                            .font(.system(size: 25, weight: .medium, design: .default))
+                                                .foregroundColor(.black)
+
+                                            .multilineTextAlignment(.center)
+                                            .accessibility(label: Text(subTitle))
+
+                                            Button(action: {
+                                                playFonik(title: self.sound)
+                                            }) {
+                                                Image("sound-button")
+                                                    .renderingMode(.original)
+                                            }
+                                            .accessibility(label: Text("Speaker"))
                                         
-                                    }.frame(width: screenWidth*3/8, height: screenHeight*5/10, alignment: .center)
-                                Spacer()
+                                            
+                                        }.frame(width: screenWidth*3/8, height: screenHeight*5/10, alignment: .center)
+                                    Spacer()
+                                }
+                                .frame(width: screenWidth*6/8, height: screenHeight*5/10, alignment: .center)
                             }
-                            .frame(width: screenWidth*6/8, height: screenHeight*5/10, alignment: .center)
+                            Spacer()
+                            scrollViewItem()
+                                .onAppear{
+                                    self.starting()
+                            }
+                            Spacer()
                         }
-                        Spacer()
-                        scrollViewItem()
-                            .onAppear{
-                                self.starting()
-                        }
-                        Spacer()
                     }
                 
                 

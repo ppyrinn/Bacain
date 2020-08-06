@@ -21,9 +21,9 @@ struct eksplorasiDetil: View {
         
         var body: some View {
             ZStack{
-                Image(self.eksplorasi.isSelected ? "fonik-aktif" : "fonik-default")
+                Image(self.eksplorasi.isSelected ? "eksplorasi-aktif" : "eksplorasi-default")
                     .resizable()
-                .frame(width: 80, height: 80, alignment: .center)
+                .frame(width: 86, height: 86, alignment: .center)
 
                      
                 Text("\(eksplorasi.sukuKata)")
@@ -32,7 +32,7 @@ struct eksplorasiDetil: View {
                     .offset(x: 2)
              }
                 .onTapGesture {
-                    if self.eksplorasiView.queue.count < 5{
+                    if self.eksplorasiView.queue.count < 6{
                         self.eksplorasi.isSelected = true
                         if self.eksplorasiView.textField == ""{
                             self.eksplorasiView.textField += "\(self.eksplorasi.sukuKata)"

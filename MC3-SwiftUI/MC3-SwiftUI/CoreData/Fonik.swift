@@ -63,7 +63,7 @@ var ArrsusunKata: [susunKata] = [
     susunKata(sukuKata: "Sa", isSelected: false), susunKata(sukuKata: "Pu", isSelected: false), susunKata(sukuKata: "Ba", isSelected: false),
     susunKata(sukuKata: "Gi", isSelected: false), susunKata(sukuKata: "Ro", isSelected: false), susunKata(sukuKata: "To", isSelected: false),
     susunKata(sukuKata: "Ra", isSelected: false), susunKata(sukuKata: "Du", isSelected: false), susunKata(sukuKata: "Li", isSelected: false),
-    susunKata(sukuKata: "Zi", isSelected: false)
+    susunKata(sukuKata: "Ze", isSelected: false)
 ]
 
 var eksplorasiTop: [Eksplorasi] = []
