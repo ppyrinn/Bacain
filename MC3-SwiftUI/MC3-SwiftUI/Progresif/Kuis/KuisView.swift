@@ -12,11 +12,13 @@ import Speech
 
 
 struct KuisView: View {
-//    @Binding var showKuisView: Bool
+//    var delegate: DismissRequestDelegate?
+    @Environment(\.presentationMode) var presentationMode
     
     var namaMurid = "Agus"
     var levelMurid = 2
     var soalKuis = SoalKuis()
+    @State var daftarMurid : [TypeMurid]
     
     @State var soalEjaan = SoalEjaan()
     @State var resultString : String = ""
@@ -262,7 +264,7 @@ struct KuisView: View {
                 VStack{
                     HStack{
                         Button(action: {
-//                            self.showKuisView = false
+                            //                            self.showKuisView = false
                         }) {
                             HStack{
                                 Image(systemName: "chevron.left")
@@ -270,17 +272,22 @@ struct KuisView: View {
                                 Text("Keluar Kuis")
                                     .font(.custom("SF Compact Text", size: 17))
                                     .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
+                                .onTapGesture {
+//                                    self.delegate?.requestDismiss()
+                                    self.presentationMode.wrappedValue.dismiss()
+                                }
+                                    
                             }
                             .accessibility(label: Text("Keluar kuis"))
                             
                         }
                         Spacer()
-                        Text(namaMurid)
+                        Text(daftarMurid[0].namaMurid)
                             .fontWeight(.bold)
                             .font(.system(size: 17))
                             .font(.custom("SF Compact Text", size: 17))
                             .foregroundColor(.black)
-                        .accessibility(label: Text(namaMurid))
+                            .accessibility(label: Text(namaMurid))
                         Spacer()
                         Button(action: {
                             //
@@ -291,7 +298,7 @@ struct KuisView: View {
                                     .fontWeight(.bold)
                                     .font(.system(size: 17))
                                     .font(.custom("SF Compact Text", size: 17))
-                                .accessibility(label: Text("Lewati murid"))
+                                    .accessibility(label: Text("Lewati murid"))
                             }
                             
                         }
@@ -330,16 +337,16 @@ struct KuisView: View {
                                 ForEach(answeredEjaan.sukuKata.indices){ i in
                                     if(self.answeredEjaan.isCorrect[i]){
                                         Text("\(self.answeredEjaan.sukuKata[i]) •")
-                                        .font(.system(size: 28))
-                                        .font(.custom("SF Compact Text", size: 28))
-                                        .foregroundColor(.black)
-                                        .accessibility(label: Text(self.soal.lowercased()))
+                                            .font(.system(size: 28))
+                                            .font(.custom("SF Compact Text", size: 28))
+                                            .foregroundColor(.black)
+                                            .accessibility(label: Text(self.soal.lowercased()))
                                     }else{
                                         Text("\(self.answeredEjaan.sukuKata[i]) •")
-                                        .font(.system(size: 28))
-                                        .font(.custom("SF Compact Text", size: 28))
-                                        .foregroundColor(.red)
-                                        .accessibility(label: Text(self.soal.lowercased()))
+                                            .font(.system(size: 28))
+                                            .font(.custom("SF Compact Text", size: 28))
+                                            .foregroundColor(.red)
+                                            .accessibility(label: Text(self.soal.lowercased()))
                                     }
                                 }
                                 Image("ceklis").resizable()
@@ -428,14 +435,14 @@ struct KuisView: View {
 }
 
 
-struct KuisView_Previews: PreviewProvider {
-    @State static var showKuisView = true
-    
-    static var previews: some View {
-//        KuisView(showKuisView: $showKuisView)
-        KuisView()
-    }
-}
+//struct KuisView_Previews: PreviewProvider {
+//    @State static var showKuisView = true
+//
+//    static var previews: some View {
+//        //        KuisView(showKuisView: $showKuisView)
+////        KuisView()
+//    }
+//}
 
 extension KuisView: SoundClassifierDelegate {
     func displayPredictionResult(identifier: String, confidence: Double) {

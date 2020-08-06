@@ -13,6 +13,7 @@ class Jawaban: NSManagedObject, Identifiable{
     @NSManaged public var idKuis:  UUID
     @NSManaged public var ejaan: String
     @NSManaged public var score: Int64
+    @NSManaged public var idMuird : UUID
 }
 
 

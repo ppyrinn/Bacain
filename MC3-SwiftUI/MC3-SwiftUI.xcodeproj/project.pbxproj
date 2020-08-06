@@ -103,6 +103,11 @@
 		F4D5CEED24C1471900C6B104 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4D5CEEC24C1471900C6B104 /* Assets.xcassets */; };
 		F4D5CEF024C1471900C6B104 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4D5CEEF24C1471900C6B104 /* Preview Assets.xcassets */; };
 		F4D5CEF324C1471900C6B104 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4D5CEF124C1471900C6B104 /* LaunchScreen.storyboard */; };
+		F4ECDBE924DBB173002ECC2D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ECDBE324DBB173002ECC2D /* BaseViewController.swift */; };
+		F4ECDBEA24DBB173002ECC2D /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ECDBE424DBB173002ECC2D /* ModalViewController.swift */; };
+		F4ECDBEB24DBB173002ECC2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4ECDBE524DBB173002ECC2D /* Main.storyboard */; };
+		F4ECDBF124DBB180002ECC2D /* PresentationRequestDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ECDBEF24DBB180002ECC2D /* PresentationRequestDelegate.swift */; };
+		F4ECDBF224DBB180002ECC2D /* DismissRequestDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ECDBF024DBB180002ECC2D /* DismissRequestDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -204,6 +209,11 @@
 		F4D5CEEF24C1471900C6B104 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F4D5CEF224C1471900C6B104 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F4D5CEF424C1471900C6B104 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4ECDBE324DBB173002ECC2D /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		F4ECDBE424DBB173002ECC2D /* ModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
+		F4ECDBE624DBB173002ECC2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F4ECDBEF24DBB180002ECC2D /* PresentationRequestDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationRequestDelegate.swift; sourceTree = "<group>"; };
+		F4ECDBF024DBB180002ECC2D /* DismissRequestDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissRequestDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -335,6 +345,8 @@
 		4BDCB7EB24C2211A00C6A6B6 /* Progresif */ = {
 			isa = PBXGroup;
 			children = (
+				F4ECDBEE24DBB180002ECC2D /* Combine */,
+				F4ECDBE224DBB173002ECC2D /* UIKit */,
 				F424198324CFDBFA000F1CA4 /* Kuis */,
 				F4D5CEEA24C1471600C6B104 /* ProgresifView.swift */,
 				4855FB4C24C6E7690040C09F /* SearchBar.swift */,
@@ -416,6 +428,25 @@
 				F4D5CEEF24C1471900C6B104 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F4ECDBE224DBB173002ECC2D /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				F4ECDBE324DBB173002ECC2D /* BaseViewController.swift */,
+				F4ECDBE424DBB173002ECC2D /* ModalViewController.swift */,
+				F4ECDBE524DBB173002ECC2D /* Main.storyboard */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		F4ECDBEE24DBB180002ECC2D /* Combine */ = {
+			isa = PBXGroup;
+			children = (
+				F4ECDBEF24DBB180002ECC2D /* PresentationRequestDelegate.swift */,
+				F4ECDBF024DBB180002ECC2D /* DismissRequestDelegate.swift */,
+			);
+			path = Combine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -526,6 +557,7 @@
 				4BB7EE0D24C95E03007087CE /* B.m4a in Resources */,
 				4B603CC424CB08B500A49EFE /* Ma.m4a in Resources */,
 				4B603CD424CB08B500A49EFE /* Ri.m4a in Resources */,
+				F4ECDBEB24DBB173002ECC2D /* Main.storyboard in Resources */,
 				4B603CC824CB08B500A49EFE /* Zo.m4a in Resources */,
 				4BB7EE1024C95E03007087CE /* C.m4a in Resources */,
 				4BB7EE0624C95E03007087CE /* S.m4a in Resources */,
@@ -557,6 +589,7 @@
 				4B132F0624D9C8BD0042A9C4 /* Jawaban.swift in Sources */,
 				F4D5CEE424C1471600C6B104 /* AppDelegate.swift in Sources */,
 				4855FB4D24C6E7690040C09F /* SearchBar.swift in Sources */,
+				F4ECDBE924DBB173002ECC2D /* BaseViewController.swift in Sources */,
 				4B6F45BE24CEAA4C00BD17EF /* SoundClassification.swift in Sources */,
 				4BDCB7E224C1F50F00C6A6B6 /* pageDetail.swift in Sources */,
 				4BDCB7E824C2209800C6A6B6 /* SusunKataView.swift in Sources */,
@@ -574,11 +607,14 @@
 				4837DF7324D861CF003EE917 /* SearchBarMurid.swift in Sources */,
 				4BDCB7E024C1B9B900C6A6B6 /* Sekolah.swift in Sources */,
 				4B6F45C224CEEF8900BD17EF /* ViewRouter.swift in Sources */,
+				F4ECDBEA24DBB173002ECC2D /* ModalViewController.swift in Sources */,
 				4803A4ED24D7C6780010BC9D /* ProgressBar.swift in Sources */,
 				4B132EF024D804F50042A9C4 /* FonikCD.swift in Sources */,
 				4B68056C24C8A63B000261E6 /* Murid.swift in Sources */,
+				F4ECDBF124DBB180002ECC2D /* PresentationRequestDelegate.swift in Sources */,
 				4B6F45BD24CEAA4C00BD17EF /* ResultsObserver.swift in Sources */,
 				F4D5CEE924C1471600C6B104 /* MC3_SwiftUI.xcdatamodeld in Sources */,
+				F4ECDBF224DBB180002ECC2D /* DismissRequestDelegate.swift in Sources */,
 				4B6F45C024CEAA8200BD17EF /* KuisView.swift in Sources */,
 				4BB7EDDA24C95643007087CE /* audioPlayer.swift in Sources */,
 				4BDCB7F324C44AFA00C6A6B6 /* Fonik.swift in Sources */,
@@ -597,6 +633,14 @@
 				F4D5CEF224C1471900C6B104 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		F4ECDBE524DBB173002ECC2D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4ECDBE624DBB173002ECC2D /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -18,12 +18,16 @@ struct DetailStudent: View {
     @State var Grid : [Int] = []
     @State var namaMuridFilter: String = ""
     @State private var isEditing = false
+    
+    var idKelas : UUID
+
 
     var kelas: Type
     var fetchRequest: FetchRequest<Murid>
     
     
     init(data: Type){
+        self.idKelas = data.idKelas
         fetchRequest = FetchRequest<Murid>(entity: Murid.entity(), sortDescriptors: [], predicate: NSPredicate(format: "idKelas = %@", data.idKelas.uuidString))
         self.kelas = data
     }
@@ -43,6 +47,7 @@ struct DetailStudent: View {
             for murid in listMurid {
                 data.append(TypeMurid(idMurid: murid.idMurid, namaMurid: murid.namaMurid, progress: murid.progress))
             }
+
     }
     
 
@@ -182,6 +187,8 @@ struct Main : View {
 
     @Binding var data : [TypeMurid]
     @Binding var Grid : [Int]
+    
+    @State var isPresented = false
     var body: some View{
         VStack{
             if !self.Grid.isEmpty {
@@ -211,6 +218,18 @@ struct Main : View {
                 }
                 .padding()
                 .background(Color(red: 1.00, green: 0.81, blue: 0.42))
+                Button(action: {
+                    self.isPresented.toggle()
+                }){
+                    Image("mulaikuis-button")
+                }
+                .accessibility(label: Text("Mulai Kuis"))
+                .padding(.bottom,80)
+                .background(Color(red: 1.00, green: 0.81, blue: 0.42))
+                .sheet(isPresented: $isPresented){
+                    KuisView(daftarMurid : self.data)
+//                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                }
             }
 
 
