@@ -38,7 +38,7 @@ struct buttonDetail: View {
                 self.fonikView.title = "\(self.fonik.alfabet + self.fonik.alfabet.lowercased())"
                 self.fonikView.subTitle = self.fonik.subTitle
                 self.fonikView.sound = "\(self.fonik.alfabet)"
-         }
+            }
         
         .accessibility(label: Text("\(fonik.alfabet)"))
         .frame(width: 44, height: 44, alignment: .center)

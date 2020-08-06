@@ -16,12 +16,18 @@ struct SusunKataView: View {
     
     
     @State public var textField = ""
+    
+    @State private var fc = Color.red
+    @State private var delay: Double = 3
+
 
     
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
     
     @State var queue: [String] = []
+    @State var highlight: [Text] = []
+
     
     
     func generateArr() -> [Eksplorasi]{
@@ -35,7 +41,6 @@ struct SusunKataView: View {
     }
     func resetisSelected(){
         for object in listEksplorasi{
-            
             object.setValue(false, forKey: "isSelected")
             do{
                 try self.moc.save()
@@ -96,17 +101,35 @@ struct SusunKataView: View {
         return VStack{
                 HStack{
                     ForEach(0..<8) { index in
-                        eksplorasiDetil(eksplorasi: eksplorasiTop[index], eksplorasiView: self)
+                        eksplorasiDetil(eksplorasi: eksplorasiTop[index], eksplorasiView: self).padding(5)
                     }
                 }
                 HStack{
                     ForEach(0..<7) { index in
-                        eksplorasiDetil(eksplorasi: eksplorasiBot[index], eksplorasiView: self)
+                        eksplorasiDetil(eksplorasi: eksplorasiBot[index], eksplorasiView: self).padding(5)
                     }
                 }
         }
     }
     
+    
+    fileprivate func highlightWord() ->  some View {
+        
+        return ForEach(0..<highlight.count, id :\.self){ i in
+    
+                self.highlight[i]
+                .foregroundColor(self.fc)
+
+//            Text("\(self.highlight[i]) •")
+                .font(.system(size: 28))
+                .font(.custom("SF Compact Text", size: 28))
+                .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
+//                .foregroundColor(Color.red)
+//                .animation(Animation.easeIn(duration: 2).delay(self.delay*Double(i)))
+
+                
+        }
+    }
     
     var body: some View {
         ZStack{
@@ -114,48 +137,65 @@ struct SusunKataView: View {
                 .foregroundColor(Color(red: 1, green: 0.81, blue: 0.42))
             titleBar()
             VStack{
-                buttonsukuKata()
-                
-                HStack{
-                    TextField("", text: $textField)
-                        .foregroundColor(.black)
-                        .accessibility(label: Text(textField))
+                Spacer()
+                    .frame(height: 74)
+                VStack{
+                    Spacer()
+                    buttonsukuKata()
+                    Spacer()
+                    HStack{
+                        TextField("", text: $textField)
+                            .foregroundColor(.black)
+                            .accessibility(label: Text(textField))
 
-                        .multilineTextAlignment(.center)
-                        .layoutPriority(1)
-                        .disabled(true)
-                        .font(.system(size: 50, weight: .bold, design: .default))
-                        .frame(width: screenWidth*3/5, height: 80, alignment: .center)
-                        .background(Color.white)
-                        .cornerRadius(20)
-                        .padding()
-                    
+                            .multilineTextAlignment(.center)
+                            .layoutPriority(1)
+                            .disabled(true)
+                            .font(.system(size: 50, weight: .bold, design: .default))
+                            .frame(width: screenWidth*3/5, height: 80, alignment: .center)
+                            .background(Color.white)
+                            .cornerRadius(20)
+                            .padding()
+                        
+                        Button(action: {
+                            quePlayer.pause()
+                            eksplorasiTop = eksplorasiTop.shuffled()
+                            eksplorasiBot = eksplorasiBot.shuffled()
+                            self.textField = ""
+                            self.queue.removeAll()
+                            self.resetisSelected()
+                            self.highlight.removeAll()
+                        }) {
+                            Image("reset-button")
+                                .renderingMode(.original)
+                        }
+                        .accessibility(label: Text("Reset"))
+
+                    .padding()
+                    }
+                    .padding()
+                    HStack{
+                        highlightWord()
+                    }.frame(height: 30)
+                    Spacer()
                     Button(action: {
-                        quePlayer.pause()
-                        eksplorasiTop = eksplorasiTop.shuffled()
-                        eksplorasiBot = eksplorasiBot.shuffled()
-                        self.textField = ""
-                        self.queue.removeAll()
-                        self.resetisSelected()
+                        self.highlight.removeAll()
+                        music(queue: self.queue)
+                        for i in 0..<self.queue.count{
+                            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i)) {
+                                self.highlight.append(Text("\(self.queue[i]) •"))
+                            }
+                        }
+                        
+
                     }) {
-                        Image("reset-button")
+                        Image("sound-button")
                             .renderingMode(.original)
                     }
-                    .accessibility(label: Text("Reset"))
-
-                .padding()
-                }
-                .padding()
-                
-                Button(action: {
-                    music(queue: self.queue)
-                }) {
-                    Image("sound-button")
-                        .renderingMode(.original)
-                }
                     .accessibility(label: Text("Speaker"))
-
-            .padding()
+                    .padding()
+                    Spacer()
+                }
             }
         }
         .onDisappear{
