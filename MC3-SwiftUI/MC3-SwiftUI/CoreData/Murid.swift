@@ -16,6 +16,17 @@ class Murid: NSManagedObject, Identifiable{
 }
 
 extension Murid{
+    
+    var wrappedNamaMurid: String {namaMurid}
+    var wrappedIdMurid: UUID {idMurid}
+    var wrappedIdKelas: UUID {idKelas}
+    var wrappedProgress: Int64 {progress}
+    
+    
+    
+    
+    
+    
     static func getAllMurid() -> NSFetchRequest<Murid>{
         let request: NSFetchRequest<Murid> = Murid.fetchRequest() as! NSFetchRequest<Murid>
         
