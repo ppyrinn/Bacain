@@ -17,6 +17,8 @@ struct pageDetail: View {
     @State private var searchText = ""
     @State var data : [Type] = []
     @State var Grid : [Int] = []
+    @State var namaKelasFilter: String = ""
+    @State private var isEditing = false
     
     var fetchRequest: FetchRequest<Kelas>
     var sekolah: Sekolah
@@ -28,15 +30,63 @@ struct pageDetail: View {
     
     func appendData() {
         data.removeAll()
+//        let randomInt = String(Int.random(in: 1...10))
         for kelas in fetchRequest.wrappedValue {
-            data.append(Type(namaKelas: kelas.namaKelas, gambarKelas: "1", idKelas: kelas.idKelas))
-           }
+            data.append(Type(namaKelas: kelas.namaKelas, gambarKelas: kelas.gambarKelas, idKelas: kelas.idKelas))
+        }
     }
     
     var body: some View {
         VStack{
+            HStack {
+                
+                TextField("Search ...", text: $namaKelasFilter)
+                    .padding(7)
+                    .padding(.horizontal, 25)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(8)
+                    .overlay(
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.gray)
+                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                .padding(.leading, 8)
+                            
+                            if isEditing {
+                                Button(action: {
+                                    self.namaKelasFilter = ""
+                                }) {
+                                    Image(systemName: "multiply.circle.fill")
+                                        .foregroundColor(.gray)
+                                        .padding(.trailing, 8)
+                                }
+                            }
+                        }
+                )
+                    .padding(.horizontal, 10)
+                    .onTapGesture {
+                        self.isEditing = true
+                }
+                
+                if isEditing {
+                    Button(action: {
+                        self.isEditing = false
+                        self.namaKelasFilter = ""
+                        self.appendData()
+                    })
+                    {
+                        Text("Cancel")
+                    }
+                    .padding(.trailing, 10)
+                    .transition(.move(edge: .trailing))
+                    .animation(.default)
+                    
+                }
+                
+            }.padding(.bottom, 10)
+            
             HStack{
-                SearchBar(text: $searchText)
+                FilteredClass(filter: namaKelasFilter, pageDetail: self)
             }
             if data.count == 0 {
                 Color(red: 1.00, green: 0.81, blue: 0.42)
@@ -96,13 +146,18 @@ struct Card : View {
         NavigationLink(destination: DetailStudent(data : data)){
             
             VStack{
-                Text(data.namaKelas)
+                HStack{
+                    Text(data.namaKelas)
                     .bold()
                     .foregroundColor(.black)
                     .frame(width: (UIScreen.main.bounds.width - 70) / 3)
                     .padding(.vertical,10)
                     .padding(.top, 10)
                     .accessibility(label: Text(data.namaKelas))
+                    
+                }.onTapGesture(count: 2) {
+                    print("Double tapped!")
+                }
                 
                 Image(data.gambarKelas)
                     .renderingMode(.original)
@@ -113,8 +168,10 @@ struct Card : View {
                     .padding(.bottom, 10)
                 
             }
+//            .padding(.trailing, 10)
             
-        }.background(Color.white)
+        }
+        .background(Color.white)
             .cornerRadius(10)
             .shadow(radius: 6)
         
@@ -144,8 +201,7 @@ struct MainView : View {
                             }
                             
                             if i == self.Grid.last! && self.data.count % 2 != 0{
-
-                                Spacer(minLength: 0)
+                                Spacer()
                             }
                         }
                     }
@@ -170,8 +226,9 @@ struct Type {
 
 struct addClass: View {
     @Environment(\.managedObjectContext) var moc
+    @Environment(\.presentationMode) var presentationMode
     @State var data : [Type] = []
-//    var fetchRequest: FetchRequest<Kelas>
+
    
     var sekolah: Sekolah
     var halamanDetail : pageDetail
@@ -184,14 +241,14 @@ struct addClass: View {
     
     
     @State private var newKelas = ""
-    @State var showDetail = true
+    @State var showDetail = false
     
     var body: some View {
         ZStack{
             VStack{
                 HStack {
                     Button(action: {
-                        self.showDetail.toggle()
+                        self.presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("Batal")
                             .foregroundColor(.orange)
@@ -199,12 +256,12 @@ struct addClass: View {
                     Spacer()
                     
                     Button(action: {
+                        let randomInt = String(Int.random(in: 1...10))
                         let kelas = Kelas(context: self.moc)
                         kelas.idKelas = UUID()
                         kelas.namaKelas = self.newKelas
                         kelas.idSekolah = self.sekolah.idSekolah
-//                        self.halamanDetail.generateGrid()
-                        
+                        kelas.gambarKelas = randomInt
                         
                         do{
                             try self.moc.save()
@@ -217,10 +274,7 @@ struct addClass: View {
                         Text("Tambah Kelas")
                             .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
                     }
-//                    self.generateGrid()
-
-                    
-                    
+     
                 }
                 .padding(30)
                 

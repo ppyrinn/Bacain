@@ -18,6 +18,7 @@
         <attribute name="score" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="Kelas" representedClassName=".Kelas" syncable="YES">
+        <attribute name="gambarKelas" optional="YES" attributeType="String"/>
         <attribute name="idKelas" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="idSekolah" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="namaKelas" optional="YES" attributeType="String"/>

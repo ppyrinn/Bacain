@@ -16,6 +16,8 @@ struct DetailStudent: View {
     @State private var searchText = ""
     @State var data : [TypeMurid] = []
     @State var Grid : [Int] = []
+    @State var namaMuridFilter: String = ""
+    @State private var isEditing = false
 
     var kelas: Type
     var fetchRequest: FetchRequest<Murid>
@@ -36,9 +38,56 @@ struct DetailStudent: View {
 
     var body: some View {
         VStack{
-
+            HStack {
+                
+                TextField("Search ...", text: $namaMuridFilter)
+                    .padding(7)
+                    .padding(.horizontal, 25)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(8)
+                    .overlay(
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.gray)
+                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                .padding(.leading, 8)
+                            
+                            if isEditing {
+                                Button(action: {
+                                    self.namaMuridFilter = ""
+                                }) {
+                                    Image(systemName: "multiply.circle.fill")
+                                        .foregroundColor(.gray)
+                                        .padding(.trailing, 8)
+                                }
+                            }
+                        }
+                )
+                    .padding(.horizontal, 10)
+                    .onTapGesture {
+                        self.isEditing = true
+                }
+                
+                if isEditing {
+                    Button(action: {
+                        self.isEditing = false
+                        self.namaMuridFilter = ""
+                        self.appendData()
+                        })
+                    {
+                        Text("Cancel")
+                    }
+                    .padding(.trailing, 10)
+                    .transition(.move(edge: .trailing))
+                    .animation(.default)
+                
+                }
+                
+            }.padding(.bottom, 10)
+            
             HStack{
-                SearchBar(text: $searchText)
+//                SearchBar(text: $searchText)
+                FilteredStudent(filter: namaMuridFilter, detailMurid: self)
             }
             if data.count == 0 {
                 Color(red: 1.00, green: 0.81, blue: 0.42)
@@ -173,6 +222,7 @@ struct TypeMurid {
 
 struct addMurid: View {
     @Environment(\.managedObjectContext) var moc
+    @Environment(\.presentationMode) var presentationMode
 
     var kelas : Type
     init(kelas: Type) {
@@ -180,14 +230,14 @@ struct addMurid: View {
     }
 
     @State private var newMurid = ""
-    @State var showDetail = true
+    @State var showDetail = false
 
     var body: some View {
         ZStack{
             VStack{
                 HStack{
                     Button(action: {
-                        self.showDetail.toggle()
+                        self.presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("Batal")
                             .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))

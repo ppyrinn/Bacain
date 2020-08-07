@@ -12,10 +12,16 @@ class Kelas: NSManagedObject, Identifiable{
     @NSManaged public var idKelas: UUID
     @NSManaged public var namaKelas: String
     @NSManaged public var idSekolah:  UUID
+    @NSManaged public var gambarKelas:  String
 
 }
 
 extension Kelas{
+    var wrappedIdKelas: UUID {idKelas}
+    var wrappedNamaKelas: String {namaKelas}
+    var wrappedIdSekolah: UUID {idSekolah}
+    var wrappedGambarKelas: String {gambarKelas}
+    
     static func getAllKelas() -> NSFetchRequest<Kelas>{
         let request: NSFetchRequest<Kelas> = Kelas.fetchRequest() as! NSFetchRequest<Kelas>
         
