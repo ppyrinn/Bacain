@@ -39,6 +39,7 @@ struct KuisView: View {
     @State var limit = 0
     @State var tempScore : Double = 0
     @State var score : Int64 = 0
+    @State var indexMurid : Int = 0
     
     @Environment(\.managedObjectContext) var moc
     
@@ -55,6 +56,7 @@ struct KuisView: View {
         jawaban.idJawaban = id
         let idKuis = UUID()
         jawaban.idKuis = idKuis
+        jawaban.idMurid = daftarMurid[indexMurid].idMurid
         do{
             try self.moc.save()
             print("Sukses set kuis to core data")
@@ -259,8 +261,8 @@ struct KuisView: View {
                     .foregroundColor(Color(red: 1.00, green: 0.81, blue: 0.42))
                 RoundedRectangle(cornerRadius: 80)
                     .foregroundColor(.white)
-                    .frame(height: screenHeight)
-                    .position(x: screenWidth / 2, y: screenHeight / 3)
+                    .frame(width: screenWidth, height: screenHeight)
+                    .position(x: screenWidth / 3, y: screenHeight / 3)
                 VStack{
                     HStack{
                         Button(action: {
@@ -282,7 +284,7 @@ struct KuisView: View {
                             
                         }
                         Spacer()
-                        Text(daftarMurid[0].namaMurid)
+                        Text(daftarMurid[indexMurid].namaMurid)
                             .fontWeight(.bold)
                             .font(.system(size: 17))
                             .font(.custom("SF Compact Text", size: 17))
@@ -293,12 +295,27 @@ struct KuisView: View {
                             //
                         }) {
                             HStack{
-                                Text("Lewati Murid")
-                                    .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
-                                    .fontWeight(.bold)
-                                    .font(.system(size: 17))
-                                    .font(.custom("SF Compact Text", size: 17))
-                                    .accessibility(label: Text("Lewati murid"))
+                                if indexMurid < daftarMurid.count-1{
+                                    Text("Lewati Murid")
+                                        .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
+                                        .fontWeight(.bold)
+                                        .font(.system(size: 17))
+                                        .font(.custom("SF Compact Text", size: 17))
+                                        .accessibility(label: Text("Lewati murid"))
+                                        .onTapGesture {
+                                            self.indexMurid += 1
+                                    }
+                                }else{
+                                    Text("Kuis Selesai")
+                                        .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
+                                        .fontWeight(.bold)
+                                        .font(.system(size: 17))
+                                        .font(.custom("SF Compact Text", size: 17))
+                                        .accessibility(label: Text("Kuis selesai"))
+                                        .onTapGesture {
+                                            self.presentationMode.wrappedValue.dismiss()
+                                    }
+                                }
                             }
                             
                         }

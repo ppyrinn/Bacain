@@ -17,6 +17,18 @@ struct DetailScoring: View {
         Kuises(id:2, tanggal:"22/2/2020", nilai:70),
         Kuises(id:3, tanggal:"23/2/2020", nilai:100)
     ]
+    var murid : TypeMurid
+    
+    var fetchRequest: FetchRequest<Jawaban>
+    
+    init(data: TypeMurid){
+//        self.idKelas = data.idKelas
+        fetchRequest = FetchRequest<Jawaban>(entity: Jawaban.entity(), sortDescriptors: [], predicate: NSPredicate(format: "idMurid = %@", data.idMurid.uuidString))
+        self.murid = data
+        print("id \(data)")
+        print("\(fetchRequest)")
+    }
+    
     var body: some View {
         ZStack{
             Rectangle()
@@ -49,15 +61,16 @@ struct DetailScoring: View {
                     KuisListView(kuises: historyKuis)
                 }
             }
+            .navigationBarTitle("Agus").accessibility(label: Text("Nama murid"))
         }
     }
 }
 
-struct DetailScoring_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailScoring()
-    }
-}
+//struct DetailScoring_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DetailScoring()
+//    }
+//}
 
 struct Kuises : Identifiable, Hashable{
     var id:Int = 0
@@ -114,7 +127,7 @@ struct KuisDetailView: View {
     var content: some View {
         VStack(alignment: .leading) {
             HStack{
-                Text("\(kuis.id)")
+                Text("\(kuis.id+1)")
                 .font(.headline)
                 .foregroundColor(.black)
                 .padding(.leading, 20)
@@ -147,39 +160,39 @@ struct KuisDetailView: View {
                         .foregroundColor(Color(red: 1.00, green: 0.87, blue: 0.61))
                     VStack(alignment: .leading) {
                         HStack{
-                            Text(kuis.tanggal)
+                            Text("la-ri")
                             .foregroundColor(.black)
                             .padding(.leading, 20)
                             Spacer()
-                            Text("\(kuis.nilai)")
+                            Text("100")
                             .foregroundColor(.black)
                             .padding(.trailing,20)
                         }.padding(.bottom,20)
                             .padding(.top,20)
                         HStack{
-                            Text(kuis.tanggal)
+                            Text("bu-di")
                             .foregroundColor(.black)
                             .padding(.leading, 20)
                             Spacer()
-                            Text("\(kuis.nilai)")
+                            Text("50")
                             .foregroundColor(.black)
                             .padding(.trailing,20)
                         }.padding(.bottom,20)
                         HStack{
-                            Text(kuis.tanggal)
+                            Text("me-nya-nyi")
                             .foregroundColor(.black)
                             .padding(.leading, 20)
                             Spacer()
-                            Text("\(kuis.nilai)")
+                            Text("60")
                             .foregroundColor(.black)
                             .padding(.trailing,20)
                         }.padding(.bottom,20)
                         HStack{
-                            Text(kuis.tanggal)
+                            Text("bo-la")
                             .foregroundColor(.black)
                             .padding(.leading, 20)
                             Spacer()
-                            Text("\(kuis.nilai)")
+                            Text("100")
                             .foregroundColor(.black)
                             .padding(.trailing,20)
                         }.padding(.bottom,20)

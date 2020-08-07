@@ -44,9 +44,11 @@ struct DetailStudent: View {
             print(error)
         }
         data.removeAll()
+
             for murid in listMurid {
                 data.append(TypeMurid(idMurid: murid.idMurid, namaMurid: murid.namaMurid, progress: murid.progress))
             }
+
 
     }
     
@@ -157,7 +159,7 @@ struct CardStudent : View {
     var body: some View{
         
         
-        NavigationLink(destination: DetailScoring()){
+        NavigationLink(destination: DetailScoring(data : data)){
             
             VStack{
 //                , alignment: .topLeading
@@ -193,25 +195,25 @@ struct Main : View {
         VStack{
             if !self.Grid.isEmpty {
                 ScrollView(.vertical, showsIndicators: false){
-
+                    
                     ForEach(self.Grid,id: \.self){i in
-
+                        
                         HStack(spacing: 15){
-
+                            
                             ForEach(i...i+1,id: \.self){j in
-
+                                
                                 VStack{
                                     if j != self.data.count {
-
+                                        
                                         CardStudent(data: self.data[j])
                                     }
                                 }
                             }
-
+                            
                             if i == self.Grid.last! && self.data.count % 2 != 0{
-
+                                
                                 Spacer(minLength: 370)
-//                                    .padding(.leading, 20)
+                                //                                    .padding(.leading, 20)
                             }
                         }
                     }
@@ -225,16 +227,15 @@ struct Main : View {
                 }
                 .accessibility(label: Text("Mulai Kuis"))
                 .padding(.bottom,80)
-                .background(Color(red: 1.00, green: 0.81, blue: 0.42))
+//                .background(Color(red: 1.00, green: 0.81, blue: 0.42))
                 .sheet(isPresented: $isPresented){
                     KuisView(daftarMurid : self.data)
-//                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                    //                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                 }
             }
-
-
+            
         }
-
+        
     }
 
 }
