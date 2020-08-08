@@ -21,7 +21,9 @@ struct pageDetail: View {
     @State private var isEditing = false
     
     var fetchRequest: FetchRequest<Kelas>
+    var listKelas: FetchedResults<Kelas> {fetchRequest.wrappedValue}
     var sekolah: Sekolah
+
     
     init(filter: String, sekolah: Sekolah){
         fetchRequest = FetchRequest<Kelas>(entity: Kelas.entity(), sortDescriptors: [], predicate: NSPredicate(format: "idSekolah = %@", filter))
@@ -29,11 +31,16 @@ struct pageDetail: View {
     }
     
     func appendData() {
-        data.removeAll()
-//        let randomInt = String(Int.random(in: 1...10))
-        for kelas in fetchRequest.wrappedValue {
-            data.append(Type(namaKelas: kelas.namaKelas, gambarKelas: kelas.gambarKelas, idKelas: kelas.idKelas))
+        var listKelas: [Kelas] = []
+        do{
+            listKelas = try moc.fetch(Kelas.getKelasWithId(id: self.sekolah.idSekolah))
+        }catch{
+            print(error)
         }
+        data.removeAll()
+            for kelas in listKelas {
+                 data.append(Type(namaKelas: kelas.namaKelas, gambarKelas: kelas.gambarKelas, idKelas: kelas.idKelas))
+            }
     }
     
     var body: some View {
@@ -227,7 +234,6 @@ struct Type {
 struct addClass: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
-    @State var data : [Type] = []
 
    
     var sekolah: Sekolah
@@ -238,7 +244,6 @@ struct addClass: View {
         self.sekolah = sekolah
         self.halamanDetail = pageDetil
     }
-    
     
     @State private var newKelas = ""
     @State var showDetail = false
@@ -258,18 +263,23 @@ struct addClass: View {
                     Button(action: {
                         let randomInt = String(Int.random(in: 1...10))
                         let kelas = Kelas(context: self.moc)
-                        kelas.idKelas = UUID()
+                        let idKelas = UUID()
+                        
+                        kelas.idKelas = idKelas
                         kelas.namaKelas = self.newKelas
                         kelas.idSekolah = self.sekolah.idSekolah
                         kelas.gambarKelas = randomInt
                         
                         do{
                             try self.moc.save()
+                            self.halamanDetail.appendData()
+
                         }catch{
                             print(error)
                         }
                         self.newKelas = ""
                         
+                        self.presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("Tambah Kelas")
                             .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
@@ -301,8 +311,10 @@ struct addClass: View {
             }
             
         }
+        .onDisappear{
+            self.halamanDetail.generateGrid()
+        }
     }
-    
 }
 
 

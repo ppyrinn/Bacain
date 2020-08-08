@@ -29,10 +29,20 @@ struct DetailStudent: View {
     }
     
     func appendData() {
+//        data.removeAll()
+//        for murid in fetchRequest.wrappedValue {
+//            data.append(TypeMurid(idMurid: murid.idMurid, namaMurid: murid.namaMurid, progress: murid.progress))
+//           }
+        var listMurid: [Murid] = []
+        do{
+            listMurid = try moc.fetch(Murid.getMuridWithId(id: self.kelas.idKelas))
+        }catch{
+            print(error)
+        }
         data.removeAll()
-        for murid in fetchRequest.wrappedValue {
-            data.append(TypeMurid(idMurid: murid.idMurid, namaMurid: murid.namaMurid, progress: murid.progress))
-           }
+            for murid in listMurid {
+                data.append(TypeMurid(idMurid: murid.idMurid, namaMurid: murid.namaMurid, progress: murid.progress))
+            }
     }
     
 
@@ -113,7 +123,7 @@ struct DetailStudent: View {
                         .imageScale(.large)
                 }.accessibility(label: Text("Tambah Murid"))
                     .sheet(isPresented: $showingDetail) {
-                        addMurid(kelas: self.kelas)
+                        addMurid(kelas: self.kelas, detailStudent: self)
                             .environment(\.managedObjectContext, self.moc)
                 }
             )
@@ -225,8 +235,10 @@ struct addMurid: View {
     @Environment(\.presentationMode) var presentationMode
 
     var kelas : Type
-    init(kelas: Type) {
+    var detailStudent: DetailStudent
+    init(kelas: Type, detailStudent: DetailStudent) {
         self.kelas = kelas
+        self.detailStudent = detailStudent
     }
 
     @State private var newMurid = ""
@@ -252,6 +264,7 @@ struct addMurid: View {
                         
                         do{
                             try self.moc.save()
+                            self.detailStudent.appendData()
                         }catch{
                             print(error)
                         }
@@ -282,6 +295,8 @@ struct addMurid: View {
                 .padding(30)
                 Spacer()
             }
+        }.onDisappear{
+            self.detailStudent.generateGrid()
         }
     }
 
