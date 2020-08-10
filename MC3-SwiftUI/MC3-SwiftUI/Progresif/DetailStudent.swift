@@ -18,12 +18,15 @@ struct DetailStudent: View {
     @State var Grid : [Int] = []
     @State var namaMuridFilter: String = ""
     @State private var isEditing = false
+    
+    var idKelas : UUID
 
     var kelas: Type
     var fetchRequest: FetchRequest<Murid>
     
     
     init(data: Type){
+        self.idKelas = data.idKelas
         fetchRequest = FetchRequest<Murid>(entity: Murid.entity(), sortDescriptors: [], predicate: NSPredicate(format: "idKelas = %@", data.idKelas.uuidString))
         self.kelas = data
     }
@@ -40,9 +43,12 @@ struct DetailStudent: View {
             print(error)
         }
         data.removeAll()
+
             for murid in listMurid {
                 data.append(TypeMurid(idMurid: murid.idMurid, namaMurid: murid.namaMurid, progress: murid.progress))
             }
+
+
     }
     
 
@@ -152,7 +158,7 @@ struct CardStudent : View {
     var body: some View{
         
         
-        NavigationLink(destination: DetailScoring()){
+        NavigationLink(destination: DetailScoring(data : data)){
             
             VStack{
 //                , alignment: .topLeading
@@ -182,40 +188,54 @@ struct Main : View {
 
     @Binding var data : [TypeMurid]
     @Binding var Grid : [Int]
+    
+    @State var isPresented = false
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var body: some View{
         VStack{
             if !self.Grid.isEmpty {
                 ScrollView(.vertical, showsIndicators: false){
-
+                    
                     ForEach(self.Grid,id: \.self){i in
-
+                        
                         HStack(spacing: 15){
-
+                            
                             ForEach(i...i+1,id: \.self){j in
-
+                                
                                 VStack{
                                     if j != self.data.count {
-
+                                        
                                         CardStudent(data: self.data[j])
                                     }
                                 }
                             }
-
+                            
                             if i == self.Grid.last! && self.data.count % 2 != 0{
-
+                                
                                 Spacer(minLength: 370)
-//                                    .padding(.leading, 20)
+                                //                                    .padding(.leading, 20)
                             }
                         }
                     }
                 }
                 .padding()
                 .background(Color(red: 1.00, green: 0.81, blue: 0.42))
+                Button(action: {
+                    self.isPresented.toggle()
+                }){
+                    Image("mulaikuis-button")
+                }
+                .accessibility(label: Text("Mulai Kuis"))
+                .padding(.bottom,80)
+//                .background(Color(red: 1.00, green: 0.81, blue: 0.42))
+                .sheet(isPresented: $isPresented){
+                    KuisView(daftarMurid : self.data).environment(\.managedObjectContext, self.context)
+                    //                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                }
             }
-
-
+            
         }
-
+        
     }
 
 }

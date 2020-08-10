@@ -13,11 +13,11 @@
 		48317F1D24DAEA57000DF720 /* FilteredStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48317F1C24DAEA57000DF720 /* FilteredStudent.swift */; };
 		4837DF7324D861CF003EE917 /* SearchBarMurid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4837DF7224D861CF003EE917 /* SearchBarMurid.swift */; };
 		4855FB4D24C6E7690040C09F /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4855FB4C24C6E7690040C09F /* SearchBar.swift */; };
+		48FC81C224DBCEE20088486E /* FilteredClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC81C124DBCEE20088486E /* FilteredClass.swift */; };
 		4B132EEE24D7F8B90042A9C4 /* buttonDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B132EED24D7F8B90042A9C4 /* buttonDetail.swift */; };
 		4B132EF024D804F50042A9C4 /* FonikCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B132EEF24D804F50042A9C4 /* FonikCD.swift */; };
 		4B132EF224D82E7B0042A9C4 /* eksplorasiDetil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B132EF124D82E7B0042A9C4 /* eksplorasiDetil.swift */; };
 		4B132F0624D9C8BD0042A9C4 /* Jawaban.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B132F0524D9C8BD0042A9C4 /* Jawaban.swift */; };
-		48FC81C224DBCEE20088486E /* FilteredClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FC81C124DBCEE20088486E /* FilteredClass.swift */; };
 		4B15D68724D1209D005C4DB1 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B15D68624D1209D005C4DB1 /* OnboardingView.swift */; };
 		4B603CC324CB08B500A49EFE /* Bo.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CA424CB08B500A49EFE /* Bo.m4a */; };
 		4B603CC424CB08B500A49EFE /* Ma.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4B603CA524CB08B500A49EFE /* Ma.m4a */; };
@@ -112,11 +112,11 @@
 		48317F1C24DAEA57000DF720 /* FilteredStudent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredStudent.swift; sourceTree = "<group>"; };
 		4837DF7224D861CF003EE917 /* SearchBarMurid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarMurid.swift; sourceTree = "<group>"; };
 		4855FB4C24C6E7690040C09F /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		48FC81C124DBCEE20088486E /* FilteredClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredClass.swift; sourceTree = "<group>"; };
 		4B132EED24D7F8B90042A9C4 /* buttonDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = buttonDetail.swift; sourceTree = "<group>"; };
 		4B132EEF24D804F50042A9C4 /* FonikCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FonikCD.swift; sourceTree = "<group>"; };
 		4B132EF124D82E7B0042A9C4 /* eksplorasiDetil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eksplorasiDetil.swift; sourceTree = "<group>"; };
 		4B132F0524D9C8BD0042A9C4 /* Jawaban.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jawaban.swift; sourceTree = "<group>"; };
-		48FC81C124DBCEE20088486E /* FilteredClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredClass.swift; sourceTree = "<group>"; };
 		4B15D68624D1209D005C4DB1 /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		4B603CA424CB08B500A49EFE /* Bo.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bo.m4a; sourceTree = "<group>"; };
 		4B603CA524CB08B500A49EFE /* Ma.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ma.m4a; sourceTree = "<group>"; };
@@ -721,7 +721,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"MC3-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = 7LUWAU8N83;
 				ENABLE_PREVIEWS = YES;
@@ -743,7 +743,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"MC3-SwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = 7LUWAU8N83;
 				ENABLE_PREVIEWS = YES;

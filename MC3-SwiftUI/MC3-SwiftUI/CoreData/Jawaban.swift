@@ -20,10 +20,22 @@ extension Jawaban{
     static func getAllJawaban() -> NSFetchRequest<Jawaban>{
         let request: NSFetchRequest<Jawaban> = Jawaban.fetchRequest() as! NSFetchRequest<Jawaban>
         
-        let sort = NSSortDescriptor(key: "tanggalKuis", ascending: true)
+        let sort = NSSortDescriptor(key: "ejaan", ascending: true)
         
         request.sortDescriptors = [sort]
     
         return request
+    }
+    
+    static func getJawabanWithId(id: UUID) -> NSFetchRequest<Jawaban>{
+        let request: NSFetchRequest<Jawaban> = Jawaban.fetchRequest() as! NSFetchRequest<Jawaban>
+            
+            let sort = NSSortDescriptor(key: "ejaan", ascending: true)
+            
+            request.predicate = NSPredicate(format: "idKuis = %@", id as CVarArg)
+            
+            request.sortDescriptors = [sort]
+        
+            return request
     }
 }

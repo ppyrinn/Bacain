@@ -12,11 +12,13 @@ import Speech
 
 
 struct KuisView: View {
-//    @Binding var showKuisView: Bool
+//    var delegate: DismissRequestDelegate?
+    @Environment(\.presentationMode) var presentationMode
     
     var namaMurid = "Agus"
     var levelMurid = 2
     var soalKuis = SoalKuis()
+    @State var daftarMurid : [TypeMurid]
     
     @State var soalEjaan = SoalEjaan()
     @State var resultString : String = ""
@@ -37,6 +39,8 @@ struct KuisView: View {
     @State var limit = 0
     @State var tempScore : Double = 0
     @State var score : Int64 = 0
+    @State var indexMurid : Int = 0
+    @State var idKuis = UUID()
     
     @Environment(\.managedObjectContext) var moc
     
@@ -47,17 +51,20 @@ struct KuisView: View {
     
     func setKuisToCoreData() {
         let jawaban = Jawaban(context: self.moc)
+        let kuis = Kuis(context: self.moc)
         jawaban.ejaan = self.soal
         jawaban.score = self.score
         let id = UUID()
         jawaban.idJawaban = id
-        let idKuis = UUID()
-        jawaban.idKuis = idKuis
+        jawaban.idKuis = self.idKuis
+        kuis.idKuis = self.idKuis
+        kuis.idMurid = daftarMurid[indexMurid].idMurid
+        kuis.tanggalKuis = Date()
         do{
             try self.moc.save()
             print("Sukses set kuis to core data")
         }catch{
-            print(error)
+            print(error.localizedDescription)
         }
     }
     
@@ -257,12 +264,12 @@ struct KuisView: View {
                     .foregroundColor(Color(red: 1.00, green: 0.81, blue: 0.42))
                 RoundedRectangle(cornerRadius: 80)
                     .foregroundColor(.white)
-                    .frame(height: screenHeight)
-                    .position(x: screenWidth / 2, y: screenHeight / 3)
+                    .frame(width: screenWidth, height: screenHeight)
+                    .position(x: screenWidth / 3, y: screenHeight / 3)
                 VStack{
                     HStack{
                         Button(action: {
-//                            self.showKuisView = false
+                            //                            self.showKuisView = false
                         }) {
                             HStack{
                                 Image(systemName: "chevron.left")
@@ -270,28 +277,50 @@ struct KuisView: View {
                                 Text("Keluar Kuis")
                                     .font(.custom("SF Compact Text", size: 17))
                                     .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
+                                .onTapGesture {
+//                                    self.delegate?.requestDismiss()
+                                    self.presentationMode.wrappedValue.dismiss()
+                                }
+                                    
                             }
                             .accessibility(label: Text("Keluar kuis"))
                             
                         }
                         Spacer()
-                        Text(namaMurid)
+                        Text(daftarMurid[indexMurid].namaMurid)
                             .fontWeight(.bold)
                             .font(.system(size: 17))
                             .font(.custom("SF Compact Text", size: 17))
                             .foregroundColor(.black)
-                        .accessibility(label: Text(namaMurid))
+                            .accessibility(label: Text(namaMurid))
                         Spacer()
                         Button(action: {
                             //
                         }) {
                             HStack{
-                                Text("Lewati Murid")
-                                    .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
-                                    .fontWeight(.bold)
-                                    .font(.system(size: 17))
-                                    .font(.custom("SF Compact Text", size: 17))
-                                .accessibility(label: Text("Lewati murid"))
+                                if indexMurid < daftarMurid.count-1{
+                                    Text("Lewati Murid")
+                                        .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
+                                        .fontWeight(.bold)
+                                        .font(.system(size: 17))
+                                        .font(.custom("SF Compact Text", size: 17))
+                                        .accessibility(label: Text("Lewati murid"))
+                                        .onTapGesture {
+                                            self.indexMurid += 1
+                                            self.idKuis = UUID()
+                                    }
+                                }else{
+                                    Text("Lewati Murid")
+                                        .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
+                                        .fontWeight(.bold)
+                                        .font(.system(size: 17))
+                                        .opacity(0)
+                                        .font(.custom("SF Compact Text", size: 17))
+                                        .accessibility(label: Text("Lewati Murid"))
+                                        .onTapGesture {
+                                            self.presentationMode.wrappedValue.dismiss()
+                                    }
+                                }
                             }
                             
                         }
@@ -330,16 +359,16 @@ struct KuisView: View {
                                 ForEach(answeredEjaan.sukuKata.indices){ i in
                                     if(self.answeredEjaan.isCorrect[i]){
                                         Text("\(self.answeredEjaan.sukuKata[i]) •")
-                                        .font(.system(size: 28))
-                                        .font(.custom("SF Compact Text", size: 28))
-                                        .foregroundColor(.black)
-                                        .accessibility(label: Text(self.soal.lowercased()))
+                                            .font(.system(size: 28))
+                                            .font(.custom("SF Compact Text", size: 28))
+                                            .foregroundColor(.black)
+                                            .accessibility(label: Text(self.soal.lowercased()))
                                     }else{
                                         Text("\(self.answeredEjaan.sukuKata[i]) •")
-                                        .font(.system(size: 28))
-                                        .font(.custom("SF Compact Text", size: 28))
-                                        .foregroundColor(.red)
-                                        .accessibility(label: Text(self.soal.lowercased()))
+                                            .font(.system(size: 28))
+                                            .font(.custom("SF Compact Text", size: 28))
+                                            .foregroundColor(.red)
+                                            .accessibility(label: Text(self.soal.lowercased()))
                                     }
                                 }
                                 Image("ceklis").resizable()
@@ -411,12 +440,25 @@ struct KuisView: View {
                             }
                             .accessibility(label: Text("Ejaan Selanjutnya"))
                         }else{
-                            Button(action: {
-                                
-                            }){
-                                Image("selesaikan-kuis")
+                            if indexMurid < daftarMurid.count-1{
+                                Button(action: {
+                                    self.indexMurid += 1
+                                    self.idKuis = UUID()
+                                    self.limit = 0
+                                    self.isAnswered = false
+                                    self.showEjaan = false
+                                }){
+                                    Image("murid-selanjutnya")
+                                }
+                                .accessibility(label: Text("Murid Selanjutnya"))
+                            }else{
+                                Button(action: {
+                                    self.presentationMode.wrappedValue.dismiss()
+                                }){
+                                    Image("selesaikan-kuis")
+                                }
+                                .accessibility(label: Text("Selesai"))
                             }
-                            .accessibility(label: Text("Selesai"))
                         }
                     }
                     
@@ -428,14 +470,14 @@ struct KuisView: View {
 }
 
 
-struct KuisView_Previews: PreviewProvider {
-    @State static var showKuisView = true
-    
-    static var previews: some View {
-//        KuisView(showKuisView: $showKuisView)
-        KuisView()
-    }
-}
+//struct KuisView_Previews: PreviewProvider {
+//    @State static var showKuisView = true
+//
+//    static var previews: some View {
+//        //        KuisView(showKuisView: $showKuisView)
+////        KuisView()
+//    }
+//}
 
 extension KuisView: SoundClassifierDelegate {
     func displayPredictionResult(identifier: String, confidence: Double) {
