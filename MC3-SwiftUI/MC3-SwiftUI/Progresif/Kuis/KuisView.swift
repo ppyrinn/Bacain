@@ -40,6 +40,7 @@ struct KuisView: View {
     @State var tempScore : Double = 0
     @State var score : Int64 = 0
     @State var indexMurid : Int = 0
+    @State var idKuis = UUID()
     
     @Environment(\.managedObjectContext) var moc
     
@@ -50,18 +51,20 @@ struct KuisView: View {
     
     func setKuisToCoreData() {
         let jawaban = Jawaban(context: self.moc)
+        let kuis = Kuis(context: self.moc)
         jawaban.ejaan = self.soal
         jawaban.score = self.score
         let id = UUID()
         jawaban.idJawaban = id
-        let idKuis = UUID()
-        jawaban.idKuis = idKuis
-        jawaban.idMurid = daftarMurid[indexMurid].idMurid
+        jawaban.idKuis = self.idKuis
+        kuis.idKuis = self.idKuis
+        kuis.idMurid = daftarMurid[indexMurid].idMurid
+        kuis.tanggalKuis = Date()
         do{
             try self.moc.save()
             print("Sukses set kuis to core data")
         }catch{
-            print(error)
+            print(error.localizedDescription)
         }
     }
     
@@ -304,14 +307,16 @@ struct KuisView: View {
                                         .accessibility(label: Text("Lewati murid"))
                                         .onTapGesture {
                                             self.indexMurid += 1
+                                            self.idKuis = UUID()
                                     }
                                 }else{
-                                    Text("Kuis Selesai")
+                                    Text("Lewati Murid")
                                         .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
                                         .fontWeight(.bold)
                                         .font(.system(size: 17))
+                                        .opacity(0)
                                         .font(.custom("SF Compact Text", size: 17))
-                                        .accessibility(label: Text("Kuis selesai"))
+                                        .accessibility(label: Text("Lewati Murid"))
                                         .onTapGesture {
                                             self.presentationMode.wrappedValue.dismiss()
                                     }
@@ -435,12 +440,25 @@ struct KuisView: View {
                             }
                             .accessibility(label: Text("Ejaan Selanjutnya"))
                         }else{
-                            Button(action: {
-                                
-                            }){
-                                Image("selesaikan-kuis")
+                            if indexMurid < daftarMurid.count-1{
+                                Button(action: {
+                                    self.indexMurid += 1
+                                    self.idKuis = UUID()
+                                    self.limit = 0
+                                    self.isAnswered = false
+                                    self.showEjaan = false
+                                }){
+                                    Image("murid-selanjutnya")
+                                }
+                                .accessibility(label: Text("Murid Selanjutnya"))
+                            }else{
+                                Button(action: {
+                                    self.presentationMode.wrappedValue.dismiss()
+                                }){
+                                    Image("selesaikan-kuis")
+                                }
+                                .accessibility(label: Text("Selesai"))
                             }
-                            .accessibility(label: Text("Selesai"))
                         }
                     }
                     

@@ -21,7 +21,6 @@ struct DetailStudent: View {
     
     var idKelas : UUID
 
-
     var kelas: Type
     var fetchRequest: FetchRequest<Murid>
     
@@ -191,6 +190,7 @@ struct Main : View {
     @Binding var Grid : [Int]
     
     @State var isPresented = false
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var body: some View{
         VStack{
             if !self.Grid.isEmpty {
@@ -229,7 +229,7 @@ struct Main : View {
                 .padding(.bottom,80)
 //                .background(Color(red: 1.00, green: 0.81, blue: 0.42))
                 .sheet(isPresented: $isPresented){
-                    KuisView(daftarMurid : self.data)
+                    KuisView(daftarMurid : self.data).environment(\.managedObjectContext, self.context)
                     //                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                 }
             }
