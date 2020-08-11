@@ -227,14 +227,12 @@ struct Main : View {
                 }
                 .accessibility(label: Text("Mulai Kuis"))
                 .padding(.bottom,80)
-//                .background(Color(red: 1.00, green: 0.81, blue: 0.42))
                 .sheet(isPresented: $isPresented){
                     KuisView(daftarMurid : self.data).environment(\.managedObjectContext, self.context)
-                    //                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                 }
             }
             
-        }
+        }.background(Color(red: 1.00, green: 0.81, blue: 0.42))
         
     }
 

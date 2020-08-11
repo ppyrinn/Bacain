@@ -8,12 +8,6 @@
 
 import SwiftUI
 
-struct TypeKuis {
-    var idKuis : UUID
-    var tanggalKuis : Date
-    var idMurid : UUID
-}
-
 struct TypeJawaban {
     var idKuis : UUID
     var ejaan : String
@@ -27,16 +21,13 @@ struct DetailScoring: View {
     @State var historyKuis : [Kuises] = []
     @State var listKuis: [Kuis] = []
     @State var listJawaban: [Jawaban] = []
-    @State var data : [TypeKuis] = []
     @State var dataJawaban : [TypeJawaban] = []
     @Environment(\.managedObjectContext) var moc
     
     var murid : TypeMurid
     
-    var fetchRequest: FetchRequest<Kuis>
     
     init(data: TypeMurid){
-        fetchRequest = FetchRequest<Kuis>(entity: Kuis.entity(), sortDescriptors: [], predicate: NSPredicate(format: "idMurid = %@", data.idMurid.uuidString))
         self.murid = data
     }
     
