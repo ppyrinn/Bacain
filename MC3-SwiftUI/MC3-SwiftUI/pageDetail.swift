@@ -31,16 +31,18 @@ struct pageDetail: View {
     }
     
     func appendData() {
+        
         var listKelas: [Kelas] = []
         do{
             listKelas = try moc.fetch(Kelas.getKelasWithId(id: self.sekolah.idSekolah))
         }catch{
             print(error)
         }
+        
         data.removeAll()
-            for kelas in listKelas {
-                 data.append(Type(namaKelas: kelas.namaKelas, gambarKelas: kelas.gambarKelas, idKelas: kelas.idKelas))
-            }
+        for kelas in listKelas {
+            data.append(Type(namaKelas: kelas.namaKelas, gambarKelas: kelas.gambarKelas, idKelas: kelas.idKelas))
+        }
     }
     
     var body: some View {
@@ -96,12 +98,20 @@ struct pageDetail: View {
                 FilteredClass(filter: namaKelasFilter, pageDetail: self)
             }
             if data.count == 0 {
-                Color(red: 1.00, green: 0.81, blue: 0.42)
+                VStack{
+                    Color(red: 1.00, green: 0.81, blue: 0.42)
+                        .padding(.bottom, -20)
+                    Image("tambah-daftarkelas")
+                        .padding(.top, -550)
+                    Text("Kamu Belum Memiliki Kelas. Tambah Kelas Terlebih Dulu")
+                        .bold()
+                        .padding(.top, -200)
+                }
                     .padding(.bottom, -50)
             }
             
             VStack(spacing: 0){
-                MainView(data: self.$data, Grid: self.$Grid)
+                MainView(data: self.$data, Grid: self.$Grid, pageDetail: self)
             }
             .background(Color.black.opacity(0.06).edgesIgnoringSafeArea(.top))
             .edgesIgnoringSafeArea(.bottom)
@@ -115,8 +125,8 @@ struct pageDetail: View {
             Button(action: {
                 self.showingDetail.toggle()
             }) {
-                Image(systemName: "plus")
-                    .foregroundColor(.orange)
+                Text("Tambah Kelas")
+                    .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
                     .imageScale(.large)
             }.accessibility(label: Text("Tambah Kelas"))
             .sheet(isPresented: $showingDetail) {
@@ -144,29 +154,43 @@ struct pageDetail: View {
 
 struct Card : View {
     
-    var data : Type
+    var dataa : Type
     @State var showingDetail = false
+    @State private var showingAlert = false
+    @Environment(\.managedObjectContext) var moc
+    
+    var pageDetail : pageDetail
+    
+    
     
     var body: some View{
+        
             
-            
-        NavigationLink(destination: DetailStudent(data : data)){
-            
+        NavigationLink(destination: DetailStudent(data : dataa)){
             VStack{
+                
                 HStack{
-                    Text(data.namaKelas)
+                    Text(dataa.namaKelas)
                     .bold()
                     .foregroundColor(.black)
                     .frame(width: (UIScreen.main.bounds.width - 70) / 3)
                     .padding(.vertical,10)
                     .padding(.top, 10)
-                    .accessibility(label: Text(data.namaKelas))
-                    
-                }.onTapGesture(count: 2) {
-                    print("Double tapped!")
+                    .accessibility(label: Text(dataa.namaKelas))
+                }
+//                .onLongPressGesture(minimumDuration: 1) {
+//                    self.showingAlert = true
+//
+//                }
+                .alert(isPresented:$showingAlert) {
+                    Alert(title: Text("Apakah Kamu Yakin Ingin Menghapus Kelas \(dataa.namaKelas) ?"), message: Text("Data tidak bisa dikembalikan"), primaryButton: .destructive(Text("Hapus")) {
+                            print("Menghapus...")
+                        self.delete(at: self.dataa.idKelas)
+                    }, secondaryButton: .cancel(Text("Batal")))
                 }
                 
-                Image(data.gambarKelas)
+                
+                Image(dataa.gambarKelas)
                     .renderingMode(.original)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -174,21 +198,58 @@ struct Card : View {
                     .cornerRadius(12)
                     .padding(.bottom, 10)
                 
+                
+
             }
-//            .padding(.trailing, 10)
-            
         }
         .background(Color.white)
-            .cornerRadius(10)
-            .shadow(radius: 6)
-        
+        .cornerRadius(10)
+        .shadow(radius: 6)
+        .contextMenu{
+            VStack{
+                Button(action: {
+                    self.showingAlert.toggle()
+                }){
+                    Text("Hapus")
+                }
+                Text("Batal")
+            }
+        }
     }
+    
+    func delete(at offsets: UUID){
+
+        var hasilFetch : [Kelas] = []
+        do {
+            hasilFetch = try moc.fetch(Kelas.getKelasWithIdKelas(id: offsets))
+        } catch {
+            print(error)
+        }
+        
+        for kelas in hasilFetch {
+            self.moc.delete(kelas)
+        }
+
+
+
+        do {
+            try self.moc.save()
+            self.pageDetail.appendData()
+            self.pageDetail.generateGrid()
+        } catch  {
+            print("error")
+        }
+
+    }
+    
+    
 }
 
 struct MainView : View {
     
     @Binding var data : [Type]
     @Binding var Grid : [Int]
+    var pageDetail : pageDetail
     var body: some View{
         VStack{
             if !self.Grid.isEmpty {
@@ -202,7 +263,7 @@ struct MainView : View {
                                 
                                 VStack{
                                     if j != self.data.count {
-                                        Card(data: self.data[j])
+                                        Card(dataa: self.data[j], pageDetail: self.pageDetail)
                                     }
                                 }
                             }
@@ -235,18 +296,18 @@ struct addClass: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.presentationMode) var presentationMode
 
-   
+    @State var data : [Type] = []
+    @State var value : CGFloat = 0
+    @State private var newKelas = ""
+    @State var showDetail = false
+    
     var sekolah: Sekolah
     var halamanDetail : pageDetail
     
     init(sekolah: Sekolah, pageDetil: pageDetail){
-
         self.sekolah = sekolah
         self.halamanDetail = pageDetil
     }
-    
-    @State private var newKelas = ""
-    @State var showDetail = false
     
     var body: some View {
         ZStack{
@@ -256,67 +317,103 @@ struct addClass: View {
                         self.presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("Batal")
-                            .foregroundColor(.orange)
-                    }
+                            .bold()
+                            .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
+                    }.accessibility(label: Text("Batal"))
                     Spacer()
                     
                     Button(action: {
-                        let randomInt = String(Int.random(in: 1...10))
-                        let kelas = Kelas(context: self.moc)
-                        let idKelas = UUID()
-                        
-                        kelas.idKelas = idKelas
-                        kelas.namaKelas = self.newKelas
-                        kelas.idSekolah = self.sekolah.idSekolah
-                        kelas.gambarKelas = randomInt
-                        
-                        do{
-                            try self.moc.save()
-                            self.halamanDetail.appendData()
 
-                        }catch{
-                            print(error)
+                        if self.newKelas == "" {
+                            self.showDetail = true
+                        } else {
+                            let randomInt = String(Int.random(in: 1...10))
+                            let kelas = Kelas(context: self.moc)
+                            kelas.idKelas = UUID()
+                            kelas.namaKelas = self.newKelas
+                            kelas.idSekolah = self.sekolah.idSekolah
+                            kelas.gambarKelas = randomInt
+                            
+                            do{
+                                try self.moc.save()
+                                self.halamanDetail.appendData()
+                            }catch{
+                                print(error)
+                            }
+                            self.newKelas = ""
+                            self.presentationMode.wrappedValue.dismiss()
+
                         }
-                        self.newKelas = ""
                         
-                        self.presentationMode.wrappedValue.dismiss()
+                        
                     }) {
+                        if newKelas.isEmpty {
+                            Text("Simpan")
+                            .bold()
+                            .accessibility(label: Text("Simpan"))
+                            .foregroundColor(Color.gray)
+                        } else {
+                            Text("Simpan")
+                            .bold()
+                            .accessibility(label: Text("Simpan"))
+                            .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
+                        }
+                    }
+                    .disabled(newKelas.isEmpty)
+                }
+                .padding(30)
+                
+                Spacer()
+                
+                VStack{
+                    HStack{
                         Text("Tambah Kelas")
+                            .font(.title)
+                            .bold()
                             .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
                     }
-     
-                }
-                .padding(30)
-                
-                Spacer()
-                
-                HStack{
-                    Text("Tambah Kelas")
-                        .font(.largeTitle)
-                        .foregroundColor(.orange)
-                }
-                HStack{
-                    Text("Tambah Kelas yang ingin kamu simpan/track perkembangan murdinya")
+                    HStack{
+                        Text("Tambah Kelas yang ingin kamu simpan/track perkembangan murdinya")
+                    }
+                    HStack{
+                        Text("Kelas")
+                            .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
+                            .bold()
+                        TextField("Nama Kelas", text: self.$newKelas)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                    }
+                    .padding(30)
+                    .padding(.top, -20)
                     
                 }
-                HStack{
-                    Text("Kelas")
-                        .foregroundColor(.orange)
-                        .bold()
-                    TextField("Kelas Baru", text: self.$newKelas)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                .offset(y: -self.value)
+                .animation(.spring())
+                .onAppear{
+                    NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (noti) in
+                        let value = noti.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+                        let height = value.height - 250
+                        
+                        self.value = height
+                        
+                    }
+                    
+                    NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { (noti) in
+                        
+                        self.value = 0
+                    }
                 }
-                .padding(30)
+                
                 Spacer()
             }
+            
             
         }
         .onDisappear{
             self.halamanDetail.generateGrid()
         }
     }
-}
 
+}
 
 
 //struct pageDetail_Previews: PreviewProvider {

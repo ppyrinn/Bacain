@@ -45,4 +45,16 @@ extension Murid{
         
             return request
     }
+    
+    static func getMuridWithIdMurid(id: UUID) -> NSFetchRequest<Murid>{
+        let request: NSFetchRequest<Murid> = Murid.fetchRequest() as! NSFetchRequest<Murid>
+            
+            let sort = NSSortDescriptor(key: "namaMurid", ascending: true)
+            
+            request.predicate = NSPredicate(format: "idMurid = %@", id as CVarArg)
+            
+            request.sortDescriptors = [sort]
+        
+            return request
+    }
 }

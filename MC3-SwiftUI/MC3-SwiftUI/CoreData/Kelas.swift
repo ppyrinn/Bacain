@@ -45,5 +45,17 @@ extension Kelas{
         
             return request
     }
+    
+    static func getKelasWithIdKelas(id: UUID) -> NSFetchRequest<Kelas>{
+        let request: NSFetchRequest<Kelas> = Kelas.fetchRequest() as! NSFetchRequest<Kelas>
+            
+            let sort = NSSortDescriptor(key: "namaKelas", ascending: true)
+            
+            request.predicate = NSPredicate(format: "idKelas = %@", id as CVarArg)
+            
+            request.sortDescriptors = [sort]
+        
+            return request
+    }
 }
 

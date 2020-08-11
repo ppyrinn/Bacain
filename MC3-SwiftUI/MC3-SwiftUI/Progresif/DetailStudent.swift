@@ -32,10 +32,6 @@ struct DetailStudent: View {
     }
     
     func appendData() {
-//        data.removeAll()
-//        for murid in fetchRequest.wrappedValue {
-//            data.append(TypeMurid(idMurid: murid.idMurid, namaMurid: murid.namaMurid, progress: murid.progress))
-//           }
         var listMurid: [Murid] = []
         do{
             listMurid = try moc.fetch(Murid.getMuridWithId(id: self.kelas.idKelas))
@@ -43,10 +39,10 @@ struct DetailStudent: View {
             print(error)
         }
         data.removeAll()
-
-            for murid in listMurid {
-                data.append(TypeMurid(idMurid: murid.idMurid, namaMurid: murid.namaMurid, progress: murid.progress))
-            }
+        
+        for murid in listMurid {
+            data.append(TypeMurid(idMurid: murid.idMurid, namaMurid: murid.namaMurid, progress: murid.progress))
+        }
 
 
     }
@@ -106,12 +102,20 @@ struct DetailStudent: View {
                 FilteredStudent(filter: namaMuridFilter, detailMurid: self)
             }
             if data.count == 0 {
-                Color(red: 1.00, green: 0.81, blue: 0.42)
+                VStack{
+                    Color(red: 1.00, green: 0.81, blue: 0.42)
+                        .padding(.bottom, -20)
+                    Image("tambah-daftarmurid")
+                        .padding(.top, -550)
+                    Text("Kamu Belum Memiliki Murid. Tambah Murid Terlebih Dulu")
+                        .bold()
+                        .padding(.top, -200)
+                }
                     .padding(.bottom, -50)
             }
             
             VStack(spacing: 0){
-                Main(data: self.$data, Grid: self.$Grid)
+                Main(data: self.$data, Grid: self.$Grid, DetailStudent: self)
             }
             .background(Color.black.opacity(0.06).edgesIgnoringSafeArea(.top))
             .edgesIgnoringSafeArea(.bottom)
@@ -124,8 +128,8 @@ struct DetailStudent: View {
                 Button(action: {
                     self.showingDetail.toggle()
                 }) {
-                    Image(systemName: "plus")
-                        .foregroundColor(.orange)
+                    Text("Tambah Murid")
+                        .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
                         .imageScale(.large)
                 }.accessibility(label: Text("Tambah Murid"))
                     .sheet(isPresented: $showingDetail) {
@@ -152,8 +156,12 @@ struct DetailStudent: View {
 struct CardStudent : View {
     
     var data : TypeMurid
-    @State var showingDetail = false
-    @State var progressValue: Float = 0.2
+//    @State var showingDetail = false
+    @State private var showingAlert = false
+    @State var progressValue: Float = Float.random(in: 0...1)
+    @Environment(\.managedObjectContext) var moc
+    
+    var DetailStudent : DetailStudent
     
     var body: some View{
         
@@ -161,27 +169,74 @@ struct CardStudent : View {
         NavigationLink(destination: DetailScoring(data : data)){
             
             VStack{
-//                , alignment: .topLeading
-                Text(data.namaMurid)
+
+                HStack{
+                    Text(data.namaMurid)
                     .bold()
                     .foregroundColor(.black)
-                    .frame(width: (UIScreen.main.bounds.width - 70) / 4)
+                    .frame(width: (UIScreen.main.bounds.width - 70) / 3)
                     .padding(.vertical,10)
                     .padding(.top, 10)
                     .accessibility(label: Text(data.namaMurid))
+                }
+                .alert(isPresented:$showingAlert) {
+                    Alert(title: Text("Apakah Kamu Yakin Ingin Menghapus Kelas \(data.namaMurid) ?"), message: Text("Data tidak bisa dikembalikan"), primaryButton: .destructive(Text("Hapus")) {
+                            print("Menghapus...")
+                        self.delete(at: self.data.idMurid)
+                    }, secondaryButton: .cancel(Text("Batal")))
+                }
+
                 
                 
-                ProgressBar(value: $progressValue).frame(height: 20)
-                .padding(15)
-                .padding(.top, -30)
-    
+                ProgressBar(value: $progressValue)
+                    .frame(height: 20)
+                    .padding(15)
+                    .padding(.top, -30)
+                
             }
    
-        }.background(Color.white)
+        }
+        .background(Color.white)
         .cornerRadius(10)
-            .shadow(radius: 6)
+        .shadow(radius: 6)
+        .contextMenu{
+            VStack{
+                Button(action: {
+                    self.showingAlert.toggle()
+                }){
+                    Text("Hapus")
+                }
+                Text("Batal")
+            }
+        }
         
     }
+    
+    func delete(at offsets: UUID){
+
+        var hasilFetch : [Murid] = []
+        do {
+            hasilFetch = try moc.fetch(Murid.getMuridWithIdMurid(id: offsets))
+        } catch {
+            print(error)
+        }
+        
+        for kelas in hasilFetch {
+            self.moc.delete(kelas)
+        }
+
+
+
+        do {
+            try self.moc.save()
+            self.DetailStudent.appendData()
+            self.DetailStudent.generateGrid()
+        } catch  {
+            print("error")
+        }
+
+    }
+    
 }
 
 struct Main : View {
@@ -190,6 +245,7 @@ struct Main : View {
     @Binding var Grid : [Int]
     
     @State var isPresented = false
+    var DetailStudent : DetailStudent
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var body: some View{
         VStack{
@@ -205,7 +261,7 @@ struct Main : View {
                                 VStack{
                                     if j != self.data.count {
                                         
-                                        CardStudent(data: self.data[j])
+                                        CardStudent(data: self.data[j], DetailStudent : self.DetailStudent)
                                     }
                                 }
                             }
@@ -213,7 +269,7 @@ struct Main : View {
                             if i == self.Grid.last! && self.data.count % 2 != 0{
                                 
                                 Spacer(minLength: 370)
-                                //                                    .padding(.leading, 20)
+                                
                             }
                         }
                     }
@@ -260,7 +316,9 @@ struct addMurid: View {
     }
 
     @State private var newMurid = ""
-    @State var showDetail = false
+//    @State var showDetail = false
+    @State private var showingAlert = false
+    @State var value : CGFloat = 0
 
     var body: some View {
         ZStack{
@@ -275,42 +333,72 @@ struct addMurid: View {
                     Spacer()
 
                     Button(action: {
-                        let murid = Murid(context: self.moc)
-                        murid.idMurid = UUID()
-                        murid.namaMurid = self.newMurid
-                        murid.idKelas = self.kelas.idKelas
-                        
-                        do{
-                            try self.moc.save()
-                            self.detailStudent.appendData()
-                        }catch{
-                            print(error)
+
+                        if self.newMurid == "" {
+                            self.showingAlert = true
+                        } else {
+                            let murid = Murid(context: self.moc)
+                            murid.idMurid = UUID()
+                            murid.namaMurid = self.newMurid
+                            murid.idKelas = self.kelas.idKelas
+                            
+                            do{
+                                try self.moc.save()
+                                self.detailStudent.appendData()
+                            }catch{
+                                print(error)
+                            }
+                            self.newMurid = ""
+                            self.presentationMode.wrappedValue.dismiss()
                         }
-                        self.newMurid = ""
                     }) {
                         Text("Tambah Murid")
                             .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
+                    }
+                    .alert(isPresented: $showingAlert){
+                        Alert(title: Text("Anda Belum Mengisi"), message: Text("Silahkan Isi Terlebih Dulu"), dismissButton: .default(Text("OK")))
                     }
                 }
                 .padding(30)
                 Spacer()
 
-                HStack{
-                    Text("Tambah Murid")
-                        .font(.largeTitle)
-                        .foregroundColor(.orange)
+                VStack{
+                    HStack{
+                        Text("Tambah Murid")
+                            .font(.title)
+                            .bold()
+                            .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
+                    }
+                    HStack{
+                        Text("Tambahkan murid-murid kamu dan track perkembangan membaca mereka")
+                    }
+                    HStack{
+                        Text("Murid")
+                            .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
+                            .bold()
+                        TextField("Nama Murid", text: self.$newMurid)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                    }
+                    .padding(30)
+                    .padding(.top, -20)
                 }
-                HStack{
-                    Text("Tambahkan murid-murid kamu dan track perkembangan membaca mereka")
+                .offset(y: -self.value)
+                .animation(.spring())
+                .onAppear{
+                    NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (noti) in
+                        let value = noti.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+                        let height = value.height - 250
+
+                        self.value = height
+                        
+                    }
+
+                    NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { (noti) in
+
+                        self.value = 0
+                    }
                 }
-                HStack{
-                    Text("Murid")
-                        .foregroundColor(.orange)
-                        .bold()
-                    TextField("Nama Murid", text: self.$newMurid)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                }
-                .padding(30)
+                
                 Spacer()
             }
         }.onDisappear{
