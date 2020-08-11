@@ -19,7 +19,7 @@ struct ProgresifView: View {
     
     var body: some View {
        NavigationView {
-      
+        
         List{
             Section(header: Text("Daftar Sekolah")) {
                 ForEach(self.listOfSekolah, id: \.namaSekolah){ item in
@@ -37,15 +37,23 @@ struct ProgresifView: View {
         }
         .onAppear {
             UITableView.appearance().separatorStyle = .none
+            
         }
             
-        .navigationBarTitle("Progresif").accessibility(label: Text("Progresif"))
+        .navigationBarTitle("Progresif")
+        .background(NavigationConfigurator { nc in
+            nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
+        })
+            
+            
+
+        .accessibility(label: Text("Progresif"))
         
         .navigationBarItems(trailing:
             Button(action: {
                 self.showingDetail.toggle()
             }) {
-                Image(systemName: "plus")
+                Text("Tambah Sekolah")
                     .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
                     .imageScale(.large)
                     .accessibility(label: Text("Tambah Sekolah"))
@@ -67,6 +75,7 @@ struct ProgresifView: View {
                     .padding(.top, -200)
             }
         .navigationBarTitle("Daftar Kelas").accessibility(label: Text("Daftar Kelas"))
+
         }
         
                 
@@ -85,6 +94,29 @@ struct ProgresifView: View {
         
     }
 }
+
+extension UINavigationController {
+    override open func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+    }
+}
+
+struct NavigationConfigurator: UIViewControllerRepresentable {
+    var configure: (UINavigationController) -> Void = { _ in }
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<NavigationConfigurator>) -> UIViewController {
+        UIViewController()
+    }
+    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<NavigationConfigurator>) {
+        if let nc = uiViewController.navigationController {
+            self.configure(nc)
+        }
+    }
+
+}
+
 
 struct addSchool: View {
     @Environment(\.managedObjectContext) var moc
@@ -145,9 +177,6 @@ struct addSchool: View {
                     }
                     .disabled(newSekolah.isEmpty)
                     
-//                    .alert(isPresented: $showingAlert){
-//                        Alert(title: Text("Anda Belum Mengisi"), message: Text("Silahkan Isi Terlebih Dulu"), dismissButton: .default(Text("OK")))
-//                    }
                 }
                 .padding(30)
                 
@@ -156,18 +185,18 @@ struct addSchool: View {
                 VStack{
                     HStack{
                         Text("Tambah Sekolah")
-                        .bold()
+                            .bold()
                             .font(.title)
-                            .foregroundColor(.orange)
+                            .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
                     }.accessibility(label: Text("Tambah Sekolah"))
                     HStack{
                         Text("Tambah Sekolah yang ingin kamu simpan/track perkembangan murdinya")
                     }.accessibility(label: Text("Tambah Sekolah yang ingin kamu simpan/track perkembangan murdinya"))
                     HStack{
                         Text("Sekolah")
-                        .foregroundColor(.orange)
+                        .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
                         .bold()
-                        TextField("Sekolah Baru", text: self.$newSekolah)
+                        TextField("Nama Sekolah", text: self.$newSekolah)
                             .accessibility(label: Text("Masukkan Sekolah Baru yang ingin ditambahkan"))
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                         .onAppear {

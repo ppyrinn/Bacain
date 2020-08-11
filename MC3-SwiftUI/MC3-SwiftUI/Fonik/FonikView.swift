@@ -133,6 +133,7 @@ struct FonikView: View {
         ZStack{
             Rectangle()
                 .foregroundColor(Color(red: 1, green: 0.81, blue: 0.42))
+            
             ZStack{
                 titleBar()
                 
@@ -140,10 +141,12 @@ struct FonikView: View {
                     VStack{
                         Spacer().frame(height: 74)
                         VStack{
+                            
                             Spacer()
                             ZStack{
                                 Rectangle()
                                     .frame(width: screenWidth*6/8, height: screenHeight*5/10, alignment: .center)
+                                    
                                 .cornerRadius(50)
                                 .foregroundColor(Color.white)
                                 HStack{
@@ -200,6 +203,19 @@ struct FonikView: View {
                                     self.starting()
                             }
                             Spacer()
+                            HStack{
+                                
+                                VStack(alignment: .leading){
+                                    Text("   Lagu dari Capung Kuning")
+                                        .bold()
+                                        .foregroundColor(Color(red: 0.69, green: 0.48, blue: 0.06))
+                                        .padding(.bottom, 10)
+                                        .opacity(0.3)
+                                    
+                                }
+                                Spacer()
+                            }
+                            
                         }
                     }
                 

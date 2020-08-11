@@ -111,7 +111,7 @@ struct pageDetail: View {
             }
             
             VStack(spacing: 0){
-                MainView(data: self.$data, Grid: self.$Grid)
+                MainView(data: self.$data, Grid: self.$Grid, pageDetail: self)
             }
             .background(Color.black.opacity(0.06).edgesIgnoringSafeArea(.top))
             .edgesIgnoringSafeArea(.bottom)
@@ -125,9 +125,8 @@ struct pageDetail: View {
             Button(action: {
                 self.showingDetail.toggle()
             }) {
-//                Text("Tambah")
-                Image(systemName: "plus")
-                    .foregroundColor(.orange)
+                Text("Tambah Kelas")
+                    .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
                     .imageScale(.large)
             }.accessibility(label: Text("Tambah Kelas"))
             .sheet(isPresented: $showingDetail) {
@@ -160,16 +159,10 @@ struct Card : View {
     @State private var showingAlert = false
     @Environment(\.managedObjectContext) var moc
     
+    var pageDetail : pageDetail
     
-//    var fetchRequest: FetchRequest<Kelas>
-//    var kelas: Type
-//
     
-//    init(data : Type) {
-//        fetchRequest = FetchRequest<Kelas>(entity: Kelas.entity(), sortDescriptors: [], predicate: NSPredicate(format: "idKelas = %@", dataa.idKelas as CVarArg))
-//        self.kelas = data
-//    }
-//
+    
     var body: some View{
         
             
@@ -185,15 +178,15 @@ struct Card : View {
                     .padding(.top, 10)
                     .accessibility(label: Text(dataa.namaKelas))
                 }
-                .onLongPressGesture(minimumDuration: 1) {
-                    self.showingAlert = true
-                    
-                }
+//                .onLongPressGesture(minimumDuration: 1) {
+//                    self.showingAlert = true
+//
+//                }
                 .alert(isPresented:$showingAlert) {
-                    Alert(title: Text("Apakah Kamu Yakin Ingin Menghapus Kelas \(dataa.namaKelas) ?"), message: Text("There is no undo"), primaryButton: .destructive(Text("Hapus")) {
+                    Alert(title: Text("Apakah Kamu Yakin Ingin Menghapus Kelas \(dataa.namaKelas) ?"), message: Text("Data tidak bisa dikembalikan"), primaryButton: .destructive(Text("Hapus")) {
                             print("Menghapus...")
                         self.delete(at: self.dataa.idKelas)
-                    }, secondaryButton: .cancel())
+                    }, secondaryButton: .cancel(Text("Batal")))
                 }
                 
                 
@@ -204,6 +197,8 @@ struct Card : View {
                     .frame(width: (UIScreen.main.bounds.width - 200) / 3)
                     .cornerRadius(12)
                     .padding(.bottom, 10)
+                
+                
 
             }
         }
@@ -223,9 +218,7 @@ struct Card : View {
     }
     
     func delete(at offsets: UUID){
-//        for offset in offsets {
-//            let hapus = kelas[offset]
-//        let hapus = kelas[offsets]
+
         var hasilFetch : [Kelas] = []
         do {
             hasilFetch = try moc.fetch(Kelas.getKelasWithIdKelas(id: offsets))
@@ -236,11 +229,13 @@ struct Card : View {
         for kelas in hasilFetch {
             self.moc.delete(kelas)
         }
-//            self.moc.delete(offsets)
-//        }
+
+
 
         do {
             try self.moc.save()
+            self.pageDetail.appendData()
+            self.pageDetail.generateGrid()
         } catch  {
             print("error")
         }
@@ -254,6 +249,7 @@ struct MainView : View {
     
     @Binding var data : [Type]
     @Binding var Grid : [Int]
+    var pageDetail : pageDetail
     var body: some View{
         VStack{
             if !self.Grid.isEmpty {
@@ -267,7 +263,7 @@ struct MainView : View {
                                 
                                 VStack{
                                     if j != self.data.count {
-                                        Card(dataa: self.data[j])
+                                        Card(dataa: self.data[j], pageDetail: self.pageDetail)
                                     }
                                 }
                             }
@@ -302,18 +298,16 @@ struct addClass: View {
 
     @State var data : [Type] = []
     @State var value : CGFloat = 0
+    @State private var newKelas = ""
+    @State var showDetail = false
     
     var sekolah: Sekolah
     var halamanDetail : pageDetail
     
     init(sekolah: Sekolah, pageDetil: pageDetail){
-        
         self.sekolah = sekolah
         self.halamanDetail = pageDetil
     }
-    
-    @State private var newKelas = ""
-    @State var showDetail = false
     
     var body: some View {
         ZStack{
@@ -323,8 +317,9 @@ struct addClass: View {
                         self.presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("Batal")
-                            .foregroundColor(.orange)
-                    }
+                            .bold()
+                            .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
+                    }.accessibility(label: Text("Batal"))
                     Spacer()
                     
                     Button(action: {
@@ -350,13 +345,21 @@ struct addClass: View {
 
                         }
                         
-                        self.presentationMode.wrappedValue.dismiss()
+                        
                     }) {
-                        Text("Tambah Kelas")
+                        if newKelas.isEmpty {
+                            Text("Simpan")
+                            .bold()
+                            .accessibility(label: Text("Simpan"))
+                            .foregroundColor(Color.gray)
+                        } else {
+                            Text("Simpan")
+                            .bold()
+                            .accessibility(label: Text("Simpan"))
                             .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
-                    }.alert(isPresented: $showDetail){
-                        Alert(title: Text("Anda Belum Mengisi"), message: Text("Silahkan Isi Terlebih Dulu"), dismissButton: .default(Text("OK")))
+                        }
                     }
+                    .disabled(newKelas.isEmpty)
                 }
                 .padding(30)
                 
@@ -365,18 +368,18 @@ struct addClass: View {
                 VStack{
                     HStack{
                         Text("Tambah Kelas")
-                            .font(.largeTitle)
-                            .foregroundColor(.orange)
+                            .font(.title)
+                            .bold()
+                            .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
                     }
                     HStack{
                         Text("Tambah Kelas yang ingin kamu simpan/track perkembangan murdinya")
-                        
                     }
                     HStack{
                         Text("Kelas")
-                            .foregroundColor(.orange)
+                            .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
                             .bold()
-                        TextField("Kelas Baru", text: self.$newKelas)
+                        TextField("Nama Kelas", text: self.$newKelas)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                     }
                     .padding(30)
