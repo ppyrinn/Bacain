@@ -106,7 +106,15 @@ struct DetailStudent: View {
                 FilteredStudent(filter: namaMuridFilter, detailMurid: self)
             }
             if data.count == 0 {
-                Color(red: 1.00, green: 0.81, blue: 0.42)
+                VStack{
+                    Color(red: 1.00, green: 0.81, blue: 0.42)
+                        .padding(.bottom, -20)
+                    Image("tambah-daftarmurid")
+                        .padding(.top, -550)
+                    Text("Kamu Belum Memiliki Murid. Tambah Murid Terlebih Dulu")
+                        .bold()
+                        .padding(.top, -200)
+                }
                     .padding(.bottom, -50)
             }
             
@@ -260,7 +268,9 @@ struct addMurid: View {
     }
 
     @State private var newMurid = ""
-    @State var showDetail = false
+//    @State var showDetail = false
+    @State private var showingAlert = false
+    @State var value : CGFloat = 0
 
     var body: some View {
         ZStack{
@@ -275,42 +285,71 @@ struct addMurid: View {
                     Spacer()
 
                     Button(action: {
-                        let murid = Murid(context: self.moc)
-                        murid.idMurid = UUID()
-                        murid.namaMurid = self.newMurid
-                        murid.idKelas = self.kelas.idKelas
-                        
-                        do{
-                            try self.moc.save()
-                            self.detailStudent.appendData()
-                        }catch{
-                            print(error)
+
+                        if self.newMurid == "" {
+                            self.showingAlert = true
+                        } else {
+                            let murid = Murid(context: self.moc)
+                            murid.idMurid = UUID()
+                            murid.namaMurid = self.newMurid
+                            murid.idKelas = self.kelas.idKelas
+                            
+                            do{
+                                try self.moc.save()
+                                self.detailStudent.appendData()
+                            }catch{
+                                print(error)
+                            }
+                            self.newMurid = ""
+                            self.presentationMode.wrappedValue.dismiss()
                         }
-                        self.newMurid = ""
                     }) {
                         Text("Tambah Murid")
                             .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
+                    }
+                    .alert(isPresented: $showingAlert){
+                        Alert(title: Text("Anda Belum Mengisi"), message: Text("Silahkan Isi Terlebih Dulu"), dismissButton: .default(Text("OK")))
                     }
                 }
                 .padding(30)
                 Spacer()
 
-                HStack{
-                    Text("Tambah Murid")
-                        .font(.largeTitle)
-                        .foregroundColor(.orange)
+                VStack{
+                    HStack{
+                        Text("Tambah Murid")
+                            .font(.largeTitle)
+                            .foregroundColor(.orange)
+                    }
+                    HStack{
+                        Text("Tambahkan murid-murid kamu dan track perkembangan membaca mereka")
+                    }
+                    HStack{
+                        Text("Murid")
+                            .foregroundColor(.orange)
+                            .bold()
+                        TextField("Nama Murid", text: self.$newMurid)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                    }
+                    .padding(30)
+                    .padding(.top, -20)
                 }
-                HStack{
-                    Text("Tambahkan murid-murid kamu dan track perkembangan membaca mereka")
+                .offset(y: -self.value)
+                .animation(.spring())
+                .onAppear{
+                    NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (noti) in
+                        let value = noti.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+                        let height = value.height - 250
+
+                        self.value = height
+                        
+                    }
+
+                    NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { (noti) in
+
+                        self.value = 0
+                    }
                 }
-                HStack{
-                    Text("Murid")
-                        .foregroundColor(.orange)
-                        .bold()
-                    TextField("Nama Murid", text: self.$newMurid)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                }
-                .padding(30)
+                
                 Spacer()
             }
         }.onDisappear{
