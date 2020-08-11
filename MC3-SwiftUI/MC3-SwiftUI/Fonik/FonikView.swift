@@ -210,7 +210,7 @@ struct FonikView: View {
                                         .bold()
                                         .foregroundColor(Color(red: 0.69, green: 0.48, blue: 0.06))
                                         .padding(.bottom, 10)
-                                        .opacity(0.3)
+                                        .opacity(0.7)
                                     
                                 }
                                 Spacer()

@@ -52,7 +52,7 @@ struct DetailStudent: View {
         VStack{
             HStack {
                 
-                TextField("Search ...", text: $namaMuridFilter)
+                TextField("Cari...", text: $namaMuridFilter)
                     .padding(7)
                     .padding(.horizontal, 25)
                     .background(Color(.systemGray6))
@@ -107,7 +107,7 @@ struct DetailStudent: View {
                         .padding(.bottom, -20)
                     Image("tambah-daftarmurid")
                         .padding(.top, -550)
-                    Text("Kamu Belum Memiliki Murid. Tambah Murid Terlebih Dulu")
+                    Text("Kamu belum memiliki murid. Tambah murid terlebih dahulu")
                         .bold()
                         .padding(.top, -200)
                 }
@@ -180,7 +180,7 @@ struct CardStudent : View {
                     .accessibility(label: Text(data.namaMurid))
                 }
                 .alert(isPresented:$showingAlert) {
-                    Alert(title: Text("Apakah Kamu Yakin Ingin Menghapus Kelas \(data.namaMurid) ?"), message: Text("Data tidak bisa dikembalikan"), primaryButton: .destructive(Text("Hapus")) {
+                    Alert(title: Text("Apakah kamu yakin ingin menghapus kelas \(data.namaMurid) ?"), message: Text("Data tidak bisa dikembalikan."), primaryButton: .destructive(Text("Hapus")) {
                             print("Menghapus...")
                         self.delete(at: self.data.idMurid)
                     }, secondaryButton: .cancel(Text("Batal")))
@@ -352,12 +352,19 @@ struct addMurid: View {
                             self.presentationMode.wrappedValue.dismiss()
                         }
                     }) {
-                        Text("Tambah Murid")
+                        if newMurid.isEmpty {
+                            Text("Simpan")
+                                .bold()
+                                .accessibility(label: Text("Simpan"))
+                                .foregroundColor(Color.gray)
+                        } else {
+                            Text("Simpan")
+                            .bold()
+                            .accessibility(label: Text("Simpan"))
                             .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
+                        }
                     }
-                    .alert(isPresented: $showingAlert){
-                        Alert(title: Text("Anda Belum Mengisi"), message: Text("Silahkan Isi Terlebih Dulu"), dismissButton: .default(Text("OK")))
-                    }
+                    .disabled(newMurid.isEmpty)
                 }
                 .padding(30)
                 Spacer()
@@ -370,7 +377,7 @@ struct addMurid: View {
                             .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
                     }
                     HStack{
-                        Text("Tambahkan murid-murid kamu dan track perkembangan membaca mereka")
+                        Text("Tambahkan murid-murid kamu dan pantau perkembangan membaca mereka")
                     }
                     HStack{
                         Text("Murid")

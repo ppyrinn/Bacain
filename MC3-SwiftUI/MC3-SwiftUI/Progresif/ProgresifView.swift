@@ -70,7 +70,7 @@ struct ProgresifView: View {
                     .padding(.bottom, -20)
                 Image("tambah-daftarsekolah")
                     .padding(.top, -550)
-                Text("Kamu Belum Memilih/Memiliki Sekolah. Pilih/Tambah Sekolah Terlebih Dulu")
+                Text("Kamu belum memilih/memiliki sekolah. Pilih/tambah sekolah terlebih dahulu.")
                     .bold()
                     .padding(.top, -200)
             }
@@ -190,14 +190,14 @@ struct addSchool: View {
                             .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
                     }.accessibility(label: Text("Tambah Sekolah"))
                     HStack{
-                        Text("Tambah Sekolah yang ingin kamu simpan/track perkembangan murdinya")
-                    }.accessibility(label: Text("Tambah Sekolah yang ingin kamu simpan/track perkembangan murdinya"))
+                        Text("Tambah sekolah yang ingin kamu simpan/pantau perkembangan muridnya")
+                    }.accessibility(label: Text("Tambah sekolah yang ingin kamu simpan/pantau perkembangan muridnya"))
                     HStack{
                         Text("Sekolah")
                         .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
                         .bold()
                         TextField("Nama Sekolah", text: self.$newSekolah)
-                            .accessibility(label: Text("Masukkan Sekolah Baru yang ingin ditambahkan"))
+                            .accessibility(label: Text("Masukkan sekolah Baru yang ingin ditambahkan"))
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                         .onAppear {
                             UITableView.appearance().separatorStyle = .singleLine
