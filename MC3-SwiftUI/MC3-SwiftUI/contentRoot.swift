@@ -14,28 +14,24 @@ struct contentRoot: View {
     var body: some View {
         TabView{
             ProgresifView().tabItem({
-                Image("Progresif ga aktif")
-                    .renderingMode(.template)
+                Image(systemName: "star.fill")
                 Text("Progresif")
             }).tag(0)
             FonikView().tabItem({
-                Image("Fonik ga aktif")
-                .renderingMode(.template)
+                Image(systemName: "star.fill")
                 Text("Fonik")
             }).tag(1)
             SusunKataView().tabItem({
-                Image("Susun kata ga aktif")
-                .renderingMode(.template)
-                Text("Eksplorasi")
+                Image(systemName: "star.fill")
+                Text("Susun Kata")
             }).tag(2)
             //tab bar kuis untuk sementara
-//            KuisView().tabItem({
-//                Image(systemName: "star.fill")
-//                Text("Kuis")
-//            }).tag(3)
+            KuisView().tabItem({
+                Image(systemName: "star.fill")
+                Text("Kuis")
+            }).tag(3)
         }
-        .accentColor(Color(red: 0.79, green: 0.26, blue: 0.00)
-)
+        .accentColor(Color.red)
     }
 }
 

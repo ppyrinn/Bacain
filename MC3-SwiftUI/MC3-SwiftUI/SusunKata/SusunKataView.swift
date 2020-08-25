@@ -9,197 +9,115 @@
 import SwiftUI
 
 struct SusunKataView: View {
-    @Environment(\.managedObjectContext) var moc
-    @FetchRequest(fetchRequest: Eksplorasi.getAllSukuKata())
-    var listEksplorasi: FetchedResults<Eksplorasi>
-        
     
+    @State private var textField = ""
     
-    @State public var textField = ""
-    
-    @State private var fc = Color.red
-    @State private var delay: Double = 3
-
+    @State private var topRow = susunKataTop.shuffled()
+    @State private var bottomRow = susunKataBot.shuffled()
 
     
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
     
-    @State var queue: [String] = []
-    @State var highlight: [Text] = []
 
-    
-    
-    func generateArr() -> [Eksplorasi]{
-        var arr:[Eksplorasi] = []
-        for i in 0..<listEksplorasi.count{
-            if i < listEksplorasi.count/2{
-               arr.append(listEksplorasi[i])
-            }
-        }
-        return arr
-    }
-    func resetisSelected(){
-        for object in listEksplorasi{
-            object.setValue(false, forKey: "isSelected")
-            do{
-                try self.moc.save()
-            }
-            catch
-            {
-                print(error)
-            }
-        }
-    }
     
     fileprivate func titleBar() -> some View {
         return VStack{
             ZStack{
                 Rectangle()
                 .foregroundColor(.white)
-                .frame(width: screenWidth, height: 74, alignment: .top)
+                .frame(width: screenWidth, height: screenHeight*1/10, alignment: .top)
                 VStack{
                     Spacer()
                     HStack{
-                        Text("Eksplorasi")
+                        Text("Susun Kata")
                             .font(.system(size: 34, weight: .bold, design: .default))
-                            .foregroundColor(.black)
-                            .padding()
-                        .accessibility(label: Text("Eksplorasi"))
-                    }
-                }.frame(width: screenWidth, height: 74, alignment: .top)
+                        .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
+                            .padding(.top)
+                        Spacer()
+                    }.padding(.top)
+                }.frame(width: screenWidth, height: screenHeight*1/10, alignment: .top)
             }
             Spacer()
         }
     }
 
-    fileprivate func buttonsukuKata() -> some View{
-        if self.listEksplorasi.isEmpty{
-                for dummy in ArrsusunKata{
-                    let eksplorasi = Eksplorasi(context: self.moc)
-                    eksplorasi.sukuKata = dummy.sukuKata
-                    eksplorasi.isSelected = dummy.isSelected
-                    
-                    do{
-                        try self.moc.save()
-                    }catch{
-                        print(error)
-                    }
-                }
-            }
-        
-        if eksplorasiTop.isEmpty && eksplorasiBot.isEmpty{
-            for i in 0..<self.listEksplorasi.count{
-                if i < self.listEksplorasi.count/2{
-                    eksplorasiTop.append(self.listEksplorasi[i])
-                }else{
-                    eksplorasiBot.append(self.listEksplorasi[i])
-                }
-            }
-        }
-        
-        return VStack{
-                HStack{
-                    ForEach(0..<8) { index in
-                        eksplorasiDetil(eksplorasi: eksplorasiTop[index], eksplorasiView: self).padding(5)
-                    }
-                }
-                HStack{
-                    ForEach(0..<7) { index in
-                        eksplorasiDetil(eksplorasi: eksplorasiBot[index], eksplorasiView: self).padding(5)
-                    }
-                }
-        }
-    }
-    
-    
-    fileprivate func highlightWord() ->  some View {
-        
-        return ForEach(0..<highlight.count, id :\.self){ i in
-    
-                self.highlight[i]
-                .foregroundColor(self.fc)
-
-//            Text("\(self.highlight[i]) •")
-                .font(.system(size: 28))
-                .font(.custom("SF Compact Text", size: 28))
-                .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.00))
-//                .foregroundColor(Color.red)
-//                .animation(Animation.easeIn(duration: 2).delay(self.delay*Double(i)))
-
-                
-        }
-    }
-    
     var body: some View {
         ZStack{
             Rectangle()
                 .foregroundColor(Color(red: 1, green: 0.81, blue: 0.42))
             titleBar()
             VStack{
-                Spacer()
-                    .frame(height: 74)
-                VStack{
-                    Spacer()
-                    buttonsukuKata()
-                    Spacer()
-                    HStack{
-                        TextField("", text: $textField)
-                            .foregroundColor(.black)
-                            .accessibility(label: Text(textField))
-
-                            .multilineTextAlignment(.center)
-                            .layoutPriority(1)
-                            .disabled(true)
-                            .font(.system(size: 50, weight: .bold, design: .default))
-                            .frame(width: screenWidth*3/5, height: 80, alignment: .center)
-                            .background(Color.white)
-                            .cornerRadius(20)
-                            .padding()
-                        
+                HStack{
+                    ForEach(0..<8) {  index in
                         Button(action: {
-                            quePlayer.pause()
-                            eksplorasiTop = eksplorasiTop.shuffled()
-                            eksplorasiBot = eksplorasiBot.shuffled()
-                            self.textField = ""
-                            self.queue.removeAll()
-                            self.resetisSelected()
-                            self.highlight.removeAll()
-                        }) {
-                            Image("reset-button")
-                                .renderingMode(.original)
-                        }
-                        .accessibility(label: Text("Reset"))
+                            if self.textField == ""{
+                                self.textField += "\(self.topRow[index].capitalized)"
 
-                    .padding()
-                    }
-                    .padding()
-                    HStack{
-                        highlightWord()
-                    }.frame(height: 30)
-                    Spacer()
-                    Button(action: {
-                        self.highlight.removeAll()
-                        music(queue: self.queue)
-                        for i in 0..<self.queue.count{
-                            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i)) {
-                                self.highlight.append(Text("\(self.queue[i]) •"))
+                            }else{
+                                self.textField += " - \(self.topRow[index].capitalized)"
                             }
+                        }) {
+                            Text(self.topRow[index].capitalized)
+                                .font(.system(size: 28, weight: .bold, design: .default))
                         }
-                        
+                        .buttonStyle(SelectableBtnStyle())
 
-                    }) {
-                        Image("sound-button")
-                            .renderingMode(.original)
                     }
-                    .accessibility(label: Text("Speaker"))
-                    .padding()
-                    Spacer()
+                    
                 }
+                .padding()
+                HStack{
+                    ForEach(0..<7) {  index in
+                        Button(action: {
+                            if self.textField == ""{
+                                self.textField += "\(self.bottomRow[index].capitalized)"
+
+                            }else{
+                                self.textField += " - \(self.bottomRow[index].capitalized)"
+                            }
+                        }) {
+                            Text(self.bottomRow[index].capitalized)
+                            .font(.system(size: 28, weight: .bold, design: .default))
+                        }
+                            
+                    .buttonStyle(SelectableBtnStyle())
+//                    .padding()
+                    }
+                }
+                .padding()
+                
+                HStack{
+                    TextField("", text: $textField)
+                        .multilineTextAlignment(.center)
+                    .layoutPriority(1)
+                        .disabled(true)
+                        .font(.system(size: 50, weight: .bold, design: .default))
+                        .frame(width: screenWidth*3/5, height: 80, alignment: .center)
+                        .background(Color.white)
+                        .cornerRadius(20)
+                        .padding()
+                    
+                    Button(action: {
+                        self.textField = ""
+                    }) {
+                        Image("reset-button")
+                    }
+                    .font(.system(size: 30, weight: .bold, design: .rounded))
+                    .foregroundColor(Color.red)
+
+                .padding()
+                }
+                .padding()
+                
+                Button(action: {
+                    print("btn")
+                }) {
+                    Image("sound-button")
+                        .renderingMode(.original)
+                }
+            .padding()
             }
-        }
-        .onDisappear{
-            quePlayer.pause()
         }
     }
 }
@@ -207,5 +125,25 @@ struct SusunKataView: View {
 struct SusunKataView_Previews: PreviewProvider {
     static var previews: some View {
         SusunKataView()
+    }
+}
+
+struct SelectableBtnStyle: ButtonStyle {
+
+    var isSelected = false
+    let color2 = Color(red: 0.79, green: 0.26, blue: 0.00)
+    
+    func makeBody(configuration: Self.Configuration) -> some View {
+        
+        configuration.label
+            .frame(width: 50, height: 50, alignment: .center)
+            .padding()
+            //.frame(width: 70, height: 70, alignment: .center)
+            .background(configuration.isPressed ?  color2 : Color.white)
+            //.background(isSelected ? color2 : color)
+            //.clipShape(RoundedRectangle(cornerRadius: isSelected ? 16.0 : 0.0))
+            //.overlay(RoundedRectangle(cornerRadius: isSelected ? 16.0 : 0.0).stroke(lineWidth: isSelected ? 2.0 : 0.0).foregroundColor(Color.pink))
+            .animation(.linear(duration: 0.1))
+            .cornerRadius(10)
     }
 }

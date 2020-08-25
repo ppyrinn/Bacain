@@ -1,24 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19G73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Eksplorasi" representedClassName=".Eksplorasi" syncable="YES">
-        <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="sukuKata" optional="YES" attributeType="String"/>
-    </entity>
-    <entity name="FonikCD" representedClassName=".FonikCD" syncable="YES">
-        <attribute name="alfabet" optional="YES" attributeType="String"/>
-        <attribute name="gambar" optional="YES" attributeType="String"/>
-        <attribute name="gambarDesc" optional="YES" attributeType="String"/>
-        <attribute name="isSelected" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="subTitle" optional="YES" attributeType="String"/>
-    </entity>
-    <entity name="Jawaban" representedClassName=".Jawaban" syncable="YES">
-        <attribute name="ejaan" optional="YES" attributeType="String"/>
-        <attribute name="idJawaban" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="idKuis" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="score" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-    </entity>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Kelas" representedClassName=".Kelas" syncable="YES">
-        <attribute name="gambarKelas" optional="YES" attributeType="String"/>
         <attribute name="idKelas" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="idSekolah" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="namaKelas" optional="YES" attributeType="String"/>
@@ -28,6 +10,8 @@
     <entity name="Kuis" representedClassName=".Kuis" syncable="YES">
         <attribute name="idKuis" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="idMurid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="levelSoal" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="nilai" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="tanggalKuis" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <entity name="Murid" representedClassName=".Murid" syncable="YES">
@@ -43,11 +27,8 @@
         <relationship name="punyaKelas" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Kelas" inverseName="diDalemSekolah" inverseEntity="Kelas"/>
     </entity>
     <elements>
-        <element name="Eksplorasi" positionX="153" positionY="135" width="128" height="73"/>
-        <element name="FonikCD" positionX="144" positionY="126" width="128" height="118"/>
-        <element name="Jawaban" positionX="162" positionY="144" width="128" height="103"/>
         <element name="Kelas" positionX="316.56640625" positionY="0.4375" width="128" height="118"/>
-        <element name="Kuis" positionX="144" positionY="126" width="128" height="88"/>
+        <element name="Kuis" positionX="144" positionY="126" width="128" height="118"/>
         <element name="Murid" positionX="-13.6796875" positionY="139.56640625" width="128" height="118"/>
         <element name="Sekolah" positionX="-45" positionY="0" width="128" height="88"/>
     </elements>

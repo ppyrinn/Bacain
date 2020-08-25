@@ -16,40 +16,29 @@ struct DetailStudent: View {
     @State private var searchText = ""
     @State var data : [TypeMurid] = []
     @State var Grid : [Int] = []
-    @State var namaMuridFilter: String = ""
-    @State private var isEditing = false
-    
-    var idKelas : UUID
 
     var kelas: Type
     var fetchRequest: FetchRequest<Murid>
     
     
     init(data: Type){
-        self.idKelas = data.idKelas
         fetchRequest = FetchRequest<Murid>(entity: Murid.entity(), sortDescriptors: [], predicate: NSPredicate(format: "idKelas = %@", data.idKelas.uuidString))
         self.kelas = data
     }
     
     func appendData() {
-        var listMurid: [Murid] = []
-        do{
-            listMurid = try moc.fetch(Murid.getMuridWithId(id: self.kelas.idKelas))
-        }catch{
-            print(error)
-        }
         data.removeAll()
-        
-        for murid in listMurid {
+        for murid in fetchRequest.wrappedValue {
             data.append(TypeMurid(idMurid: murid.idMurid, namaMurid: murid.namaMurid, progress: murid.progress))
-        }
-
-
+           }
     }
     
 
     var body: some View {
         VStack{
+<<<<<<< HEAD
+
+=======
             HStack {
                 
                 TextField("Cari...", text: $namaMuridFilter)
@@ -97,11 +86,14 @@ struct DetailStudent: View {
                 
             }.padding(.bottom, 10)
             
+>>>>>>> 210887e... Merge pull request #22 from ppyrinn/KuisAndDetailMurid
             HStack{
-//                SearchBar(text: $searchText)
-                FilteredStudent(filter: namaMuridFilter, detailMurid: self)
+                SearchBar(text: $searchText)
             }
             if data.count == 0 {
+<<<<<<< HEAD
+                Color(red: 1.00, green: 0.81, blue: 0.42)
+=======
                 VStack{
                     Color(red: 1.00, green: 0.81, blue: 0.42)
                         .padding(.bottom, -20)
@@ -111,11 +103,12 @@ struct DetailStudent: View {
                         .bold()
                         .padding(.top, -200)
                 }
+>>>>>>> 210887e... Merge pull request #22 from ppyrinn/KuisAndDetailMurid
                     .padding(.bottom, -50)
             }
             
             VStack(spacing: 0){
-                Main(data: self.$data, Grid: self.$Grid, DetailStudent: self)
+                Main(data: self.$data, Grid: self.$Grid)
             }
             .background(Color.black.opacity(0.06).edgesIgnoringSafeArea(.top))
             .edgesIgnoringSafeArea(.bottom)
@@ -128,12 +121,12 @@ struct DetailStudent: View {
                 Button(action: {
                     self.showingDetail.toggle()
                 }) {
-                    Text("Tambah Murid")
-                        .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
+                    Image(systemName: "plus")
+                        .foregroundColor(.orange)
                         .imageScale(.large)
                 }.accessibility(label: Text("Tambah Murid"))
                     .sheet(isPresented: $showingDetail) {
-                        addMurid(kelas: self.kelas, detailStudent: self)
+                        addMurid(kelas: self.kelas)
                             .environment(\.managedObjectContext, self.moc)
                 }
             )
@@ -156,28 +149,25 @@ struct DetailStudent: View {
 struct CardStudent : View {
     
     var data : TypeMurid
-//    @State var showingDetail = false
-    @State private var showingAlert = false
-    @State var progressValue: Float = Float.random(in: 0...1)
-    @Environment(\.managedObjectContext) var moc
-    
-    var DetailStudent : DetailStudent
+    @State var showingDetail = false
+    @State var progressValue: Float = 0.2
     
     var body: some View{
         
         
-        NavigationLink(destination: DetailScoring(data : data)){
+        NavigationLink(destination: DetailScoring()){
             
             VStack{
-
-                HStack{
-                    Text(data.namaMurid)
+//                , alignment: .topLeading
+                Text(data.namaMurid)
                     .bold()
                     .foregroundColor(.black)
-                    .frame(width: (UIScreen.main.bounds.width - 70) / 3)
+                    .frame(width: (UIScreen.main.bounds.width - 70) / 4)
                     .padding(.vertical,10)
                     .padding(.top, 10)
                     .accessibility(label: Text(data.namaMurid))
+<<<<<<< HEAD
+=======
                 }
                 .alert(isPresented:$showingAlert) {
                     Alert(title: Text("Apakah kamu yakin ingin menghapus kelas \(data.namaMurid) ?"), message: Text("Data tidak bisa dikembalikan."), primaryButton: .destructive(Text("Hapus")) {
@@ -186,110 +176,60 @@ struct CardStudent : View {
                     }, secondaryButton: .cancel(Text("Batal")))
                 }
 
+>>>>>>> 210887e... Merge pull request #22 from ppyrinn/KuisAndDetailMurid
                 
                 
-                ProgressBar(value: $progressValue)
-                    .frame(height: 20)
-                    .padding(15)
-                    .padding(.top, -30)
-                
+                ProgressBar(value: $progressValue).frame(height: 20)
+                .padding(15)
+                .padding(.top, -30)
+    
             }
    
-        }
-        .background(Color.white)
+        }.background(Color.white)
         .cornerRadius(10)
-        .shadow(radius: 6)
-        .contextMenu{
-            VStack{
-                Button(action: {
-                    self.showingAlert.toggle()
-                }){
-                    Text("Hapus")
-                }
-                Text("Batal")
-            }
-        }
+            .shadow(radius: 6)
         
     }
-    
-    func delete(at offsets: UUID){
-
-        var hasilFetch : [Murid] = []
-        do {
-            hasilFetch = try moc.fetch(Murid.getMuridWithIdMurid(id: offsets))
-        } catch {
-            print(error)
-        }
-        
-        for kelas in hasilFetch {
-            self.moc.delete(kelas)
-        }
-
-
-
-        do {
-            try self.moc.save()
-            self.DetailStudent.appendData()
-            self.DetailStudent.generateGrid()
-        } catch  {
-            print("error")
-        }
-
-    }
-    
 }
 
 struct Main : View {
 
     @Binding var data : [TypeMurid]
     @Binding var Grid : [Int]
-    
-    @State var isPresented = false
-    var DetailStudent : DetailStudent
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var body: some View{
         VStack{
             if !self.Grid.isEmpty {
                 ScrollView(.vertical, showsIndicators: false){
-                    
+
                     ForEach(self.Grid,id: \.self){i in
-                        
+
                         HStack(spacing: 15){
-                            
+
                             ForEach(i...i+1,id: \.self){j in
-                                
+
                                 VStack{
                                     if j != self.data.count {
-                                        
-                                        CardStudent(data: self.data[j], DetailStudent : self.DetailStudent)
+
+                                        CardStudent(data: self.data[j])
                                     }
                                 }
                             }
-                            
+
                             if i == self.Grid.last! && self.data.count % 2 != 0{
-                                
+
                                 Spacer(minLength: 370)
-                                
+//                                    .padding(.leading, 20)
                             }
                         }
                     }
                 }
                 .padding()
                 .background(Color(red: 1.00, green: 0.81, blue: 0.42))
-                Button(action: {
-                    self.isPresented.toggle()
-                }){
-                    Image("mulaikuis-button")
-                }
-                .accessibility(label: Text("Mulai Kuis"))
-                .padding(.bottom,80)
-                .sheet(isPresented: $isPresented){
-                    KuisView(daftarMurid : self.data).environment(\.managedObjectContext, self.context)
-                }
             }
-            
-        }.background(Color(red: 1.00, green: 0.81, blue: 0.42))
-        
+
+
+        }
+
     }
 
 }
@@ -306,26 +246,21 @@ struct TypeMurid {
 
 struct addMurid: View {
     @Environment(\.managedObjectContext) var moc
-    @Environment(\.presentationMode) var presentationMode
 
     var kelas : Type
-    var detailStudent: DetailStudent
-    init(kelas: Type, detailStudent: DetailStudent) {
+    init(kelas: Type) {
         self.kelas = kelas
-        self.detailStudent = detailStudent
     }
 
     @State private var newMurid = ""
-//    @State var showDetail = false
-    @State private var showingAlert = false
-    @State var value : CGFloat = 0
+    @State var showDetail = true
 
     var body: some View {
         ZStack{
             VStack{
                 HStack{
                     Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
+                        self.showDetail.toggle()
                     }) {
                         Text("Batal")
                             .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
@@ -333,24 +268,17 @@ struct addMurid: View {
                     Spacer()
 
                     Button(action: {
-
-                        if self.newMurid == "" {
-                            self.showingAlert = true
-                        } else {
-                            let murid = Murid(context: self.moc)
-                            murid.idMurid = UUID()
-                            murid.namaMurid = self.newMurid
-                            murid.idKelas = self.kelas.idKelas
-                            
-                            do{
-                                try self.moc.save()
-                                self.detailStudent.appendData()
-                            }catch{
-                                print(error)
-                            }
-                            self.newMurid = ""
-                            self.presentationMode.wrappedValue.dismiss()
+                        let murid = Murid(context: self.moc)
+                        murid.idMurid = UUID()
+                        murid.namaMurid = self.newMurid
+                        murid.idKelas = self.kelas.idKelas
+                        
+                        do{
+                            try self.moc.save()
+                        }catch{
+                            print(error)
                         }
+                        self.newMurid = ""
                     }) {
                         if newMurid.isEmpty {
                             Text("Simpan")
@@ -364,11 +292,20 @@ struct addMurid: View {
                             .foregroundColor(Color(red: 0.79, green: 0.26, blue: 0.0))
                         }
                     }
+<<<<<<< HEAD
+=======
                     .disabled(newMurid.isEmpty)
+>>>>>>> 210887e... Merge pull request #22 from ppyrinn/KuisAndDetailMurid
                 }
                 .padding(30)
                 Spacer()
 
+<<<<<<< HEAD
+                HStack{
+                    Text("Tambah Murid")
+                        .font(.largeTitle)
+                        .foregroundColor(.orange)
+=======
                 VStack{
                     HStack{
                         Text("Tambah Murid")
@@ -388,28 +325,21 @@ struct addMurid: View {
                     }
                     .padding(30)
                     .padding(.top, -20)
+>>>>>>> 210887e... Merge pull request #22 from ppyrinn/KuisAndDetailMurid
                 }
-                .offset(y: -self.value)
-                .animation(.spring())
-                .onAppear{
-                    NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (noti) in
-                        let value = noti.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
-                        let height = value.height - 250
-
-                        self.value = height
-                        
-                    }
-
-                    NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { (noti) in
-
-                        self.value = 0
-                    }
+                HStack{
+                    Text("Tambahkan murid-murid kamu dan track perkembangan membaca mereka")
                 }
-                
+                HStack{
+                    Text("Murid")
+                        .foregroundColor(.orange)
+                        .bold()
+                    TextField("Nama Murid", text: self.$newMurid)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                }
+                .padding(30)
                 Spacer()
             }
-        }.onDisappear{
-            self.detailStudent.generateGrid()
         }
     }
 
@@ -424,9 +354,3 @@ struct addMurid: View {
 //}
 
 //Text(kelas.namaKelas)
-
-struct DetailStudent_Previews: PreviewProvider {
-    static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
-    }
-}

@@ -11,7 +11,9 @@ import CoreData
 class Kuis: NSManagedObject, Identifiable{
     @NSManaged public var idMurid:  UUID
     @NSManaged public var idKuis:  UUID
+    @NSManaged public var levelSoal:  Int64
     @NSManaged public var tanggalKuis: Date
+    @NSManaged public var nilai: Int64
 
     
 }
@@ -26,17 +28,5 @@ extension Kuis{
         request.sortDescriptors = [sort]
     
         return request
-    }
-    
-    static func getKuisWithId(id: UUID) -> NSFetchRequest<Kuis>{
-        let request: NSFetchRequest<Kuis> = Kuis.fetchRequest() as! NSFetchRequest<Kuis>
-            
-            let sort = NSSortDescriptor(key: "tanggalKuis", ascending: true)
-            
-            request.predicate = NSPredicate(format: "idMurid = %@", id as CVarArg)
-            
-            request.sortDescriptors = [sort]
-        
-            return request
     }
 }

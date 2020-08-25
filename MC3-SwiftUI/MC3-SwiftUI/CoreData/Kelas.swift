@@ -12,16 +12,10 @@ class Kelas: NSManagedObject, Identifiable{
     @NSManaged public var idKelas: UUID
     @NSManaged public var namaKelas: String
     @NSManaged public var idSekolah:  UUID
-    @NSManaged public var gambarKelas:  String
 
 }
 
 extension Kelas{
-    var wrappedIdKelas: UUID {idKelas}
-    var wrappedNamaKelas: String {namaKelas}
-    var wrappedIdSekolah: UUID {idSekolah}
-    var wrappedGambarKelas: String {gambarKelas}
-    
     static func getAllKelas() -> NSFetchRequest<Kelas>{
         let request: NSFetchRequest<Kelas> = Kelas.fetchRequest() as! NSFetchRequest<Kelas>
         
@@ -40,18 +34,6 @@ extension Kelas{
             let sort = NSSortDescriptor(key: "namaKelas", ascending: true)
             
             request.predicate = NSPredicate(format: "idSekolah = %@", id as CVarArg)
-            
-            request.sortDescriptors = [sort]
-        
-            return request
-    }
-    
-    static func getKelasWithIdKelas(id: UUID) -> NSFetchRequest<Kelas>{
-        let request: NSFetchRequest<Kelas> = Kelas.fetchRequest() as! NSFetchRequest<Kelas>
-            
-            let sort = NSSortDescriptor(key: "namaKelas", ascending: true)
-            
-            request.predicate = NSPredicate(format: "idKelas = %@", id as CVarArg)
             
             request.sortDescriptors = [sort]
         
