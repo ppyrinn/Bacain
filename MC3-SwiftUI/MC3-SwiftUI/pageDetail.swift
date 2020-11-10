@@ -43,13 +43,23 @@ struct pageDetail: View {
         for kelas in listKelas {
             data.append(Type(namaKelas: kelas.namaKelas, gambarKelas: kelas.gambarKelas, idKelas: kelas.idKelas))
         }
+        print(data)
     }
+    
+//    func appendDataSearch () {
+//        data.removeAll()
+//        for kelas in fetchRequest.wrappedValue {
+//            data.append(Type(namaKelas: kelas.namaKelas, gambarKelas: kelas.gambarKelas, idKelas: kelas.idKelas))
+//        }
+//        print(data)
+//    }
     
     var body: some View {
         VStack{
             HStack {
                 
                 TextField("Search ...", text: $namaKelasFilter)
+                    .keyboardType(.webSearch)
                     .padding(7)
                     .padding(.horizontal, 25)
                     .background(Color(.systemGray6))
@@ -82,6 +92,7 @@ struct pageDetail: View {
                         self.isEditing = false
                         self.namaKelasFilter = ""
                         self.appendData()
+                        
                     })
                     {
                         Text("Cancel")

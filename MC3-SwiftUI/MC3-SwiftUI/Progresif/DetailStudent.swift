@@ -53,6 +53,7 @@ struct DetailStudent: View {
             HStack {
                 
                 TextField("Search ...", text: $namaMuridFilter)
+                    .keyboardType(.webSearch)
                     .padding(7)
                     .padding(.horizontal, 25)
                     .background(Color(.systemGray6))
@@ -186,12 +187,12 @@ struct CardStudent : View {
                     }, secondaryButton: .cancel(Text("Batal")))
                 }
 
-                
-                
-                ProgressBar(value: $progressValue)
+                HStack{
+                    ProgressBar(value: $progressValue)
                     .frame(height: 20)
                     .padding(15)
                     .padding(.top, -30)
+                }
                 
             }
    

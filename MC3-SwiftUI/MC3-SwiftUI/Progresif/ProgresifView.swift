@@ -41,9 +41,9 @@ struct ProgresifView: View {
         }
             
         .navigationBarTitle("Progresif")
-        .background(NavigationConfigurator { nc in
-            nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
-        })
+//        .background(NavigationConfigurator { nc in
+//            nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
+//        })
             
             
 
@@ -79,7 +79,7 @@ struct ProgresifView: View {
         }
         
                 
-        }
+       }
     }
     
     func deleteItem(indexSet: IndexSet){
